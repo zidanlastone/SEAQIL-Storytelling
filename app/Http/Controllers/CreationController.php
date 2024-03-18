@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCreationRequest;
-use App\Http\Requests\UpdateCreationRequest;
+use App\Http\Requests\Participant\StoreCreationRequest;
+use App\Http\Requests\Participant\UpdateCreationRequest;
 use App\Models\Participant\Creation;
 
 class CreationController extends Controller
