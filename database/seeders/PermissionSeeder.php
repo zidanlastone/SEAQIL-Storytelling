@@ -26,9 +26,9 @@ class PermissionSeeder extends Seeder
 
         // key permission yang dapat dilakukan oleh operator dan admin
         $keys = ['index', 'show', 'edit', 'update', 'delete'];
-        $permission_value = ['participant', 'language', 'translation', 'category', 'slider', 'level-of-participant', 'creation'];
+        $permission_value = ['user', 'participant', 'language', 'translation', 'category', 'slider', 'level-of-participant', 'creation'];
         // permission yangn hanya bisa dilakukan oleh admin
-        $permission_admin = ['role', 'permission'];
+        $permission_admin = ['role', 'permission',];
 
         $permission_operator = [];
         $permission_admin_list = [];
