@@ -21,9 +21,10 @@ Route::get('/dashboard', function () {
 
 Route::group([
     'middleware'=> ['auth', 'verified'], 
-    'prefix' => 'admin'
+    'prefix' => 'admin',
+    'as' => 'admin.'
     ], function ($route) {
-    $route->get('users', [UserController::class,'index'])->name('admin.users.index');
+    $route->resource('users', UserController::class);
 });
 
 Route::middleware('auth')->group(function () {

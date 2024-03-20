@@ -38,7 +38,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
-                        value={data.name}
+                        value={data.name as string}
                         onChange={(e) => setData('name', e.target.value)}
                         required
                         isFocused
@@ -55,7 +55,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={data.email as string}
                         onChange={(e) => setData('email', e.target.value)}
                         required
                         autoComplete="username"

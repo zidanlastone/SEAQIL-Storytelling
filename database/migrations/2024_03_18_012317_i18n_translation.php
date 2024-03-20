@@ -15,7 +15,7 @@ return new class extends Migration
         //
         Schema::create('i18n_translation', function (Blueprint $table) {
             $table->id()->primary();
-            $table->foreignId(Language::class)->constrained()->onDelete('CASCADE'); // Foreign key yang digunakan
+            $table->foreignId(Language::class); // Foreign key yang digunakan
             $table->string('label');            // label untuk konteks apa yang akan di terjemahkan
             $table->string('key');              // konstanta yang digunkana oleh sistem untuk mengambil data terjemahan
             $table->string('translation');      // nilai dari terjemahan mengenai konteks.

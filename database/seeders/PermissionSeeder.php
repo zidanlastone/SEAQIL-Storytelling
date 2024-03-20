@@ -17,10 +17,12 @@ class PermissionSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         // permission yang hanya dapat dilakukan oleh user
-        Permission::create(['name' => 'edit-profile']);
-        Permission::create(['name' => 'participant-upload-receipt']);
-        Permission::create(['name' => 'participant-upload-creation']);
-        Permission::create(['name' => 'participant-download-certificate']);
+        $permission_participant = [
+            'participant-edit-profile', 
+            'participant-upload-receipt', 
+            'participant-upload-creation', 
+            'participant-download-certificate'
+        ];
 
         // key permission yang dapat dilakukan oleh operator dan admin
         $keys = ['index', 'show', 'edit', 'update', 'delete'];
@@ -28,42 +30,40 @@ class PermissionSeeder extends Seeder
         // permission yangn hanya bisa dilakukan oleh admin
         $permission_admin = ['role', 'permission'];
 
-        $permission_list = [];
+        $permission_operator = [];
         $permission_admin_list = [];
 
         foreach ($keys as $value) {
             foreach ($permission_value as $pv) {
                 $permission = $value . "-" . $pv;
-                Permission::create(['name' => $permission]);
-                array_push($permission_list, $permission);
+                array_push($permission_operator, $permission);
             }
         }
 
         foreach ($keys as $value) {
             foreach ($permission_admin as $pv) {
                 $permission = $value . "-" . $pv;
-                Permission::create(['name' => $permission]);
                 array_push($permission_admin_list, $permission);
             }
         }
 
-    
+        // menggabung semua permission yang terdaftar di sistem
+        $permission_admin_result = array_merge($permission_operator, $permission_admin_list, $permission_participant);
+
+        $permissions = collect($permission_admin_result)->map(function($permission) {
+            return ['name' => $permission, 'guard_name' => 'web'];
+        });
+
+        Permission::insert($permissions->toArray());
+
         Role::create([
             'name' => 'participant'
-        ])->givePermissionTo([
-            'participant-edit-profile',
-            'participant-upload-receipt',
-            'participant-upload-creation',
-            'participant-download-certificate'
-        ]);
+        ])->givePermissionTo($permission_participant);
 
         Role::create([
             'name'=> 'operator'
-        ])->givePermissionTo($permission_list);
+        ])->givePermissionTo($permission_operator);
 
-
-        // menggabung permission yang dimiliki oleh operator dan permission yang hanya dimiliki oleh admin
-        $permission_admin_result = array_merge($permission_list, $permission_admin_list);
         Role::create([
             'name' => 'administrator'
         ])->givePermissionTo($permission_admin_result);

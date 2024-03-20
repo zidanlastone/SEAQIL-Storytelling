@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,8 +18,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $users = User::all();
         return Inertia::render('Users/List', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'users' => $users,
             'status' => session('status'),
         ]);
     }
@@ -30,7 +36,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         //
     }
@@ -38,31 +44,36 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return to_route("admin.users.edit", $user);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
+        return Inertia::render('Users/Edit', [
+            'user' => $user,
+            'status' => session('status'),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        // 
+                
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
     }

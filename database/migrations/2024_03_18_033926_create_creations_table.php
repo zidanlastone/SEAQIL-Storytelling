@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('creations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Participant::class, 'id_participant')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Participant::class, 'id_participant');
             $table->string('title');                    // untuk judul karya yang di upload
             $table->string('upload_location');          // untuk link lokasi file peserta mengupload karyanya, preferensi google drive
             $table->enum('upload_status', ['0', '1']);  // untuk menetukan apakah peserta sudah melakukan upload karya

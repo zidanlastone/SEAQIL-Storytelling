@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('external_service_configs', function (Blueprint $table) {
             $table->id();
+            $table->string('service_name');
+            $table->string('protocol');
+            $table->string('host');
+            $table->string('port');
+            $table->string('timeout');
+            $table->string('username');
+            $table->string('password');
             $table->timestamps();
         });
     }
