@@ -51,7 +51,6 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
       header: 'Aksi',
       cell: (_props) => (
         <div key={_props.getValue()}>
-          {/* <Link type="button" className="px-3 py-1 mr-1 bg-blue-500 rounded-md text-white" href={route('admin.users.show', {user: _props.getValue()} )}>Detail</Link> */}
           <Link type="button" className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white" href={route('admin.users.edit', { user: _props.getValue() })}>Edit</Link>
           <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ user: _props.row.original, show: true })}>Hapus</button>
         </div>
@@ -74,24 +73,29 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
     <AuthenticatedLayout
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">User Management</h2>}>
+
       <Head title="Admin | User Management" />
+
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-          <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <div className="relative rounded-xl overflow-auto w-100">
-              <div className="my-3 mx-2 flex flex-row justify-between">
-                <div className="mr-2">
-                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-                </div>
-                <div className="mr-2 w-1/5 order-last">
-                  <DebouncedInput
-                    value={globalFilter ?? ''}
-                    onChange={value => setGlobalFilter(String(value))}
-                    className="px-2 py-2 font-sm shadow border rounded"
-                    placeholder="Cari semua kolom"
-                  />
-                </div>
+          <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
+
+            <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
+              <div className="md:mx-2 my-2 order-first">
+                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
               </div>
+              <div className="md:mx-2 my-2 order-last">
+                <DebouncedInput
+                  value={globalFilter ?? ''}
+                  onChange={value => setGlobalFilter(String(value))}
+                  className="px-2 py-2 font-sm shadow border rounded"
+                  placeholder="Cari semua kolom"
+                />
+              </div>
+            </div>
+
+
+            <div className="w-full overflow-x-auto">
               <table className="table-auto">
                 <thead>
                   {table.getHeaderGroups().map(headerGroup => <RowHeader {...headerGroup} />)}
@@ -101,7 +105,8 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
                 </tbody>
               </table>
             </div>
-          </div>
+
+          </section>
         </div>
       </div>
 

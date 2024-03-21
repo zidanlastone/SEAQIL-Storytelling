@@ -115,14 +115,39 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </div>
                 </div>
             </nav>
+            
+            
+            <main className='justify-center'>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
+                <div className="flex">
+                    <div className="hidden md:block w-1/6 bg-white justify-center h-screen">
+                        <div className="flex flex-col gap-4 mt-16">
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex mx-auto">
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Dashboard
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex mx-auto">
+                                <NavLink href={route('admin.users.index')} active={route().current('admin.users.index')}>
+                                    User Management
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
 
-            <main>{children}</main>
+                    <div className="w-full md:w-5/6">
+                    {header && (
+                        <header className="bg-white">
+                            <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+                        </header>
+                    )}
+                        {children}
+                    </div>
+
+                </div>
+
+            </main>
+            
         </div>
     );
 }
