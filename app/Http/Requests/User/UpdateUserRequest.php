@@ -11,6 +11,9 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if($this->user()->can('update-user')){
+            return true;
+        }
         return false;
     }
 
@@ -22,7 +25,11 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email'     => ['required'],
+            'role'      => ['required', 'string'],
+            'password'  => ['required', 'confirmed'],
+            'password_confirmation'=> ['required'],
+            'email_verified_at' => ['nullable', 'string'],
         ];
     }
 }

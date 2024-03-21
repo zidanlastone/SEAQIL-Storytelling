@@ -1,24 +1,25 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { Link, useForm } from '@inertiajs/react';
+import { PageProps, Roles } from '@/types';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useState } from 'react';
 
-function CreateUserForm({ onComplete, className }: { onComplete?: () => void, className?: string }) {
+function CreateUserForm({ onComplete, className, roles }: { onComplete?: () => void, className?: string, roles?: Roles[] }) {
 
-  const [submitted, setSubmited] = useState<boolean>(false);
-  const { data, setData, post, processing, errors, reset, progress } = useForm({
+  const { data, setData, post, processing, errors, reset, wasSuccessful } = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    role: ''
   });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
     post(route('admin.users.store'));
-    setSubmited(true);
   };
 
   useEffect(() => {
@@ -28,12 +29,12 @@ function CreateUserForm({ onComplete, className }: { onComplete?: () => void, cl
   }, []);
 
   useEffect(() => {
-    if(progress?.percentage == 100){
-      if(typeof onComplete == 'function'){
+    if (wasSuccessful) {
+      if (typeof onComplete == 'function') {
         onComplete();
       }
     }
-  }, [progress?.percentage])
+  }, [wasSuccessful])
 
   return (
     <section className={className}>
@@ -109,6 +110,27 @@ function CreateUserForm({ onComplete, className }: { onComplete?: () => void, cl
 
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
+
+        {roles && (
+          <div className="mt-4">
+            <InputLabel htmlFor="role" value="Select Role" />
+            <SelectInput
+              id="role"
+              type="select"
+              name="role"
+              value={data.role}
+              className="mt-1 block w-full"
+              autoComplete="role"
+              onChange={(e) => setData('role', e.target.value)}
+              required
+            >
+              {roles && roles.map((item, index) => (
+                <option key={"option-"+index} value={item.name}>{item.name}</option>
+              ))}
+            </SelectInput>
+            <InputError message={errors.password_confirmation} className="mt-2" />
+          </div>
+        )}
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton className="ms-4" disabled={processing}>

@@ -9,6 +9,11 @@ export interface User {
     created_at?: string
 }
 
+export interface Roles {
+    name: string,
+    guard_name: string,
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;

@@ -20,11 +20,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group([
-    'middleware'=> ['auth', 'verified'], 
+    'middleware'=> ['auth', 'verified', 'role:administrator'], 
     'prefix' => 'admin',
     'as' => 'admin.'
     ], function ($route) {
     $route->resource('users', UserController::class);
+    $route->put('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.password.update');
 });
 
 Route::middleware('auth')->group(function () {
