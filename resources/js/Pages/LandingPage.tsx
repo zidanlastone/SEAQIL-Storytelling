@@ -17,8 +17,8 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
   { name: 'Tata Cara Partisipasi ', href: '#teknis-lomba' },
-  { name: 'Kontak', href: '#' },
-  { name: 'FAQ', href: '#' },
+  // { name: 'Kontak', href: '#' },
+  // { name: 'FAQ', href: '#' },
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
