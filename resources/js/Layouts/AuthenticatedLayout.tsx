@@ -95,7 +95,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
             <main className='justify-center'>
                 <div className="flex">
                     <Sidebar />
-                    <div className="w-full md:w-5/6">
+                    <div className="w-full md:w-5/6 overflow-y-scroll">
                         {header && (
                             <header className="bg-white shadow">
                                 <div className="max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>

@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\Profile\DetailProfileCreateUpdateRequest;
+use App\Http\Requests\Profile\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Profile;
 
 class ProfileController extends Controller
 {
@@ -18,9 +22,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $profile = Auth::user()->profile;
+
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'profile' => $profile
         ]);
     }
 
@@ -37,6 +44,30 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        return Redirect::route('profile.edit');
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function updateDetail(DetailProfileCreateUpdateRequest $request): RedirectResponse
+    {
+        $input = $request->except(['password', 'password_confirmation']);
+        $input['pwd'] = $request->password;
+
+        if(!Hash::check($request->password, $request->user()->password)){
+            return to_route('profile.edit');
+        }
+
+        if(!$request->user()->profile) {
+            $input['user_id'] = $request->user()->id;
+            $created = Profile::create($input);
+            if($created)
+            return to_route('profile.edit');
+        }
+
+        $request->user()->profile->update($input);
+        
         return Redirect::route('profile.edit');
     }
 

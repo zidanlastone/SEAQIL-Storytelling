@@ -1,3 +1,5 @@
+import { User } from "@/types";
+
 export function NavbarCloseButton({ user }: { user: User }) {
   return (
   <span className="inline-flex rounded-md">

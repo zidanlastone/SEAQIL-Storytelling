@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use App\Models\Profile;
+use App\Models\Participant;
 
 class User extends Authenticatable
 {
@@ -44,5 +49,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function profile(): HasOne {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function participation(): HasMany {
+        return $this->hasMany(Participant::class);
     }
 }

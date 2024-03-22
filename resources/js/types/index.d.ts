@@ -14,6 +14,18 @@ export interface Roles {
     guard_name: string,
 }
 
+export interface Profile {
+    gender: 'L' | 'P',
+    whatsapp_contact: string,
+    parent_contact: string,
+    institution: string,
+    country: string,
+    province: string,
+    city: string,
+    address: string,
+    pwd?: string
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;
