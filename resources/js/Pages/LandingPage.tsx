@@ -15,8 +15,8 @@ import 'swiper/css/pagination';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Kategori Peserta', href: '#' },
-  { name: 'Tata Cara Partisipasi ', href: '#' },
+  { name: 'Kategori Peserta', href: '#kategori-lomba' },
+  { name: 'Tata Cara Partisipasi ', href: '#teknis-lomba' },
   { name: 'Kontak', href: '#' },
   { name: 'FAQ', href: '#' },
 ]
@@ -52,20 +52,32 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
               ))}
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <div className="leading-6 text-sm">
-                <Link
-                  href={route('login')}
-                  className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
-                >
-                  Log in <span aria-hidden="true">&rarr;</span>
-                </Link>
-                <Link
-                  href={route('register')}
-                  className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
-                >
-                  Register
-                </Link>
-              </div>
+              {auth.user ? (
+                <div className="leading-6 text-sm">
+                  <Link
+                    href={route('dashboard')}
+                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                  >
+                    Dashboard
+                  </Link>
+                </div>
+              ) : (
+
+                <div className="leading-6 text-sm">
+                  <Link
+                    href={route('login')}
+                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                  >
+                    Log in <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                  <Link
+                    href={route('register')}
+                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
             </div>
           </nav>
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -98,20 +110,31 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                       </a>
                     ))}
                   </div>
-                  <div className="py-6">
-                    <Link
-                      href={route('login')}
-                      className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      href={route('register')}
-                      className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                    >
-                      Register
-                    </Link>
-                  </div>
+                  {auth.user ? (
+                    <div className="py-6">
+                      <Link
+                        href={route('dashboard')}
+                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                      >
+                        Dashboard
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="py-6">
+                      <Link
+                        href={route('login')}
+                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                      >
+                        Log in
+                      </Link>
+                      <Link
+                        href={route('register')}
+                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </Dialog.Panel>
@@ -154,8 +177,6 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
             </div>
           </div>
 
-
-
           <div
             className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
             aria-hidden="true"
@@ -169,6 +190,73 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
             />
           </div>
         </div>
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16">
+          <div className="text-left">
+            <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
+              Kompetisi Mendongeng Tingkat Nasional
+            </h1>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 h-64 shadow=sm">
+                <img className='h-3/5 mx-auto' src="/image/tridaya-group.png" alt="/image/tridaya-group.png" />
+                <img className='h-2/5 mx-auto' src="/image/UPI.png" alt="/image/UPI.png" />
+              </div>
+              <p className="order-end mt-6 text-md w-full md:w-3/4 leading-8 text-gray-600">
+                Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="kategori-lomba">
+          <div className="text-left">
+            <h1 className="text-xl text-center font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
+              Kategori Lomba
+            </h1>
+            <div className="flex flex-col md:flex-row flex-wrap gap-6 my-16 justify-center">
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Sekolah Dasar
+                </div>
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Sekolah Menengah Pertama
+                </div>
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Sekolah Menengah Atas                  
+                </div>
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Mahasiswa
+                </div>
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Guru
+                </div>
+                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  Umum
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
+          <div className="text-left">
+            <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
+              Teknis Pelaksanaan Lomba
+            </h1>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
+                <p>Batas waktu pendaftaran: 25 April 2024</p>
+                <p>Teknikal Meeting dan Webinar: 27 April 2024</p>
+                <p>Pengumpulan Karya Video Lomba: 27 April - 11 Mei 2024</p>
+                <p>Babak Final: 21 Mei 2024
+                <p>
+                Biaya pendaftaran lomba sebesar Rp.50.000 per orang. 
+                Pastikan telah melakukan transfer pembayaran biaya pendaftaran sebelum mengisi form data peserta ini. Transfer dapat dilakukan melalui rekening Virtual Account BNI 9882 4474 2223 1991 Atas Nama TRIDAYA OLIMPIADE.</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </>
   )

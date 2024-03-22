@@ -1,6 +1,9 @@
 import NavLink from "@/Components/NavLink";
+import { PageProps } from "@/types";
+import { usePage } from '@inertiajs/react';
 
 export function Sidebar() {
+    const auth = usePage<PageProps>().props.auth;
     return (
         <div className="hidden md:block w-1/6 bg-white h-screen shadow-md">
             <div className="flex flex-col gap-4 mt-16 justify-center w-full">
@@ -9,7 +12,6 @@ export function Sidebar() {
                         Dashboard
                     </NavLink>
                 </div>
-
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
                     <NavLink href={route('admin.users.index')} active={route().current('admin.users.index')}>
                         User Management
