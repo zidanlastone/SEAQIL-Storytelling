@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Profile;
-use App\Models\Participant;
+use App\Models\Participant\Participant;
 
 class User extends Authenticatable
 {
@@ -51,11 +52,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function profile(): HasOne {
+    public function profile(): HasOne
+    {
         return $this->hasOne(Profile::class);
     }
 
-    public function participation(): HasMany {
+    public function participation(): HasMany
+    {
         return $this->hasMany(Participant::class);
     }
 }

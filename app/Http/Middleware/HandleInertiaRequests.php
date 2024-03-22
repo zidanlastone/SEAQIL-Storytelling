@@ -30,12 +30,21 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $hidden_fields = ['created_at', 'updated_at', 'id', 'guard_name', 'pivot'];
+
+        $user = $request->user();
+        $user->getPermissionsViaRoles();
+        $user->roles->makeHidden($hidden_fields);
+        $user->roles->map(function ($role) use ($hidden_fields) {
+            return $role->permissions->makeHidden($hidden_fields);
+        });
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $user,
             ],
-            'ziggy' => fn () => [
+            'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
