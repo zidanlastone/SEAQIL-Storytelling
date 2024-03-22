@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::group([
     'as' => 'admin.'
     ], function ($route) {
     $route->resource('users', UserController::class);
+    $route->resource('participant', ParticipantController::class);
     $route->put('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.password.update');
 });
 

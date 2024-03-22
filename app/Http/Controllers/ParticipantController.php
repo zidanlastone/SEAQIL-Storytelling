@@ -2,18 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Participant\StoreParticipantRequest;
 use App\Http\Requests\Participant\UpdateParticipantRequest;
 use App\Models\Participant\Participant;
 
+use Inertia\Inertia;
+use Inertia\Response;
+
 class ParticipantController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $profile = Auth::user()->profile;
+
+        $participant = Participant::all();
+
+        return Inertia::render('Participant/List', [
+            'status' => session('status'),
+            'profile' => $profile,
+            'participant' => $participant
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreParticipantRequest $request)
     {
-        //
+        $participant = Participant::create($request->all());
+        if($participant){
+            return to_route('admin.participant.index');
+        }
+        return to_route('admin.participant.index');
     }
 
     /**

@@ -12,13 +12,33 @@ export function Sidebar() {
                     </NavLink>
                 </div>
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <NavLink href={route('participant')} active={route().current('participant')}>
+                    <NavLink href={route('admin.participant.index')} active={route().current('admin.participant.index')}>
                         Participant
                     </NavLink>
                 </div>
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
                     <NavLink href={route('admin.users.index')} active={route().current('admin.users.index')}>
                         User Management
+                    </NavLink>
+                </div>
+                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
+                    <NavLink href={route('dashboard')} active={route().current('#')}>
+                        Category
+                    </NavLink>
+                </div>
+                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
+                    <NavLink href={route('dashboard')} active={route().current('#')}>
+                        Role
+                    </NavLink>
+                </div>
+                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
+                    <NavLink href={route('dashboard')} active={route().current('#')}>
+                        Permission
+                    </NavLink>
+                </div>
+                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex w-full">
+                    <NavLink href={route('dashboard')} active={route().current('#')}>
+                        Settings
                     </NavLink>
                 </div>
             </div>

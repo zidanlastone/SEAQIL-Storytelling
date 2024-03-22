@@ -11,7 +11,7 @@ class StoreParticipantRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreParticipantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => ['required'],
+            'language_id' => ['required'],
+            'level_of_participant_id' => ['required'],
+            'payment_receipt' => ['required'],
+            'certificate' => ['required'],
+            'status_verifikasi' => ['required'],
         ];
     }
 }

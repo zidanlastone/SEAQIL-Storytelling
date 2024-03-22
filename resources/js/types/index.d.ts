@@ -26,6 +26,29 @@ export interface Profile {
     pwd?: string
 }
 
+export interface Category {
+    id: number,
+    category_name: string
+}
+export interface Language {
+    id: number,
+    code: string,
+    name: string
+}
+
+export interface Participant {
+    id: number,
+    user: User,
+    category?: Category,
+    language?: Language,
+    category_id?: string,
+    language_id?: string,
+    level_of_participant_id: string,
+    payment_receipt?: string,
+    certificate?: string,
+    status_verifikasi: 0 | 1
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;

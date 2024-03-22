@@ -257,6 +257,18 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
         </div>
 
 
+        <footer className="w-full bg-blue-400 rounded-t-xl">
+          <div className="flex flex-row">
+            <div className="flex-auto w-1/6">
+              <img className="w-auto mx-auto p-4" src="https://training.qiteplanguage.org/assets2/images/logo.png" />
+            </div>
+            <div className="flex-auto w-5/6 items-center justify-center text-center">
+              <p className="mt-8">Copyright ©2024 All rights reserved | This Website is made with  by ICT SEAQIL</p>
+            </div>
+          </div>
+        </footer>
+
+
       </div>
     </>
   )

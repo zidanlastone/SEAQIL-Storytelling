@@ -4,13 +4,13 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps, Roles, User } from "@/types";
+import { PageProps, Participant, Roles, User } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table"
 import { useState } from "react";
 
 
-export default function List({ auth, users = [], roles = [] }: PageProps<{ users: User[], roles: Roles[] }>) {
+export default function List({ auth, participant = []}: PageProps<{ participant: Participant[] }>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
@@ -18,30 +18,42 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
   const [globalFilter, setGlobalFilter] = useState<string>('');
 
-  const columnHelper = createColumnHelper<User>();
+  const columnHelper = createColumnHelper<Participant>();
   const columns = [
-    columnHelper.accessor(row => row.name, {
-      header: 'Nama',
-      id: 'table-header-name',
+    columnHelper.accessor(row => row.category_id, {
+      header: 'Kategori',
+      id: 'table-header-category',
       cell: info => info.getValue(),
       footer: props => props.column.id,
     }),
-    columnHelper.accessor(row => row.email, {
-      header: 'Email',
-      id: 'table-header-email',
+    columnHelper.accessor(row => row.language_id, {
+      header: 'Bahasa',
+      id: 'table-header-language',
       cell: info => info.getValue(),
       footer: props => props.column.id,
     }),
-    columnHelper.accessor(row => row.email_verified_at, {
-      header: 'Verifikasi Email',
-      id: 'table-header-email_verification',
+    columnHelper.accessor(row => row.level_of_participant_id, {
+      header: 'Tingkatan Pendidikan',
+      id: 'table-header-level_of_participant_id',
       cell: info => new Date(info.getValue() as string).toLocaleString(),
       footer: props => props.column.id,
     }),
-    columnHelper.accessor(row => row.created_at, {
-      header: 'Created At',
-      id: 'table-header-created_at',
-      cell: info => new Date(info.getValue() as string).toLocaleString(),
+    columnHelper.accessor(row => row.payment_receipt, {
+      header: 'Bukti Pembayaran',
+      id: 'table-header-payment_receipt',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+    }),
+    columnHelper.accessor(row => row.certificate, {
+      header: 'Sertifikat',
+      id: 'table-header-certificate',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+    }),
+    columnHelper.accessor(row => row.status_verifikasi, {
+      header: 'Status Verifikasi',
+      id: 'table-header-status_verifikasi',
+      cell: info => info.getValue(),
       footer: props => props.column.id,
     }),
     columnHelper.accessor(row => row.id, {
@@ -59,7 +71,7 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
   const table = useReactTable({
     columns,
-    data: users,
+    data: participant,
     state: {
       globalFilter,
     },
