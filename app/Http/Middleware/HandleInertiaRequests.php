@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -30,19 +31,21 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $hidden_fields = ['created_at', 'updated_at', 'id', 'guard_name', 'pivot'];
-
         $user = $request->user();
-        $user->getPermissionsViaRoles();
-        $user->roles->makeHidden($hidden_fields);
-        $user->roles->map(function ($role) use ($hidden_fields) {
-            return $role->permissions->makeHidden($hidden_fields);
-        });
+
+        // permission to access menu
+        $can = [];
+        $permission_list = config('permission.resource');
+        foreach ($permission_list as $permission) {
+            $item = 'index.' . $permission;
+            $can[$item] = $user->can($item);
+        }
 
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $user,
+                'can' => $can,
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useClientAuthorization } from '@/utils/permission';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -22,8 +23,8 @@ const navigation = [
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <>
       <Head title="SEAQIL Storytelling" />
@@ -214,24 +215,24 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
               Kategori Lomba
             </h1>
             <div className="flex flex-col md:flex-row flex-wrap gap-6 my-16 justify-center">
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Sekolah Dasar
-                </div>
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Sekolah Menengah Pertama
-                </div>
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Sekolah Menengah Atas                  
-                </div>
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Mahasiswa
-                </div>
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Guru
-                </div>
-                <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                  Umum
-                </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Sekolah Dasar
+              </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Sekolah Menengah Pertama
+              </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Sekolah Menengah Atas
+              </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Mahasiswa
+              </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Guru
+              </div>
+              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                Umum
+              </div>
             </div>
           </div>
         </div>
@@ -246,10 +247,10 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                 <p>Batas waktu pendaftaran: 25 April 2024</p>
                 <p>Teknikal Meeting dan Webinar: 27 April 2024</p>
                 <p>Pengumpulan Karya Video Lomba: 27 April - 11 Mei 2024</p>
-                <p>Babak Final: 21 Mei 2024
+                <p>Babak Final: 21 Mei 2024 </p>
                 <p>
-                Biaya pendaftaran lomba sebesar Rp.50.000 per orang. 
-                Pastikan telah melakukan transfer pembayaran biaya pendaftaran sebelum mengisi form data peserta ini. Transfer dapat dilakukan melalui rekening Virtual Account BNI 9882 4474 2223 1991 Atas Nama TRIDAYA OLIMPIADE.</p>
+                  Biaya pendaftaran lomba sebesar Rp.50.000 per orang.
+                  Pastikan telah melakukan transfer pembayaran biaya pendaftaran sebelum mengisi form data peserta ini. Transfer dapat dilakukan melalui rekening Virtual Account BNI 9882 4474 2223 1991 Atas Nama TRIDAYA OLIMPIADE.
                 </p>
               </div>
             </div>

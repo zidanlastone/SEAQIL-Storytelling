@@ -1,12 +1,27 @@
 import { Config } from 'ziggy-js';
 
+
+export type MenuPermission = {
+    [key: string]: boolean
+}
+
+export type Permission = {
+    name: string
+}
+
+export interface RoleAuthorization {
+    name: string,
+    permissions: Permission[]
+}
+
 export interface User {
     id: number,
     name: string,
     email: string,
     password: string,
     email_verified_at?: string,
-    created_at?: string
+    created_at?: string,
+    roles: RoleAuthorization[]
 }
 
 export interface Roles {
@@ -51,7 +66,8 @@ export interface Participant {
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
-        user: User;
+        user: User,
+        can: MenuPermission[]
     };
     ziggy: Config & { location: string };
 };

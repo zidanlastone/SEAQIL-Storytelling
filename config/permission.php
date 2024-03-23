@@ -2,6 +2,42 @@
 
 return [
 
+    /**
+     * list of default authorization access that we define globally, 
+     * so we can access them throug laravel application
+     */
+    'access' => [
+        'index',
+        'show',
+        'create',
+        'edit',
+        'update',
+        'delete'
+    ],
+
+    /**
+     * When creating resource, that resource is needed to defined and given access to the user
+     * we define the list of resouce here so laravel can access this value globally
+     * we combine access and resource to create permission that given to user
+     */
+    'resource' => [
+        'participant',
+        'language',
+        'translation',
+        'category',
+        'slider',
+        'level-of-participant',
+        'creation'
+    ],
+    /**
+     * this resource exclusive to admin permission rights
+     */
+    'resource_admin' => [
+        'users',
+        'role',
+        'permission',
+    ],
+
     'models' => [
 
         /*
