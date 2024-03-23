@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\I18n\Language;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,11 +18,13 @@ return new class extends Migration {
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('language_code');
+            $table->foreignIdFor(Language::class);
             $table->string('name');
             $table->string('route');
             $table->string('guard');
-            $table->string('parent_menu');
+            $table->string('icon')->nullable();
+            $table->string('parent_menu')->nullable();
+            $table->string('roles');
             $table->timestamps();
         });
     }

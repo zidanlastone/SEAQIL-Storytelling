@@ -14,6 +14,13 @@ class Menu extends Model
         "name",
         "route",
         "guard",
-        "parent_menu"
+        "icon",
+        "parent_menu",
+        "roles"
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
     ];
 }

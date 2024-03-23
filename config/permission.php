@@ -27,7 +27,10 @@ return [
         'category',
         'slider',
         'level-of-participant',
-        'creation'
+        'creation',
+        // TODO: Membuat laman dinamis dengan konten sesuai terjemahan
+        // 'page',
+        // 'page-content'
     ],
     /**
      * this resource exclusive to admin permission rights
@@ -36,6 +39,7 @@ return [
         'users',
         'role',
         'permission',
+        'external-service-config',
     ],
 
     'models' => [

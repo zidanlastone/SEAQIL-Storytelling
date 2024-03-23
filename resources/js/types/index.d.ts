@@ -14,6 +14,14 @@ export interface RoleAuthorization {
     permissions: Permission[]
 }
 
+export interface Menu {
+    language_id: number,
+    name: string,
+    route: string,
+    roles: string,
+    parent_menu?: string
+}
+
 export interface User {
     id: number,
     name: string,
@@ -67,7 +75,7 @@ export interface Participant {
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User,
-        can: MenuPermission[]
+        menus: Menu[]
     };
     ziggy: Config & { location: string };
 };

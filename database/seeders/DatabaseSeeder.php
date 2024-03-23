@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PermissionSeeder::class,
+            MenuSeeder::class,
         ]);
 
         $admin = User::where(['email' => 'admin@email.com'])->firstOrFail();

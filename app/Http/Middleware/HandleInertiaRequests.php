@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use App\Models\Menu;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -32,20 +32,13 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
-
-        // permission to access menu
-        $can = [];
-        $permission_list = config('permission.resource');
-        foreach ($permission_list as $permission) {
-            $item = 'index.' . $permission;
-            $can[$item] = $user->can($item);
-        }
+        $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))->get();
 
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $user,
-                'can' => $can,
+                'menus' => $menus
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

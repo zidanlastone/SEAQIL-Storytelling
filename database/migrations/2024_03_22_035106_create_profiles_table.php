@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
-return new class extends Migration
-{
+
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,10 +17,10 @@ return new class extends Migration
             $table->enum('gender', ['L', 'P']);
             $table->string('whatsapp_contact');             // untuk menyimpan kontak nomor wahatsapp peserta
             $table->string('parent_contact');
-            $table->string('institution');
+            $table->string('institution')->nullable();
             $table->string('country');
             $table->string('province');
-            $table->string('city');  
+            $table->string('city');
             $table->text('address');
             $table->string('pwd'); // untuk menyimpan password dalam plaintext
             $table->timestamps();
