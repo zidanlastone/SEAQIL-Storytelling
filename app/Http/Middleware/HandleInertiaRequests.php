@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\I18n\Language;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -34,8 +35,22 @@ class HandleInertiaRequests extends Middleware
         $user = $request->user();
         $menus = [];
 
+        $locale = $request->input('locale');
+        $where = [
+            'language_id' => 1,
+        ];
+
+        if ($locale) {
+            $language = Language::where('code', $locale)->first();
+            if ($language)
+                $where['language_id'] = $language->id;
+        }
+
         if ($user) {
-            $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))->get();
+            $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))
+                ->where($where)
+                ->get()
+                ->unique('route');
         }
 
         return [
