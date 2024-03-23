@@ -51,7 +51,8 @@ export interface Profile {
 
 export interface Category {
     id: number,
-    category_name: string
+    category_name: string,
+    image?: string
 }
 export interface Language {
     id: number,

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\I18n;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Translation extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class Translation extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "category_name" => "required",
+            "image" => "image|mimes:jpeg,jpg,png,gif",
         ];
     }
 }

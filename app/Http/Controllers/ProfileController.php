@@ -55,19 +55,19 @@ class ProfileController extends Controller
         $input = $request->except(['password', 'password_confirmation']);
         $input['pwd'] = $request->password;
 
-        if(!Hash::check($request->password, $request->user()->password)){
+        if (!Hash::check($request->password, $request->user()->password)) {
             return to_route('profile.edit');
         }
 
-        if(!$request->user()->profile) {
+        if (!$request->user()->profile) {
             $input['user_id'] = $request->user()->id;
             $created = Profile::create($input);
-            if($created)
-            return to_route('profile.edit');
+            if ($created)
+                return to_route('profile.edit');
         }
 
         $request->user()->profile->update($input);
-        
+
         return Redirect::route('profile.edit');
     }
 

@@ -32,7 +32,11 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
-        $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))->get();
+        $menus = [];
+
+        if ($user) {
+            $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))->get();
+        }
 
         return [
             ...parent::share($request),

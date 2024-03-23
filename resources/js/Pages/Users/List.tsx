@@ -16,7 +16,7 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
-  const [showDeleteDialog, setShowDeleteDialog] = useState<{ user?: User, show: boolean }>({ user: undefined, show: false });
+  const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: User, show: boolean }>({ item: undefined, show: false });
 
   const [globalFilter, setGlobalFilter] = useState<string>('');
 
@@ -52,7 +52,7 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
       cell: (_props) => (
         <div key={_props.getValue()}>
           <Link type="button" className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white" href={route('admin.users.edit', { user: _props.getValue() })}>Edit</Link>
-          <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ user: _props.row.original, show: true })}>Hapus</button>
+          <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>Hapus</button>
         </div>
       ),
       footer: props => props.column.id,
@@ -96,7 +96,7 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
 
             <div className="w-full overflow-x-auto">
-              <table className="table-auto">
+              <table className="table-auto w-full">
                 <thead>
                   {table.getHeaderGroups().map(headerGroup => <RowHeader {...headerGroup} />)}
                 </thead>
@@ -114,8 +114,8 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
         <CreateUserForm className="p-4 sm:p-8 bg-white shadow sm:rounded-lg" onComplete={() => setShowCreateDialog(false)} roles={roles} />
       </Modal>
 
-      <Modal show={showDeleteDialog.show} onClose={() => setShowDeleteDialog({ user: undefined, show: false })}>
-        <AdminDeleteUserForm user={showDeleteDialog.user} className="p-4 sm:p-8 bg-white shadow sm:rounded-lg" onComplete={() => setShowDeleteDialog({ user: undefined, show: false })} />
+      <Modal show={showDeleteDialog.show} onClose={() => setShowDeleteDialog({ item: undefined, show: false })}>
+        <AdminDeleteUserForm user={showDeleteDialog.item} className="p-4 sm:p-8 bg-white shadow sm:rounded-lg" onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
     </AuthenticatedLayout>
   )

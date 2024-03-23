@@ -27,6 +27,7 @@
     "dependencies": {
         "@heroicons/react": "^2.1.1",
         "@tanstack/react-table": "^8.13.2",
+        "react-dropzone": "^14.2.3",
         "swiper": "^11.0.7",
         "uuid": "^9.0.1"
     }

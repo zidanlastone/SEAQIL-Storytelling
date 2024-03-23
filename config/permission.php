@@ -23,7 +23,6 @@ return [
     'resource' => [
         'participant',
         'language',
-        'translation',
         'category',
         'slider',
         'level-of-participant',

@@ -10,11 +10,11 @@ import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/re
 import { useState } from "react";
 
 
-export default function List({ auth, participant = []}: PageProps<{ participant: Participant[] }>) {
+export default function List({ auth, participant = [] }: PageProps<{ participant: Participant[] }>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
-  const [showDeleteDialog, setShowDeleteDialog] = useState<{ user?: User, show: boolean }>({ user: undefined, show: false });
+  const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Participant, show: boolean }>({ item: undefined, show: false });
 
   const [globalFilter, setGlobalFilter] = useState<string>('');
 
@@ -61,8 +61,8 @@ export default function List({ auth, participant = []}: PageProps<{ participant:
       header: 'Aksi',
       cell: (_props) => (
         <div key={_props.getValue()}>
-          <Link type="button" className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white" href={route('admin.users.edit', { user: _props.getValue() })}>Edit</Link>
-          <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ user: _props.row.original, show: true })}>Hapus</button>
+          <Link type="button" className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white" href={route('admin.users.edit', { item: _props.getValue() })}>Edit</Link>
+          <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>Hapus</button>
         </div>
       ),
       footer: props => props.column.id,
@@ -106,12 +106,12 @@ export default function List({ auth, participant = []}: PageProps<{ participant:
 
 
             <div className="w-full overflow-x-auto">
-              <table className="table-auto">
+              <table className="table-auto w-full">
                 <thead>
-                  {table.getHeaderGroups().map(headerGroup => <RowHeader {...headerGroup} />)}
+                  {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
                 </thead>
                 <tbody className="bg-white">
-                  {table.getRowModel().rows.map(row => <RowContent {...row} />)}
+                  {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
                 </tbody>
               </table>
             </div>

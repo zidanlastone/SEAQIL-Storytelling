@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
+        User::factory()->create([
+            'name' => 'Operator',
+            'email' => 'operator@email.com',
+            'password' => Hash::make('password')
+        ]);
+
         $this->call([
             PermissionSeeder::class,
             MenuSeeder::class,
@@ -28,5 +34,8 @@ class DatabaseSeeder extends Seeder
 
         $admin = User::where(['email' => 'admin@email.com'])->firstOrFail();
         $admin->assignRole('administrator');
+
+        $operator = User::where(['email' => 'operator@email.com'])->firstOrFail();
+        $operator->assignRole('operator');
     }
 }

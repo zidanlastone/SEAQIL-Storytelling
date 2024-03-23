@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ExternalServiceConfig\StoreExternalServiceConfigRequest;
 use App\Http\Requests\ExternalServiceConfig\UpdateExternalServiceConfigRequest;
 use App\Models\ExternalServiceConfig;
+use App\Http\Controllers\Controller;
 
 class ExternalServiceConfigController extends Controller
 {

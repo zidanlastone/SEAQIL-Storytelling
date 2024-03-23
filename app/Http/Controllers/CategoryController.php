@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CaTEGORY\StoreCategoryRequest;
+use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Inertia\Inertia;
+
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -15,6 +18,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        return Inertia::render("Category/List", [
+            "categories" => Category::all(),
+        ]);
     }
 
     /**
@@ -22,15 +28,25 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return to_route('category.index');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+
+        if ($request->file('image')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
+            $path = $request->file('image')->storeAs('image', $filename);
+            Category::create([
+                'category_name' => $request->category_name,
+                'image' => $path
+            ]);
+        }
+
+        return to_route('category.index');
     }
 
     /**
@@ -60,8 +76,16 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categiory $categiory)
+    public function destroy(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'category_name' => 'required|in:' . $category->category_name
+        ]);
+
+        if ($validated) {
+            $category->delete();
+        }
+
+        return to_route('category.index');
     }
 }

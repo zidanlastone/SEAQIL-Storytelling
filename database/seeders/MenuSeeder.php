@@ -57,7 +57,7 @@ class MenuSeeder extends Seeder
             [
                 'language_id' => $language->id,
                 'name' => 'Partisipan Lomba',
-                'route' => 'admin.participant.index',
+                'route' => 'participant.index',
                 'guard' => 'web',
             ],
             [
@@ -81,19 +81,13 @@ class MenuSeeder extends Seeder
             [
                 'language_id' => $language->id,
                 'name' => 'Slider',
-                'route' => 'category.index',
+                'route' => 'slider.index',
                 'guard' => 'web',
             ],
             [
                 'language_id' => $language->id,
                 'name' => 'Bahasa',
                 'route' => 'language.index',
-                'guard' => 'web',
-            ],
-            [
-                'language_id' => $language->id,
-                'name' => 'Terjemahan',
-                'route' => 'translation.index',
                 'guard' => 'web',
             ],
             // [
