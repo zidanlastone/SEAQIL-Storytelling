@@ -8,7 +8,7 @@ import { Category, LevelOfParticipant, PageProps, Participant } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
-import ParticipantForm from "./Partials/ParticipantForm";
+// import ParticipantForm from "./Partials/ParticipantForm";
 // import DeleteParticipant from "./Partials/DeleteParticipant";
 
 export default function List({ auth, participants = [] }: PageProps<{ participants: Participant[] }>) {
@@ -114,9 +114,9 @@ export default function List({ auth, participants = [] }: PageProps<{ participan
 
       {/* Create mode */}
       <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
-        <ParticipantForm mode="create"
+        {/* <ParticipantForm mode="create"
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowCreateDialog(false)} />
+          onComplete={() => setShowCreateDialog(false)} /> */}
       </Modal>
 
       {/* update mode */}

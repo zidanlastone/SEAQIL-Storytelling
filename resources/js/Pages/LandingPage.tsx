@@ -12,7 +12,6 @@ import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useClientAuthorization } from '@/utils/permission';
 
 const navigation = [
   { name: 'Home', href: '/' },
