@@ -55,6 +55,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        return to_route('category.index');
     }
 
     /**
@@ -63,14 +64,25 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        return to_route('category.index');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
+        if ($request->file('image')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
+            $path = $request->file('image')->storeAs('image', $filename);
+            $category->image = $path;
+        }
+
+        $category->category_name = $request->category_name;
+        $category->save();
+
+        return to_route('category.index');
     }
 
     /**

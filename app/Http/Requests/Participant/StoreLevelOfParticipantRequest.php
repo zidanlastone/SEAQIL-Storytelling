@@ -11,6 +11,9 @@ class StoreLevelOfParticipantRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->can("create.level-of-participant")) {
+            return true;
+        }
         return false;
     }
 
@@ -23,6 +26,7 @@ class StoreLevelOfParticipantRequest extends FormRequest
     {
         return [
             //
+            'level_name' => 'required'
         ];
     }
 }

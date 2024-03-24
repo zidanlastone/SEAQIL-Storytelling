@@ -6,15 +6,18 @@ export type MenuPermission = {
 }
 
 export type Permission = {
+    id?: number,
     name: string
 }
 
 export interface RoleAuthorization {
+    id?: number,
     name: string,
     permissions: Permission[]
 }
 
 export interface Menu {
+    id?: number,
     language_id: number,
     name: string,
     route: string,
@@ -33,11 +36,13 @@ export interface User {
 }
 
 export interface Roles {
+    id?: number,
     name: string,
     guard_name: string,
 }
 
 export interface Profile {
+    id?: number,
     gender: 'L' | 'P',
     whatsapp_contact: string,
     parent_contact: string,
@@ -71,6 +76,11 @@ export interface Participant {
     payment_receipt?: string,
     certificate?: string,
     status_verifikasi: 0 | 1
+}
+
+export interface LevelOfParticipant {
+    id?: number,
+    level_name: string
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {

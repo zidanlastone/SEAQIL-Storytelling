@@ -11,6 +11,10 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->can("update.category")) {
+            return true;
+        }
+
         return false;
     }
 
@@ -22,7 +26,8 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "category_name" => "required",
+            "image" => "image|mimes:jpeg,jpg,png,gif",
         ];
     }
 }

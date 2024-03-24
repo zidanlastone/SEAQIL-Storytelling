@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Participant\StoreLevelOfParticipantRequest;
 use App\Http\Requests\Participant\UpdateLevelOfParticipantRequest;
 use App\Models\Participant\LevelOfParticipant;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class LevelOfParticipantController extends Controller
 {
@@ -13,7 +15,9 @@ class LevelOfParticipantController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render("LevelOfParticipant/List", [
+            "level_of_participants" => LevelOfParticipant::all(),
+        ]);
     }
 
     /**
@@ -22,6 +26,7 @@ class LevelOfParticipantController extends Controller
     public function create()
     {
         //
+        return to_route("level_of_participant.index");
     }
 
     /**
@@ -30,6 +35,10 @@ class LevelOfParticipantController extends Controller
     public function store(StoreLevelOfParticipantRequest $request)
     {
         //
+        LevelOfParticipant::create([
+            'level_name' => $request->level_name,
+        ]);
+        return to_route("level-of-participant.index");
     }
 
     /**
@@ -38,6 +47,7 @@ class LevelOfParticipantController extends Controller
     public function show(LevelOfParticipant $levelOfParticipant)
     {
         //
+        return to_route("level-of-participant.index");
     }
 
     /**
@@ -46,6 +56,7 @@ class LevelOfParticipantController extends Controller
     public function edit(LevelOfParticipant $levelOfParticipant)
     {
         //
+        return to_route("level-of-participant.index");
     }
 
     /**
@@ -53,14 +64,24 @@ class LevelOfParticipantController extends Controller
      */
     public function update(UpdateLevelOfParticipantRequest $request, LevelOfParticipant $levelOfParticipant)
     {
-        //
+        $levelOfParticipant->level_name = $request->level_name;
+        $levelOfParticipant->save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LevelOfParticipant $levelOfParticipant)
+    public function destroy(Request $request, LevelOfParticipant $levelOfParticipant)
     {
         //
+        $validated = $request->validate([
+            'level_name' => 'required|in:' . $levelOfParticipant->level_name
+        ]);
+
+        if ($validated) {
+            $levelOfParticipant->delete();
+        }
+
+        return to_route("level-of-participant.index");
     }
 }

@@ -11,7 +11,12 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+
+        if ($this->user()->can("store.category")) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -23,7 +28,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             "category_name" => "required",
-            "image" => "image|mimes:jpeg,jpg,png,gif",
+            "image" => "required|image|mimes:jpeg,jpg,png,gif",
         ];
     }
 }
