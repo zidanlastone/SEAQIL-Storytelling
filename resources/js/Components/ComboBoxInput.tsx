@@ -1,5 +1,5 @@
-import { Combobox, Transition, Li } from '@headlessui/react'
-import { ComponentPropsWithoutRef, Fragment, InputHTMLAttributes, useState } from 'react';
+import { Combobox, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react';
 
 export type ComboBoxData = {
   id: number,
