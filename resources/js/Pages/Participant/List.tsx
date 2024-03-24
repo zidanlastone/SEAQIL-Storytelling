@@ -4,87 +4,80 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps, Participant, Roles, User } from "@/types";
+import { Category, LevelOfParticipant, PageProps, Participant } from "@/types";
 import { Head, Link } from "@inertiajs/react";
-import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table"
-import { useState } from "react";
+import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
+import { useMemo, useState } from "react";
+import ParticipantForm from "./Partials/ParticipantForm";
+// import DeleteParticipant from "./Partials/DeleteParticipant";
 
-
-export default function List({ auth, participant = [] }: PageProps<{ participant: Participant[] }>) {
+export default function List({ auth, participants = [] }: PageProps<{ participants: Participant[] }>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Participant, show: boolean }>({ item: undefined, show: false });
 
-  const [globalFilter, setGlobalFilter] = useState<string>('');
+  const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Participant, show: boolean }>({ item: undefined, show: false });
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const columnHelper = createColumnHelper<Participant>();
-  const columns = [
-    columnHelper.accessor(row => row.category_id, {
-      header: 'Kategori',
-      id: 'table-header-category',
+
+
+  const columns = useMemo(() => [
+    columnHelper.accessor(row => row.user_id, {
+      header: 'Nama Partisipan',
+      id: 'table-header-participant_name',
       cell: info => info.getValue(),
       footer: props => props.column.id,
-    }),
-    columnHelper.accessor(row => row.language_id, {
-      header: 'Bahasa',
-      id: 'table-header-language',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-    }),
-    columnHelper.accessor(row => row.level_of_participant_id, {
-      header: 'Tingkatan Pendidikan',
-      id: 'table-header-level_of_participant_id',
-      cell: info => new Date(info.getValue() as string).toLocaleString(),
-      footer: props => props.column.id,
-    }),
-    columnHelper.accessor(row => row.payment_receipt, {
-      header: 'Bukti Pembayaran',
-      id: 'table-header-payment_receipt',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-    }),
-    columnHelper.accessor(row => row.certificate, {
-      header: 'Sertifikat',
-      id: 'table-header-certificate',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-    }),
-    columnHelper.accessor(row => row.status_verifikasi, {
-      header: 'Status Verifikasi',
-      id: 'table-header-status_verifikasi',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
+      filterFn: 'includesString',
     }),
     columnHelper.accessor(row => row.id, {
       id: 'table-header-action',
       header: 'Aksi',
       cell: (_props) => (
         <div key={_props.getValue()}>
-          <Link type="button" className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white" href={route('admin.users.edit', { item: _props.getValue() })}>Edit</Link>
-          <button type="button" className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white" onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>Hapus</button>
+          <button
+            type="button"
+            className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white"
+            onClick={() => setShowUpdateDialog({ item: _props.row.original, show: true })}>
+            Edit
+          </button>
+          <button
+            type="button"
+            className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white"
+            onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>
+            Hapus
+          </button>
         </div>
       ),
       footer: props => props.column.id,
     }),
-  ];
+  ], []);
 
   const table = useReactTable({
     columns,
-    data: participant,
+    data: participants,
     state: {
-      globalFilter,
+      columnFilters
     },
     getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnFiltersChange: setColumnFilters,
   });
+
+  const getColumnFilterValue = (columnId: string): string => {
+    let data = table.getState().columnFilters.find(item => item.id = columnId)
+    if (data != undefined) return data.value as string;
+    return '';
+  }
 
   return (
     <AuthenticatedLayout
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">User Management</h2>}>
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Admin | Tingkatan Partisipan </h2>}>
 
-      <Head title="Admin | User Management" />
+      <Head title="Admin | Tingkatan Partisipan" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -96,14 +89,13 @@ export default function List({ auth, participant = [] }: PageProps<{ participant
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput
-                  value={globalFilter ?? ''}
-                  onChange={value => setGlobalFilter(String(value))}
+                  value={getColumnFilterValue('table-header-participant_name')}
+                  onChange={value => setColumnFilters([{ value, id: 'table-header-participant_name' }])}
                   className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari semua kolom"
+                  placeholder="Cari Tingkatan Partisipan"
                 />
               </div>
             </div>
-
 
             <div className="w-full overflow-x-auto">
               <table className="table-auto w-full">
@@ -120,6 +112,27 @@ export default function List({ auth, participant = [] }: PageProps<{ participant
         </div>
       </div>
 
+      {/* Create mode */}
+      <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
+        <ParticipantForm mode="create"
+          className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
+          onComplete={() => setShowCreateDialog(false)} />
+      </Modal>
+
+      {/* update mode */}
+      <Modal show={showUpdateDialog.show} onClose={() => setShowUpdateDialog({ item: undefined, show: false })}>
+        {/* <LevelOfParticipantForm mode="update"
+          item={showUpdateDialog.item}
+          className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
+          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} /> */}
+      </Modal>
+
+      {/* update delete prompt */}
+      <Modal show={showDeleteDialog.show} onClose={() => setShowDeleteDialog({ item: undefined, show: false })}>
+        {/* <DeleteLevelOfParticipant
+          className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
+          item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} /> */}
+      </Modal>
     </AuthenticatedLayout>
   )
 }

@@ -6,7 +6,7 @@ import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps, Roles, User } from "@/types";
 import { Head, Link } from "@inertiajs/react";
-import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table"
+import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useState } from "react";
 import CreateUserForm from "./Partials/CreateUserForm";
 import AdminDeleteUserForm from "./Partials/AdminDeleteUserForm";
@@ -18,7 +18,7 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: User, show: boolean }>({ item: undefined, show: false });
 
-  const [globalFilter, setGlobalFilter] = useState<string>('');
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const columnHelper = createColumnHelper<User>();
   const columns = [
@@ -63,11 +63,18 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
     columns,
     data: users,
     state: {
-      globalFilter,
+      columnFilters
     },
     getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnFiltersChange: setColumnFilters,
   });
+
+  const getColumnFilterValue = (columnId: string): string => {
+    let data = table.getState().columnFilters.find(item => item.id = columnId)
+    if (data != undefined) return data.value as string;
+    return '';
+  }
 
   return (
     <AuthenticatedLayout
@@ -86,8 +93,8 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput
-                  value={globalFilter ?? ''}
-                  onChange={value => setGlobalFilter(String(value))}
+                  value={getColumnFilterValue('table-header-name')}
+                  onChange={value => setColumnFilters([{ value, id: 'table-header-name' }])}
                   className="px-2 py-2 font-sm shadow border rounded"
                   placeholder="Cari semua kolom"
                 />
@@ -98,10 +105,10 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
             <div className="w-full overflow-x-auto">
               <table className="table-auto w-full">
                 <thead>
-                  {table.getHeaderGroups().map(headerGroup => <RowHeader {...headerGroup} />)}
+                  {table.getHeaderGroups().map(headerGroup => <RowHeader key={headerGroup.id} {...headerGroup} />)}
                 </thead>
                 <tbody className="bg-white">
-                  {table.getRowModel().rows.map(row => <RowContent {...row} />)}
+                  {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
                 </tbody>
               </table>
             </div>

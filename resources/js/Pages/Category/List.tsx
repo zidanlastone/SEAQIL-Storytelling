@@ -72,7 +72,7 @@ export default function List({ auth, categories = [] }: PageProps<{ categories: 
   });
 
   const getColumnFilterValue = (columnId: string): string => {
-    let data = columnFilters.find(item => item.id = columnId)
+    let data = table.getState().columnFilters.find(item => item.id = columnId)
     if (data != undefined) return data.value as string;
     return '';
   }
