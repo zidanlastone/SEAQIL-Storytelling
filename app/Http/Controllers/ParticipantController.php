@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\I18n\Language;
+use App\Models\Participant\LevelOfParticipant;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Participant\StoreParticipantRequest;
 use App\Http\Requests\Participant\UpdateParticipantRequest;
@@ -19,12 +23,22 @@ class ParticipantController extends Controller
     {
         $profile = Auth::user()->profile;
 
+        $users = User::all();
         $participant = Participant::all();
+        $categories = Category::all();
+        $language = Language::all();
+        $levelOfParticipant = LevelOfParticipant::all();
+
+        // dd($participant, $categories, $language, $levelOfParticipant);
 
         return Inertia::render('Participant/List', [
             'status' => session('status'),
             'profile' => $profile,
-            'participant' => $participant
+            'users' => $users,
+            'participants' => $participant,
+            'categories' => $categories,
+            'languages' => $language,
+            'level_of_participant' => $levelOfParticipant
         ]);
     }
     /**
@@ -33,7 +47,7 @@ class ParticipantController extends Controller
     public function store(StoreParticipantRequest $request)
     {
         $participant = Participant::create($request->all());
-        if($participant){
+        if ($participant) {
             return to_route('admin.participant.index');
         }
         return to_route('admin.participant.index');
@@ -44,7 +58,7 @@ class ParticipantController extends Controller
      */
     public function show(Participant $participant)
     {
-        //
+        // 
     }
 
     /**

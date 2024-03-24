@@ -4,14 +4,25 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Category, LevelOfParticipant, PageProps, Participant } from "@/types";
+import { Category, Language, LevelOfParticipant, PageProps, Participant, User } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
 import ParticipantForm from "./Partials/ParticipantForm";
 // import DeleteParticipant from "./Partials/DeleteParticipant";
 
-export default function List({ auth, participants = [] }: PageProps<{ participants: Participant[] }>) {
+export default function List({ auth, participants = [], users, languages, categories, level_of_participant }: PageProps<{
+  participants: Participant[],
+  users: User[],
+  languages: Language[],
+  categories: Category[],
+  level_of_participant: LevelOfParticipant[]
+}>) {
+
+  console.log('users', users)
+  console.log('languages', languages)
+  console.log('categories', categories)
+  console.log('level_of_participant', level_of_participant)
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
