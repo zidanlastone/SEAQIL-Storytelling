@@ -13,6 +13,7 @@ function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }
 
   const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<LevelOfParticipant>({
     level_name: item?.level_name || '',
+    description: item?.description || ''
   });
 
   const submit: FormEventHandler = (e) => {
@@ -53,6 +54,17 @@ function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }
           <InputError message={errors.level_name} className="mt-2" />
         </div>
 
+        <div>
+          <InputLabel htmlFor="address" value="Deskripsi" />
+
+          <textarea
+            className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
+            name="description" id="description" rows={3}
+            defaultValue={data.description}
+            onChange={(e) => setData('description', e.target.value)} />
+
+          <InputError className="mt-2" message={errors.description} />
+        </div>
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton className="ms-4" disabled={processing}>

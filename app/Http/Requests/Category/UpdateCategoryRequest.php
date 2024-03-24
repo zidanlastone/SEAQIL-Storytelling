@@ -28,6 +28,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             "category_name" => "required",
             "image" => "image|mimes:jpeg,jpg,png,gif",
+            "description" => "min:3",
         ];
     }
 }

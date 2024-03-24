@@ -42,7 +42,8 @@ class CategoryController extends Controller
             $path = $request->file('image')->storeAs('image', $filename);
             Category::create([
                 'category_name' => $request->category_name,
-                'image' => $path
+                'description' => $request->description,
+                'image' => $path,
             ]);
         }
 

@@ -58,6 +58,7 @@ export interface Category {
     id: number,
     category_name: string,
     image?: string
+    description: string
 }
 export interface Language {
     id: number,
@@ -81,7 +82,8 @@ export interface Participant {
 
 export interface LevelOfParticipant {
     id?: number,
-    level_name: string
+    level_name: string,
+    description: string
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {

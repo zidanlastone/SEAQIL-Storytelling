@@ -37,6 +37,7 @@ class LevelOfParticipantController extends Controller
         //
         LevelOfParticipant::create([
             'level_name' => $request->level_name,
+            'descripton' => $request->description
         ]);
         return to_route("level-of-participant.index");
     }
@@ -65,6 +66,7 @@ class LevelOfParticipantController extends Controller
     public function update(UpdateLevelOfParticipantRequest $request, LevelOfParticipant $levelOfParticipant)
     {
         $levelOfParticipant->level_name = $request->level_name;
+        $levelOfParticipant->description = $request->description;
         $levelOfParticipant->save();
     }
 

@@ -10,14 +10,16 @@ import { FormEventHandler, useEffect, useState } from 'react';
 
 type CategoryInsert = {
   category_name: string,
-  image?: File
+  image?: File,
+  description: string
 }
 
 function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Category, mode?: 'create' | 'update' }) {
 
   const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<CategoryInsert>({
     category_name: item?.category_name || '',
-    image: undefined
+    image: undefined,
+    description: item?.description || ''
   });
 
   const submit: FormEventHandler = (e) => {
@@ -56,6 +58,18 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
             required
           />
           <InputError message={errors.category_name} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="address" value="Deskripsi" />
+
+          <textarea
+            className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
+            name="description" id="description" rows={3}
+            defaultValue={data.description}
+            onChange={(e) => setData('description', e.target.value)} />
+
+          <InputError className="mt-2" message={errors.description} />
         </div>
 
         <div>

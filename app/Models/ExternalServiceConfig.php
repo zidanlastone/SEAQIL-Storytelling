@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ExternalServiceConfig extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'service_name',
+        'protocol',
+        'host',
+        'port',
+        'timeout',
+        'username',
+        'password',
+    ];
 }

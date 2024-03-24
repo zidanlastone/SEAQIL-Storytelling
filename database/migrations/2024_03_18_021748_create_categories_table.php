@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('category_name'); // digunakan untuk kategori lomba yang di ikuti
             $table->string('image')->nullable(); // digunakan untuk kategori lomba yang di ikuti
+            $table->text('description')->nullable(); // digunakan untuk kategori lomba yang di ikuti
             $table->enum('is_deleted', ['0', '1']); // mengindikasikan data di hapus
             $table->softDeletes();                  // waktu penghapusan data
             $table->timestamps();

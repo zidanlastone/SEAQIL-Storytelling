@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ExternalServiceConfig;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,6 +26,16 @@ class DatabaseSeeder extends Seeder
             'name' => 'Operator',
             'email' => 'operator@email.com',
             'password' => Hash::make('password')
+        ]);
+
+        ExternalServiceConfig::factory()->create([
+            'service_name' => 'email-configuration',
+            'protocol' => 'smtp',
+            'host' => 'mailpit',
+            'port' => '1025',
+            'timeout' => '3000',
+            'username' => '',
+            'password' => '',
         ]);
 
         $this->call([

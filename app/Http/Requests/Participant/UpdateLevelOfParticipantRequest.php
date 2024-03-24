@@ -26,7 +26,8 @@ class UpdateLevelOfParticipantRequest extends FormRequest
     {
         return [
             //
-            'level_name' => 'required'
+            'level_name' => 'required',
+            'description' => 'min:3',
         ];
     }
 }
