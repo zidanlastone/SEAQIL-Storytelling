@@ -29,6 +29,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             "category_name" => "required",
             "image" => "required|image|mimes:jpeg,jpg,png,gif",
+            "description" => "min:3",
         ];
     }
 }
