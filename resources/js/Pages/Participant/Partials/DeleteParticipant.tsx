@@ -7,11 +7,14 @@ import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useRef } from 'react'
 
+type ParticipantDelete = {
+  user_id?: number
+}
+
 function DeleteParticipant({ className, item, onComplete }: { className?: string, item?: Participant, onComplete: () => void }) {
 
-  const { data, delete: destroy, reset, processing, setData, errors, recentlySuccessful, wasSuccessful } = useForm<Participant>({
-    user_id: item?.user_id || '',
-    status_verifikasi: item?.status_verifikasi || '',
+  const { data, delete: destroy, reset, processing, setData, errors, recentlySuccessful, wasSuccessful } = useForm<ParticipantDelete>({
+    user_id: item?.user_id,
   });
 
   const deleteUser: FormEventHandler = (e) => {
@@ -47,20 +50,20 @@ function DeleteParticipant({ className, item, onComplete }: { className?: string
       <form onSubmit={deleteUser} className="mt-6 space-y-6">
 
         <div>
-          <InputLabel htmlFor="image" value="Tingkatan Partisipan" />
+          <InputLabel htmlFor="image" value="User ID" />
           <TextInput
             id="image"
             type="text"
-            name="level_name"
-            value={data.level_name}
+            name="user_id"
+            value={data.user_id}
             className="my-2 block w-full"
             autoComplete="category_name"
             isFocused={true}
-            onChange={(e) => setData('level_name', e.target.value)}
+            onChange={(e) => setData('user_id', parseInt(e.target.value))}
             required
           />
 
-          <InputError message={errors.level_name} className="mt-2" />
+          <InputError message={errors.user_id} className="mt-2" />
         </div>
 
         <div className="flex items-center gap-4">

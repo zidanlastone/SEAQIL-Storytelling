@@ -71,12 +71,12 @@ export interface Participant {
     user_id: number,
     category?: Category,
     language?: Language,
-    category_id?: string,
-    language_id?: string,
-    level_of_participant_id: string,
+    category_id?: number,
+    language_id?: number,
+    level_of_participant_id: number,
     payment_receipt?: string,
     certificate?: string,
-    status_verifikasi: 0 | 1
+    status_verifikasi: number
 }
 
 export interface LevelOfParticipant {
