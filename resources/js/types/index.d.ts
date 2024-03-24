@@ -68,6 +68,7 @@ export interface Language {
 export interface Participant {
     id: number,
     user: User,
+    user_id: number,
     category?: Category,
     language?: Language,
     category_id?: string,
