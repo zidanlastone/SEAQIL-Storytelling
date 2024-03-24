@@ -6,6 +6,9 @@ use App\Http\Requests\Slider\StoreSliderRequest;
 use App\Http\Requests\Slider\UpdateSliderRequest;
 use App\Models\Slider;
 
+use Carbon\Carbon;
+use Inertia\Inertia;
+
 class SliderController extends Controller
 {
     /**
@@ -14,6 +17,9 @@ class SliderController extends Controller
     public function index()
     {
         //
+        return Inertia::render("Slider/List", [
+            "sliders" => Slider::all(),
+        ]);
     }
 
     /**
@@ -29,7 +35,20 @@ class SliderController extends Controller
      */
     public function store(StoreSliderRequest $request)
     {
-        //
+        if ($request->file('source')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->source->getClientOriginalName();
+            $path = $request->file('source')->storeAs('slider', $filename);
+
+            $slider = Slider::create([
+                'title' => $request->title,
+                'type' => $request->type,
+                'description' => $request->description,
+                'source' => $path,
+            ]);
+            return to_route("slider.index", $slider);
+        }
+
+        return to_route("slider.index");
     }
 
     /**
@@ -54,6 +73,18 @@ class SliderController extends Controller
     public function update(UpdateSliderRequest $request, Slider $slider)
     {
         //
+        if ($request->file('source')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->source->getClientOriginalName();
+            $path = $request->file('source')->storeAs('slider', $filename);
+            $slider->source = $path;
+        }
+
+        $slider->title = $request->title;
+        $slider->type = $request->type;
+        $slider->description = $request->description;
+        $slider->save();
+
+        return to_route("slider.index", $slider);
     }
 
     /**

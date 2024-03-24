@@ -87,6 +87,14 @@ export interface LevelOfParticipant {
     description: string
 }
 
+export interface Slider {
+    id: number,
+    title: string,
+    type: string,
+    description: string,
+    source: string
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User,
