@@ -12,10 +12,11 @@ type ComboBoxProps = {
   value: ComboBoxData | null,
   id?: string
   name?: string
-  className?: string
+  className?: string,
+  placeholder?: string
 };
 
-function ComboBoxInput({ data, value, onChange, ...props }: ComboBoxProps) {
+function ComboBoxInput({ data, value, onChange, placeholder, ...props }: ComboBoxProps) {
   const [query, setQuery] = useState('')
 
   const filteredData = query === '' ? data : data.filter((item) => {
@@ -31,7 +32,7 @@ function ComboBoxInput({ data, value, onChange, ...props }: ComboBoxProps) {
             onChange={(event: any) => setQuery(event.target.value)}
             displayValue={(item: ComboBoxData) => item !== null ? item.value : ''}
           >
-            <input type="text" className="w-full rounded" placeholder='Pilih Data' />
+            <input type="text" className="w-full rounded" placeholder={placeholder ? placeholder : 'Harap pilih data...'} />
           </Combobox.Input>
           <Transition
             show={open}

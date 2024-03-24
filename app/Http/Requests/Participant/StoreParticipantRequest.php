@@ -11,7 +11,10 @@ class StoreParticipantRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if ($this->user()->can("create.participant")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -22,11 +25,12 @@ class StoreParticipantRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => ['required'],
             'category_id' => ['required'],
             'language_id' => ['required'],
             'level_of_participant_id' => ['required'],
-            'payment_receipt' => ['required'],
-            'certificate' => ['required'],
+            'payment_receipt' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+            'certificate' => ['nullable'],
             'status_verifikasi' => ['required'],
         ];
     }

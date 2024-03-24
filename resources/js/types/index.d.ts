@@ -72,6 +72,7 @@ export interface Participant {
     user_id: number,
     category?: Category,
     language?: Language,
+    level_of_participant?: LevelOfParticipant,
     category_id?: number,
     language_id?: number,
     level_of_participant_id: number,
@@ -81,7 +82,7 @@ export interface Participant {
 }
 
 export interface LevelOfParticipant {
-    id?: number,
+    id: number,
     level_name: string,
     description: string
 }

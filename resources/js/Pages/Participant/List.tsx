@@ -8,8 +8,8 @@ import { Category, Language, LevelOfParticipant, PageProps, Participant, User } 
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
-// import ParticipantForm from "./Partials/ParticipantForm";
-// import DeleteParticipant from "./Partials/DeleteParticipant";
+import ParticipantForm from "./Partials/ParticipantForm";
+import DeleteParticipant from "./Partials/DeleteParticipant";
 
 export default function List({ auth, participants = [], users, languages, categories, level_of_participant }: PageProps<{
   participants: Participant[],
@@ -18,11 +18,6 @@ export default function List({ auth, participants = [], users, languages, catego
   categories: Category[],
   level_of_participant: LevelOfParticipant[]
 }>) {
-
-  console.log('users', users)
-  console.log('languages', languages)
-  console.log('categories', categories)
-  console.log('level_of_participant', level_of_participant)
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
@@ -36,9 +31,51 @@ export default function List({ auth, participants = [], users, languages, catego
 
 
   const columns = useMemo(() => [
-    columnHelper.accessor(row => row.user_id, {
+    columnHelper.accessor(row => row.user.name, {
       header: 'Nama Partisipan',
       id: 'table-header-participant_name',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.category?.category_name, {
+      header: 'Kategori',
+      id: 'table-header-category',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.language?.name, {
+      header: 'Bahasa',
+      id: 'table-header-language',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.level_of_participant?.level_name, {
+      header: 'Tingkatan Partisipan',
+      id: 'table-header-level_of_participant',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.payment_receipt, {
+      header: 'Bukti Bayar',
+      id: 'table-header-payment_receipt',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.certificate, {
+      header: 'Sertifikat',
+      id: 'table-header-certificate',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.status_verifikasi, {
+      header: 'Status Verifikasi',
+      id: 'table-header-status_verifikasi',
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
@@ -125,24 +162,32 @@ export default function List({ auth, participants = [], users, languages, catego
 
       {/* Create mode */}
       <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
-        {/* <ParticipantForm mode="create"
+        <ParticipantForm mode="create"
+          users={users}
+          categories={categories}
+          languages={languages}
+          level_of_participants={level_of_participant}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowCreateDialog(false)} /> */}
+          onComplete={() => setShowCreateDialog(false)} />
       </Modal>
 
       {/* update mode */}
       <Modal show={showUpdateDialog.show} onClose={() => setShowUpdateDialog({ item: undefined, show: false })}>
-        {/* <LevelOfParticipantForm mode="update"
+        <ParticipantForm mode="update"
           item={showUpdateDialog.item}
+          users={users}
+          categories={categories}
+          languages={languages}
+          level_of_participants={level_of_participant}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} /> */}
+          onComplete={() => setShowUpdateDialog({ item: undefined, show: false })} />
       </Modal>
 
       {/* update delete prompt */}
       <Modal show={showDeleteDialog.show} onClose={() => setShowDeleteDialog({ item: undefined, show: false })}>
-        {/* <DeleteLevelOfParticipant
+        <DeleteParticipant
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} /> */}
+          item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
     </AuthenticatedLayout>
   )

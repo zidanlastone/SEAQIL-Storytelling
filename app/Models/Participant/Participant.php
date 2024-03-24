@@ -2,16 +2,19 @@
 
 namespace App\Models\Participant;
 
+use App\Models\User;
+use App\Models\Category;
+use App\Models\I18n\Language;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User;
 
 class Participant extends Model
 {
     use HasFactory;
 
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -36,7 +39,23 @@ class Participant extends Model
         'remember_token',
     ];
 
-    public function user(){
-        $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function level_of_participant()
+    {
+        return $this->belongsTo(LevelOfParticipant::class);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
     }
 }

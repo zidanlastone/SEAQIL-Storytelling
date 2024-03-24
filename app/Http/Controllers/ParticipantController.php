@@ -13,6 +13,7 @@ use App\Models\Participant\Participant;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use Carbon\Carbon;
 
 class ParticipantController extends Controller
 {
@@ -24,12 +25,16 @@ class ParticipantController extends Controller
         $profile = Auth::user()->profile;
 
         $users = User::all();
-        $participant = Participant::all();
         $categories = Category::all();
         $language = Language::all();
         $levelOfParticipant = LevelOfParticipant::all();
+        $participant = Participant::with([
+            'user',
+            'category',
+            'language',
+            'level_of_participant'
+        ])->get();
 
-        // dd($participant, $categories, $language, $levelOfParticipant);
 
         return Inertia::render('Participant/List', [
             'status' => session('status'),
@@ -46,11 +51,29 @@ class ParticipantController extends Controller
      */
     public function store(StoreParticipantRequest $request)
     {
-        $participant = Participant::create($request->all());
-        if ($participant) {
-            return to_route('admin.participant.index');
+
+        if ($request->file('payment_receipt')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
+            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename);
+            $participant = Participant::create([
+                'user_id' => $request->user_id,
+                'category_id' => $request->category_id,
+                'language_id' => $request->language_id,
+                'level_of_participant_id' => $request->level_of_participant_id,
+                'certificate' => $request->certificate,
+                'status_verifikasi' => $request->status_verifikasi,
+                'payment_receipt' => $path,
+            ]);
+            if ($participant) {
+                return to_route('participant.index');
+            }
+
+            if ($request->accepts('application/json')) {
+                return response()->json(['message' => 'success', 'data' => $participant], 201);
+            }
         }
-        return to_route('admin.participant.index');
+
+        return to_route('participant.index');
     }
 
     /**
@@ -59,6 +82,7 @@ class ParticipantController extends Controller
     public function show(Participant $participant)
     {
         // 
+        return to_route('participant.index');
     }
 
     /**
@@ -67,6 +91,7 @@ class ParticipantController extends Controller
     public function edit(Participant $participant)
     {
         //
+        return to_route('participant.index');
     }
 
     /**
@@ -74,7 +99,29 @@ class ParticipantController extends Controller
      */
     public function update(UpdateParticipantRequest $request, Participant $participant)
     {
-        //
+        if ($request->file('payment_receipt')->isValid()) {
+            $filename = Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
+            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename);
+            $participant->payment_receipt = $path;
+        }
+
+        $participant->user_id = $request->user_id;
+        $participant->category_id = $request->category_id;
+        $participant->language_id = $request->language_id;
+        $participant->certificate = $request->certificate;
+        $participant->status_verifikasi = $request->status_verifikasi;
+        $participant->level_of_participant_id = $request->level_of_participant_id;
+        $participant->save();
+
+        if ($participant) {
+            return to_route('admin.participant.index');
+        }
+
+        if ($request->accepts('application/json')) {
+            return response()->json(['message' => 'success', 'data' => $participant], 201);
+        }
+
+        return to_route('participant.index');
     }
 
     /**
@@ -83,5 +130,7 @@ class ParticipantController extends Controller
     public function destroy(Participant $participant)
     {
         //
+        $participant->delete();
+        return to_route('participant.index');
     }
 }

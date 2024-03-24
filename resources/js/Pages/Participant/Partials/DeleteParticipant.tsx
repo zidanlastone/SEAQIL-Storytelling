@@ -17,7 +17,7 @@ function DeleteParticipant({ className, item, onComplete }: { className?: string
     user_id: item?.user_id,
   });
 
-  const deleteUser: FormEventHandler = (e) => {
+  const onSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (item != undefined) {
@@ -42,29 +42,12 @@ function DeleteParticipant({ className, item, onComplete }: { className?: string
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Tingkatan Partisipan</h2>
+        <h2 className="text-lg font-medium text-gray-900">Partisipan</h2>
         <p className="mt-1 text-sm text-gray-600">
-          Apakah Anda yakin ingin tingkatan partisipan ini?
+          Apakah Anda yakin ingin menghapus partisipan ini?
         </p>
       </header>
-      <form onSubmit={deleteUser} className="mt-6 space-y-6">
-
-        <div>
-          <InputLabel htmlFor="image" value="User ID" />
-          <TextInput
-            id="image"
-            type="text"
-            name="user_id"
-            value={data.user_id}
-            className="my-2 block w-full"
-            autoComplete="category_name"
-            isFocused={true}
-            onChange={(e) => setData('user_id', parseInt(e.target.value))}
-            required
-          />
-
-          <InputError message={errors.user_id} className="mt-2" />
-        </div>
+      <form onSubmit={onSubmit} className="mt-6 space-y-6">
 
         <div className="flex items-center gap-4">
           <PrimaryButton disabled={processing}>Delete</PrimaryButton>

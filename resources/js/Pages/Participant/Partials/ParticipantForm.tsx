@@ -1,29 +1,53 @@
+import ComboBoxInput, { ComboBoxData } from '@/Components/ComboBoxInput';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { Category, LevelOfParticipant, PageProps, Participant, Roles } from '@/types';
+import { Category, Language, LevelOfParticipant, PageProps, Participant, Roles, User } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler, useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useMemo, useState } from 'react';
 
 type ParticipantInsert = {
-  user_id?: number,
+  user_id?: number | null,
   payment_receipt?: File,
   status_verifikasi?: number,
-  category_id?: number,
-  language_id?: number,
-  level_of_participant_id?: number,
+  category_id?: number | null,
+  language_id?: number | null,
+  level_of_participant_id?: number | null,
+  certificate?: string
 }
-function ParticipantForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Participant, mode?: 'create' | 'update' }) {
+
+type ParticipantFormProps = {
+  onComplete?: () => void,
+  className?: string,
+  item?: Participant,
+  mode?: 'create' | 'update',
+  users?: User[],
+  categories?: Category[],
+  languages?: Language[],
+  level_of_participants?: LevelOfParticipant[],
+};
+
+function ParticipantForm({
+  onComplete,
+  className,
+  item,
+  mode = 'create',
+  users,
+  categories,
+  languages,
+  level_of_participants
+}: ParticipantFormProps) {
 
   const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<ParticipantInsert>({
-    user_id: item?.user_id,
+    user_id: item?.user_id || null,
     payment_receipt: undefined,
     status_verifikasi: item?.status_verifikasi,
-    category_id: item?.category_id,
-    language_id: item?.language_id,
-    level_of_participant_id: item?.level_of_participant_id,
+    category_id: item?.category_id || null,
+    language_id: item?.language_id || null,
+    level_of_participant_id: item?.level_of_participant_id || null,
+    certificate: item?.certificate,
   });
 
   const submit: FormEventHandler = (e) => {
@@ -43,6 +67,39 @@ function ParticipantForm({ onComplete, className, item, mode = 'create' }: { onC
     }
   }, [wasSuccessful])
 
+  const combo_user: ComboBoxData[] = useMemo(() => {
+    if (typeof users != undefined) {
+      return users!.map(item => ({ id: item.id, value: item.name }))
+    }
+    return [];
+  }, [users])
+
+  const combo_category: ComboBoxData[] = useMemo(() => {
+    if (typeof categories != undefined) {
+      return categories!.map(item => ({ id: item.id, value: item.category_name }))
+    }
+    return [];
+  }, [categories])
+
+  const combo_languages: ComboBoxData[] = useMemo(() => {
+    if (typeof languages != undefined) {
+      return languages!.map(item => ({ id: item.id, value: item.name }))
+    }
+    return [];
+  }, [languages])
+
+  const combo_level_of_participants: ComboBoxData[] = useMemo(() => {
+    if (typeof level_of_participants != undefined) {
+      return level_of_participants!.map(item => ({ id: item.id, value: item.level_name }))
+    }
+    return [];
+  }, [level_of_participants])
+
+  const [selectedLOP, setSelectedLOP] = useState<ComboBoxData | null>(combo_level_of_participants.find(x => x.id == item?.level_of_participant_id) || null);
+  const [selectedUser, setSelectedUser] = useState<ComboBoxData | null>(combo_user.find(x => x.id == item?.user_id) || null);
+  const [selectedCategory, setSelectedCategory] = useState<ComboBoxData | null>(combo_category.find(x => x.id == item?.category_id) || null);
+  const [selectedLanguage, setSelectedLanguage] = useState<ComboBoxData | null>(combo_languages.find(x => x.id == item?.language_id) || null);
+
   return (
     <section className={className}>
       <header>
@@ -50,23 +107,106 @@ function ParticipantForm({ onComplete, className, item, mode = 'create' }: { onC
       </header>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div>
-          <InputLabel htmlFor="category_name" value="Nama Tingkatan Partisipan" />
-          {/* <TextInput
-            id="name"
-            name="name"
-            value={data.payment_receipt}
+          <InputLabel htmlFor="user_id" value="Pilih User" />
+          <ComboBoxInput
+            data={combo_user}
+            id="user_id"
+            onChange={(value) => {
+              setSelectedUser(value)
+              setData('user_id', value.id)
+            }}
+            value={selectedUser} />
+          <InputError message={errors.payment_receipt} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="category_id" value="Pilih Kategori" />
+          <ComboBoxInput
+            data={combo_category}
+            id="category_id"
+            onChange={(value) => {
+              setSelectedCategory(value)
+              setData('category_id', value.id)
+            }}
+            value={selectedCategory} />
+          <InputError message={errors.payment_receipt} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
+          <ComboBoxInput
+            data={combo_languages}
+            id="language_id"
+            onChange={(value) => {
+              setSelectedLanguage(value)
+              setData('language_id', value.id)
+            }}
+            value={selectedLanguage} />
+          <InputError message={errors.payment_receipt} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="level_of_participant_id" value="Pilih Tingkatan Partisipan" />
+          <ComboBoxInput
+            data={combo_level_of_participants}
+            id="level_of_participant_id"
+            onChange={(value) => {
+              setSelectedLOP(value)
+              setData('level_of_participant_id', value.id)
+            }}
+            value={selectedLOP} />
+          <InputError message={errors.payment_receipt} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="image" value="Bukti Pembayaran" />
+          <TextInput
+            id="image"
+            type="file"
+            name="payment_receipt"
             className="my-2 block w-full"
-            autoComplete="name"
+            autoComplete="image"
             isFocused={true}
             onChange={(e) => {
-
               if (e.target.files) {
                 setData('payment_receipt', e.target.files[0])
               }
             }}
-            required
-          /> */}
+          />
+
           <InputError message={errors.payment_receipt} className="mt-2" />
+
+          {item?.payment_receipt && (
+            <p>File Sebelumnya: {item?.payment_receipt}</p>
+          )}
+        </div>
+
+        <div>
+          <InputLabel htmlFor="certificate" value="Link Sertifikat" />
+          <TextInput
+            id="name"
+            name="name"
+            value={data.certificate}
+            className="my-2 block w-full"
+            autoComplete="name"
+            isFocused={true}
+            onChange={(e) => setData('certificate', e.target.value)}
+            required
+          />
+          <InputError message={errors.certificate} className="mt-2" />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="status_verifikasi" value="Status Verifikasi" />
+          <div className="flex flex-row gap-4">
+            <label htmlFor="status_verifikasi-l">
+              <input type="radio" id="status_verifikasi-l" name="status_verifikasi" value={0} checked={data.status_verifikasi == 0} onChange={(e) => setData('status_verifikasi', 0)} /> Tidak Terverifikasi
+            </label>
+            <label htmlFor="status_verifikasi-p">
+              <input type="radio" id="status_verifikasi-p" name="status_verifikasi" value={1} checked={data.status_verifikasi == 1} onChange={(e) => setData('status_verifikasi', 1)} /> Sudah Terverifikasi
+            </label>
+          </div>
+          <InputError className="mt-2" message={errors.status_verifikasi} />
         </div>
 
 
