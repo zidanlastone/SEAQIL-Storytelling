@@ -1,17 +1,19 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import { Category, LevelOfParticipant, PageProps, Roles } from '@/types';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler, useEffect, useState } from 'react';
+import { LevelOfParticipant } from '@/types';
+import {  useForm } from '@inertiajs/react';
+import { FormEventHandler, useEffect } from 'react';
 
-
+export type InsertLevelOfParticipant = {
+  level_name: string
+  description: string
+}
 
 function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: LevelOfParticipant, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<LevelOfParticipant>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<InsertLevelOfParticipant>({
     level_name: item?.level_name || '',
     description: item?.description || ''
   });

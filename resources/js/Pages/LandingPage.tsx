@@ -1,17 +1,15 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import Guest from '@/Layouts/GuestLayout';
-import Navbar from '@/Layouts/Partials/Navbar';
 import { PageProps } from '@/types'
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
 import { useState } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import SponsorHeader from '@/Components/SponsorHeader';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -29,7 +27,8 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
       <Head title="SEAQIL Storytelling" />
       <div className="bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
-          <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <SponsorHeader />
+          <nav className="flex items-center justify-between px-6 pt-2 lg:px-8" aria-label="Global">
             <div className="flex lg:hidden">
               <button
                 type="button"
@@ -40,6 +39,8 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
+            
+
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
                 <span className="sr-only">SEAQIL Storytelling</span>
@@ -141,7 +142,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
           </Dialog>
         </header>
 
-        <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div className="relative isolate px-6 pt-10 lg:px-8">
           <div
             className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
@@ -154,7 +155,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
               }}
             />
           </div>
-          <div className="mx-auto max-w-7xl py-12 sm:py-22 lg:py-">
+          <div className="mx-auto max-w-7xl py-16 sm:py-22 lg:py-24">
 
             <div className="justify-center">
               <Swiper
@@ -196,10 +197,11 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
             <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
               Kompetisi Mendongeng Tingkat Nasional
             </h1>
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 h-64 shadow=sm">
-                <img className='h-3/5 mx-auto' src="/image/tridaya-group.png" alt="/image/tridaya-group.png" />
-                <img className='h-2/5 mx-auto' src="/image/UPI.png" alt="/image/UPI.png" />
+            <div className="flex flex-col md:flex-row gap-4 items-center">
+              <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
+                <video className="w-full" controls>
+                  <source src="/video/intro-video.mp4" type="video/mp4" />
+                </video>
               </div>
               <p className="order-end mt-6 text-md w-full md:w-3/4 leading-8 text-gray-600">
                 Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
@@ -213,23 +215,23 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
             <h1 className="text-xl text-center font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
               Kategori Lomba
             </h1>
-            <div className="flex flex-col md:flex-row flex-wrap gap-6 my-16 justify-center">
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+            <div className="flex flex-col sm:flex-row md:flex-row flex-wrap gap-6 my-16 justify-center items-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Sekolah Dasar
               </div>
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Sekolah Menengah Pertama
               </div>
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Sekolah Menengah Atas
               </div>
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Mahasiswa
               </div>
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Guru
               </div>
-              <div className="w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                 Umum
               </div>
             </div>
@@ -257,13 +259,13 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
         </div>
 
 
-        <footer className="w-full bg-blue-400 rounded-t-xl">
+        <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
-            <div className="flex-auto w-1/6">
-              <img className="w-auto mx-auto p-4" src="https://training.qiteplanguage.org/assets2/images/logo.png" />
+            <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
+              <p className="mt-8">Copyright ©2024 All rights reserved</p>
             </div>
-            <div className="flex-auto w-5/6 items-center justify-center text-center">
-              <p className="mt-8">Copyright ©2024 All rights reserved | This Website is made with  by ICT SEAQIL</p>
+            <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
+              <p className="mt-8">Copyright ©2024 All rights reserved</p>
             </div>
           </div>
         </footer>

@@ -2,15 +2,19 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Category, LevelOfParticipant, User } from '@/types';
+import { LevelOfParticipant } from '@/types';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
-import { FormEventHandler, useEffect, useRef } from 'react'
+import { FormEventHandler, useEffect } from 'react'
+
+import { InsertLevelOfParticipant } from './LevelOfParticipantForm';
+
 
 function DeleteLevelOfParticipant({ className, item, onComplete }: { className?: string, item?: LevelOfParticipant, onComplete: () => void }) {
 
-  const { data, delete: destroy, reset, processing, setData, errors, recentlySuccessful, wasSuccessful } = useForm<LevelOfParticipant>({
-    level_name: item?.level_name || ''
+  const { data, delete: destroy, reset, processing, setData, errors, recentlySuccessful, wasSuccessful } = useForm<InsertLevelOfParticipant>({
+    level_name: item?.level_name || '',
+    description: item?.description || ''
   });
 
   const deleteUser: FormEventHandler = (e) => {
