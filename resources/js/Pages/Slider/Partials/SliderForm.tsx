@@ -101,7 +101,7 @@ function SliderForm({ onComplete, className, item, mode = 'create' }: { onComple
                 setData('source', e.target.files[0])
               }
             }}
-            required
+            required={mode == 'create'}
           />
 
           <InputError message={errors.source} className="mt-2" />

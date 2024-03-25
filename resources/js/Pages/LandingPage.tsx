@@ -1,5 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { PageProps } from '@/types'
+import { Category, PageProps, Slider } from '@/types'
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
@@ -10,6 +10,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import SponsorHeader from '@/Components/SponsorHeader';
+import ConditionalRender from '@/Components/ConditionalRender';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -19,7 +20,7 @@ const navigation = [
   // { name: 'FAQ', href: '#' },
 ]
 
-function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
+function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -27,7 +28,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
       <Head title="SEAQIL Storytelling" />
       <div className="bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
-        <SponsorHeader />
+          <SponsorHeader />
           <nav className="flex items-center justify-between px-6 pt-2 lg:px-8" aria-label="Global">
             <div className="flex lg:hidden">
               <button
@@ -39,7 +40,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            
+
 
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
@@ -177,15 +178,24 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                 modules={[Pagination]}
                 className="mySwiper rounded-md"
               >
-                <SwiperSlide>
-                  <img className="rounded-lg" src="https://training.qiteplanguage.org/assets/uploads/pelatihan/foto/20072022_CerPen_Rima.png" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img className="rounded-lg" src="https://training.qiteplanguage.org/assets/uploads/pelatihan/foto/20072022_CerPen_Rima.png" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img className="rounded-lg" src="https://training.qiteplanguage.org/assets/uploads/pelatihan/foto/20072022_CerPen_Rima.png" alt="" />
-                </SwiperSlide>
+                {sliders.map(item => {
+                  if (item.type == 'image') {
+                    return (
+                      <SwiperSlide key={item.id}>
+                        <img className="rounded-lg w-full" src={'/storage/' + item.source} alt="" />
+                      </SwiperSlide>
+                    )
+                  }
+                  if (item.type == 'video') {
+                    return (
+                      <SwiperSlide key={item.id}>
+                        <video className="rounded-lg w-full" controls>
+                          <source src={'/storage/' + item.source} />
+                        </video>
+                      </SwiperSlide>
+                    )
+                  }
+                })}
               </Swiper>
             </div>
           </div>
@@ -230,24 +240,13 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
               Kategori Lomba
             </h1>
             <div className="flex flex-col sm:flex-row md:flex-row flex-wrap gap-6 my-16 justify-center items-center">
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Sekolah Dasar
-              </div>
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Sekolah Menengah Pertama
-              </div>
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Sekolah Menengah Atas
-              </div>
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Mahasiswa
-              </div>
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Guru
-              </div>
-              <div className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                Umum
-              </div>
+              {categories.map(item => {
+                return (
+                  <Link key={item.id} href={route('landing.category', { category: item.id })} className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                    {item.category_name}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -276,13 +275,13 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
-                <p>Our Sponsors:</p>
+              <p>Our Sponsors:</p>
               <div className="flex flex-row justify-center">
                 <div className="h-12 w-36  p-1 m-1">
-                    <img className="object-cover"  src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
+                  <img className="object-cover" src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
                 </div>
                 <div className="h-12 w-28 p-1 m-1">
-                    <img className="object-contain"  src="/image/sponsors/sierra.png" alt="upi" />
+                  <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
                 </div>
               </div>
               <p className="mt-8">Copyright ©2024 All rights reserved</p>

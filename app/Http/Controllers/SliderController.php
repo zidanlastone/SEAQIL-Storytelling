@@ -7,6 +7,7 @@ use App\Http\Requests\Slider\UpdateSliderRequest;
 use App\Models\Slider;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class SliderController extends Controller
@@ -37,7 +38,7 @@ class SliderController extends Controller
     {
         if ($request->file('source')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->source->getClientOriginalName();
-            $path = $request->file('source')->storeAs('slider', $filename);
+            $path = $request->file('source')->storeAs('slider', $filename, 'public');
 
             $slider = Slider::create([
                 'title' => $request->title,
@@ -75,7 +76,7 @@ class SliderController extends Controller
         //
         if ($request->file('source')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->source->getClientOriginalName();
-            $path = $request->file('source')->storeAs('slider', $filename);
+            $path = $request->file('source')->storeAs('slider', $filename, 'public');
             $slider->source = $path;
         }
 
@@ -92,6 +93,10 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        //
+        if (Storage::disk('public')->exists($slider->source)) {
+            Storage::disk('public')->delete("public/slider/" . $slider->source);
+        }
+        $slider->delete();
+        return to_route("slider.index");
     }
 }

@@ -30,8 +30,8 @@ class RegisteredParticipantController extends Controller
         $levelOfParticipant = LevelOfParticipant::all();
         return Inertia::render('Auth/RegisterParticipant', [
             'categories' => $categories,
-            'languages'=> $language,
-            'level_of_participants'=> $levelOfParticipant,
+            'languages' => $language,
+            'level_of_participants' => $levelOfParticipant,
         ]);
     }
 
@@ -42,10 +42,10 @@ class RegisteredParticipantController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -58,7 +58,7 @@ class RegisteredParticipantController extends Controller
         $user->assignRole('participant');
 
         Profile::create([
-            'user_id' =>$user->id,
+            'user_id' => $user->id,
             'gender' => $request->gender,
             'whatsapp_contact' => $request->whatsapp_contact,
             'parent_contact' => $request->parent_contact,
@@ -72,8 +72,8 @@ class RegisteredParticipantController extends Controller
 
         if ($request->file('payment_receipt')->isValid()) {
             $filename = \Carbon\Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
-            $path = $request->file('payment_receipt')->storeAs('V', $filename);
-            
+            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
+
             Participant::create([
                 'user_id' => $user->id,
                 'category_id' => $request->category_id,

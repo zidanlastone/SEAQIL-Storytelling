@@ -22,7 +22,10 @@ class UpdateSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => "required",
+            "type" => "required",
+            "description" => "required",
+            "source" => "mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4,video/h264,image/jpeg,image/png,image/bmp",
         ];
     }
 }

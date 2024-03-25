@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
         if ($request->file('image')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
-            $path = $request->file('image')->storeAs('image', $filename);
+            $path = $request->file('image')->storeAs('image', $filename, 'public');
             Category::create([
                 'category_name' => $request->category_name,
                 'description' => $request->description,
@@ -56,7 +56,9 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-        return to_route('category.index');
+        return Inertia::render('LandingCategory', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -76,7 +78,7 @@ class CategoryController extends Controller
         //
         if ($request->file('image')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
-            $path = $request->file('image')->storeAs('image', $filename);
+            $path = $request->file('image')->storeAs('image', $filename, 'public');
             $category->image = $path;
         }
 

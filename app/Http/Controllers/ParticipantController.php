@@ -54,7 +54,7 @@ class ParticipantController extends Controller
 
         if ($request->file('payment_receipt')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
-            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename);
+            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
             $participant = Participant::create([
                 'user_id' => $request->user_id,
                 'category_id' => $request->category_id,
@@ -101,7 +101,7 @@ class ParticipantController extends Controller
     {
         if ($request->file('payment_receipt')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
-            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename);
+            $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
             $participant->payment_receipt = $path;
         }
 
