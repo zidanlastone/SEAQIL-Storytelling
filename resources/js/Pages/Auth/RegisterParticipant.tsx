@@ -106,263 +106,271 @@ export default function RegisterParticipant({
     <GuestLayout>
       <Head title="Register" />
 
-      <form onSubmit={submit} className='grid'>
-        <div>
-          <InputLabel htmlFor="name" value="Name" />
+      <form onSubmit={submit} >
 
-          <TextInput
-            id="name"
-            name="name"
-            value={data.name}
-            className="mt-1 block w-full"
-            autoComplete="name"
-            isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-            required
-          />
+        <div className='grid grid-col-2'>
+          <div>
+            <div>
+              <InputLabel htmlFor="name" value="Name" />
 
-          <InputError message={errors.name} className="mt-2" />
-        </div>
+              <TextInput
+                id="name"
+                name="name"
+                value={data.name}
+                className="mt-1 block w-full"
+                autoComplete="name"
+                isFocused={true}
+                onChange={(e) => setData('name', e.target.value)}
+                required
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="email" value="Email" />
+              <InputError message={errors.name} className="mt-2" />
+            </div>
 
-          <TextInput
-            id="email"
-            type="email"
-            name="email"
-            value={data.email}
-            className="mt-1 block w-full"
-            autoComplete="username"
-            onChange={(e) => setData('email', e.target.value)}
-            required
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="email" value="Email" />
 
-          <InputError message={errors.email} className="mt-2" />
-        </div>
+              <TextInput
+                id="email"
+                type="email"
+                name="email"
+                value={data.email}
+                className="mt-1 block w-full"
+                autoComplete="username"
+                onChange={(e) => setData('email', e.target.value)}
+                required
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="password" value="Password" />
+              <InputError message={errors.email} className="mt-2" />
+            </div>
 
-          <TextInput
-            id="password"
-            type="password"
-            name="password"
-            value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
-            onChange={(e) => setData('password', e.target.value)}
-            required
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="password" value="Password" />
 
-          <InputError message={errors.password} className="mt-2" />
-        </div>
+              <TextInput
+                id="password"
+                type="password"
+                name="password"
+                value={data.password}
+                className="mt-1 block w-full"
+                autoComplete="new-password"
+                onChange={(e) => setData('password', e.target.value)}
+                required
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+              <InputError message={errors.password} className="mt-2" />
+            </div>
 
-          <TextInput
-            id="password_confirmation"
-            type="password"
-            name="password_confirmation"
-            value={data.password_confirmation}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
-            onChange={(e) => setData('password_confirmation', e.target.value)}
-            required
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
 
-          <InputError message={errors.password_confirmation} className="mt-2" />
-        </div>
+              <TextInput
+                id="password_confirmation"
+                type="password"
+                name="password_confirmation"
+                value={data.password_confirmation}
+                className="mt-1 block w-full"
+                autoComplete="new-password"
+                onChange={(e) => setData('password_confirmation', e.target.value)}
+                required
+              />
 
-        <hr className='my-4' />
-        <br />
-
-        <h3>Detail Informasi</h3>
-        <div className="mt-4">
-          <InputLabel htmlFor="gender" value="Jenis Kelamin" />
-          <div className="flex flex-row gap-4">
-            <label htmlFor="gender-l">
-              <input type="radio" id="gender-l" name="gender" value={"L"} checked={data.gender == 'L'} onChange={(e) => setData('gender', 'L')} /> Laki-Laki
-            </label>
-            <label htmlFor="gender-p">
-              <input type="radio" id="gender-p" name="gender" value={"P"} checked={data.gender == 'P'} onChange={(e) => setData('gender', 'P')} /> Perempuan
-            </label>
+              <InputError message={errors.password_confirmation} className="mt-2" />
+            </div>
+            <hr className='my-4' />
+            <br />
           </div>
-          <InputError className="mt-2" message={errors.gender} />
-        </div>
 
-        <div className="mt-4">
-          <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
-          <TextInput
-            id="whatsapp_contact"
-            type="tel"
-            className="mt-1 block w-full"
-            value={data.whatsapp_contact as string}
-            onChange={(e) => setData('whatsapp_contact', e.target.value)}
-            required
-            autoComplete="phone"
-          />
+          <div>
+            <h2 className='my-2 text-lg'>Detail Informasi</h2>
+            <div className="mt-4">
+              <InputLabel htmlFor="gender" value="Jenis Kelamin" />
+              <div className="flex flex-row gap-4">
+                <label htmlFor="gender-l">
+                  <input type="radio" id="gender-l" name="gender" value={"L"} checked={data.gender == 'L'} onChange={(e) => setData('gender', 'L')} /> Laki-Laki
+                </label>
+                <label htmlFor="gender-p">
+                  <input type="radio" id="gender-p" name="gender" value={"P"} checked={data.gender == 'P'} onChange={(e) => setData('gender', 'P')} /> Perempuan
+                </label>
+              </div>
+              <InputError className="mt-2" message={errors.gender} />
+            </div>
 
-          <InputError className="mt-2" message={errors.whatsapp_contact} />
-        </div>
+            <div className="mt-4">
+              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
+              <TextInput
+                id="whatsapp_contact"
+                type="tel"
+                className="mt-1 block w-full"
+                value={data.whatsapp_contact as string}
+                onChange={(e) => setData('whatsapp_contact', e.target.value)}
+                required
+                autoComplete="phone"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua" />
+              <InputError className="mt-2" message={errors.whatsapp_contact} />
+            </div>
 
-          <TextInput
-            id="parent_contact"
-            type="tel"
-            className="mt-1 block w-full"
-            value={data.parent_contact as string}
-            onChange={(e) => setData('parent_contact', e.target.value)}
-            required
-            autoComplete="phone"
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua" />
 
-          <InputError className="mt-2" message={errors.parent_contact} />
-        </div>
+              <TextInput
+                id="parent_contact"
+                type="tel"
+                className="mt-1 block w-full"
+                value={data.parent_contact as string}
+                onChange={(e) => setData('parent_contact', e.target.value)}
+                required
+                autoComplete="phone"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="institution" value="Institusi" />
+              <InputError className="mt-2" message={errors.parent_contact} />
+            </div>
 
-          <TextInput
-            id="institution"
-            type="text"
-            className="mt-1 block w-full"
-            value={data.institution as string}
-            onChange={(e) => setData('institution', e.target.value)}
-            required
-            placeholder="Contoh: Universitas Indonesia"
-            autoComplete="institution"
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="institution" value="Institusi" />
 
-          <InputError className="mt-2" message={errors.parent_contact} />
-        </div>
+              <TextInput
+                id="institution"
+                type="text"
+                className="mt-1 block w-full"
+                value={data.institution as string}
+                onChange={(e) => setData('institution', e.target.value)}
+                required
+                placeholder="Contoh: Universitas Indonesia"
+                autoComplete="institution"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="country" value="Negara" />
+              <InputError className="mt-2" message={errors.parent_contact} />
+            </div>
 
-          <TextInput
-            id="country"
-            type="text"
-            className="mt-1 block w-full"
-            value={data.country as string}
-            onChange={(e) => setData('country', e.target.value)}
-            required
-            placeholder="Contoh: Indonesia"
-            autoComplete="country"
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="country" value="Negara" />
 
-          <InputError className="mt-2" message={errors.institution} />
-        </div>
+              <TextInput
+                id="country"
+                type="text"
+                className="mt-1 block w-full"
+                value={data.country as string}
+                onChange={(e) => setData('country', e.target.value)}
+                required
+                placeholder="Contoh: Indonesia"
+                autoComplete="country"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="province" value="Provinsi" />
+              <InputError className="mt-2" message={errors.institution} />
+            </div>
 
-          <TextInput
-            id="province"
-            type="text"
-            className="mt-1 block w-full"
-            value={data.province as string}
-            onChange={(e) => setData('province', e.target.value)}
-            required
-            placeholder="Contoh: Jawa Barat"
-            autoComplete="province"
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="province" value="Provinsi" />
 
-          <InputError className="mt-2" message={errors.province} />
-        </div>
+              <TextInput
+                id="province"
+                type="text"
+                className="mt-1 block w-full"
+                value={data.province as string}
+                onChange={(e) => setData('province', e.target.value)}
+                required
+                placeholder="Contoh: Jawa Barat"
+                autoComplete="province"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="city" value="Kabupaten / Kota" />
+              <InputError className="mt-2" message={errors.province} />
+            </div>
 
-          <TextInput
-            id="city"
-            type="text"
-            className="mt-1 block w-full"
-            value={data.city as string}
-            onChange={(e) => setData('city', e.target.value)}
-            required
-            placeholder="Contoh: Bogor"
-            autoComplete="city"
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="city" value="Kabupaten / Kota" />
 
-          <InputError className="mt-2" message={errors.city} />
-        </div>
+              <TextInput
+                id="city"
+                type="text"
+                className="mt-1 block w-full"
+                value={data.city as string}
+                onChange={(e) => setData('city', e.target.value)}
+                required
+                placeholder="Contoh: Bogor"
+                autoComplete="city"
+              />
 
-        <div className="mt-4">
-          <InputLabel htmlFor="address" value="Alamat Lengkap" />
+              <InputError className="mt-2" message={errors.city} />
+            </div>
 
-          <textarea
-            className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
-            name="address" id="address" rows={3}
-            defaultValue={data.address}
-            onChange={(e) => setData('address', e.target.value)} />
+            <div className="mt-4">
+              <InputLabel htmlFor="address" value="Alamat Lengkap" />
 
-          <InputError className="mt-2" message={errors.address} />
-        </div>
+              <textarea
+                className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
+                name="address" id="address" rows={3}
+                defaultValue={data.address}
+                onChange={(e) => setData('address', e.target.value)} />
 
-        <hr />
-        <h2>Data Partisipasi Lomba</h2>
+              <InputError className="mt-2" message={errors.address} />
+            </div>
+          </div>
 
-        <div className="mt-4">
-          <InputLabel htmlFor="category_id" value="Pilih Kategori" />
-          <ComboBoxInput
-            data={combo_category}
-            id="category_id"
-            onChange={(value) => {
-              setSelectedCategory(value)
-              setData('category_id', value.id)
-            }}
-            value={selectedCategory} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
-        </div>
+          <div>
+            <hr className='my-4' />
+            <h2 className="my-2 text-lg">Data Partisipasi Lomba</h2>
 
-        <div className="mt-4">
-          <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
-          <ComboBoxInput
-            data={combo_languages}
-            id="language_id"
-            onChange={(value) => {
-              setSelectedLanguage(value)
-              setData('language_id', value.id)
-            }}
-            value={selectedLanguage} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
-        </div>
+            <div className="mt-4">
+              <InputLabel htmlFor="category_id" value="Pilih Kategori" />
+              <ComboBoxInput
+                data={combo_category}
+                id="category_id"
+                onChange={(value) => {
+                  setSelectedCategory(value)
+                  setData('category_id', value.id)
+                }}
+                value={selectedCategory} />
+              <InputError message={errors.payment_receipt} className="mt-2" />
+            </div>
 
-        <div className="mt-4">
-          <InputLabel htmlFor="level_of_participant_id" value="Pilih Tingkatan Partisipan" />
-          <ComboBoxInput
-            data={combo_level_of_participants}
-            id="level_of_participant_id"
-            onChange={(value) => {
-              setSelectedLOP(value)
-              setData('level_of_participant_id', value.id)
-            }}
-            value={selectedLOP} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
-        </div>
+            <div className="mt-4">
+              <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
+              <ComboBoxInput
+                data={combo_languages}
+                id="language_id"
+                onChange={(value) => {
+                  setSelectedLanguage(value)
+                  setData('language_id', value.id)
+                }}
+                value={selectedLanguage} />
+              <InputError message={errors.payment_receipt} className="mt-2" />
+            </div>
 
-        <div className="mt-4">
-          <InputLabel htmlFor="image" value="Bukti Pembayaran" />
-          <TextInput
-            id="image"
-            type="file"
-            name="payment_receipt"
-            className="my-2 block w-full"
-            autoComplete="image"
-            isFocused={true}
-            onChange={(e: any) => {
-              if (e.target.files ) {
-                setData('payment_receipt', e.target.files[0])
-              }
-            }}
-          />
+            <div className="mt-4">
+              <InputLabel htmlFor="level_of_participant_id" value="Pilih Tingkatan Partisipan" />
+              <ComboBoxInput
+                data={combo_level_of_participants}
+                id="level_of_participant_id"
+                onChange={(value) => {
+                  setSelectedLOP(value)
+                  setData('level_of_participant_id', value.id)
+                }}
+                value={selectedLOP} />
+              <InputError message={errors.payment_receipt} className="mt-2" />
+            </div>
 
-          <InputError message={errors.payment_receipt} className="mt-2" />
+            <div className="mt-4">
+              <InputLabel htmlFor="image" value="Bukti Pembayaran" />
+              <TextInput
+                id="image"
+                type="file"
+                name="payment_receipt"
+                className="my-2 block w-full"
+                autoComplete="image"
+                isFocused={true}
+                onChange={(e: any) => {
+                  if (e.target.files) {
+                    setData('payment_receipt', e.target.files[0])
+                  }
+                }}
+              />
 
+              <InputError message={errors.payment_receipt} className="mt-2" />
+
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center justify-end mt-4">
