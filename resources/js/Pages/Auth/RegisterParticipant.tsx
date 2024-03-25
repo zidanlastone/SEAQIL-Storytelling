@@ -106,7 +106,7 @@ export default function RegisterParticipant({
     <GuestLayout>
       <Head title="Register" />
 
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className='grid'>
         <div>
           <InputLabel htmlFor="name" value="Name" />
 
@@ -179,7 +179,7 @@ export default function RegisterParticipant({
         <br />
 
         <h3>Detail Informasi</h3>
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="gender" value="Jenis Kelamin" />
           <div className="flex flex-row gap-4">
             <label htmlFor="gender-l">
@@ -192,7 +192,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.gender} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
           <TextInput
             id="whatsapp_contact"
@@ -207,7 +207,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.whatsapp_contact} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua" />
 
           <TextInput
@@ -223,7 +223,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.parent_contact} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="institution" value="Institusi" />
 
           <TextInput
@@ -240,7 +240,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.parent_contact} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="country" value="Negara" />
 
           <TextInput
@@ -257,7 +257,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.institution} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="province" value="Provinsi" />
 
           <TextInput
@@ -274,7 +274,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.province} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="city" value="Kabupaten / Kota" />
 
           <TextInput
@@ -291,7 +291,7 @@ export default function RegisterParticipant({
           <InputError className="mt-2" message={errors.city} />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="address" value="Alamat Lengkap" />
 
           <textarea
@@ -306,7 +306,7 @@ export default function RegisterParticipant({
         <hr />
         <h2>Data Partisipasi Lomba</h2>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="category_id" value="Pilih Kategori" />
           <ComboBoxInput
             data={combo_category}
@@ -319,7 +319,7 @@ export default function RegisterParticipant({
           <InputError message={errors.payment_receipt} className="mt-2" />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
           <ComboBoxInput
             data={combo_languages}
@@ -332,7 +332,7 @@ export default function RegisterParticipant({
           <InputError message={errors.payment_receipt} className="mt-2" />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="level_of_participant_id" value="Pilih Tingkatan Partisipan" />
           <ComboBoxInput
             data={combo_level_of_participants}
@@ -345,7 +345,7 @@ export default function RegisterParticipant({
           <InputError message={errors.payment_receipt} className="mt-2" />
         </div>
 
-        <div>
+        <div className="mt-4">
           <InputLabel htmlFor="image" value="Bukti Pembayaran" />
           <TextInput
             id="image"

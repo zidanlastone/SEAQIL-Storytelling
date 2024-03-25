@@ -71,12 +71,12 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                   >
                     Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
-                  <Link
+                  {/* <Link
                     href={route('register')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
                     Register
-                  </Link>
+                  </Link> */}
                   <Link
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
@@ -134,8 +134,14 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                       >
                         Log in
                       </Link>
-                      <Link
+                      {/* <Link
                         href={route('register')}
+                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                      >
+                        Register
+                      </Link> */}
+                      <Link
+                        href={route('register.participant')}
                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                       >
                         Register
