@@ -53,6 +53,7 @@ class HandleInertiaRequests extends Middleware
                 ->unique('route');
         }
 
+        // dd($menus);
         return [
             ...parent::share($request),
             'auth' => [

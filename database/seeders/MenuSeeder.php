@@ -33,7 +33,7 @@ class MenuSeeder extends Seeder
             [
                 'language_id' => $language->id,
                 'name' => 'Registrasi Lomba',
-                'route' => 'participation.index',
+                'route' => 'participant.index',
                 'guard' => 'web',
                 'roles' => 'participant'
             ],

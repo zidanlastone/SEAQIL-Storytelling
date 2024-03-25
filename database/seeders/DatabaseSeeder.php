@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        ExternalServiceConfig::factory()->create([
+        ExternalServiceConfig::create([
             'service_name' => 'email-configuration',
             'protocol' => 'smtp',
             'host' => 'mailpit',

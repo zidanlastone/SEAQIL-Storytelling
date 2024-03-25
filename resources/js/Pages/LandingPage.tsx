@@ -77,6 +77,12 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
                   >
                     Register
                   </Link>
+                  <Link
+                    href={route('register.participant')}
+                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                  >
+                    Register Participant
+                  </Link>
                 </div>
               )}
             </div>
@@ -155,7 +161,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
               }}
             />
           </div>
-          <div className="mx-auto max-w-7xl py-16 sm:py-22 lg:py-24">
+          <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-24">
 
             <div className="justify-center">
               <Swiper
@@ -192,20 +198,22 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-5 my-2">
           <div className="text-left">
-            <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
-              Kompetisi Mendongeng Tingkat Nasional
-            </h1>
             <div className="flex flex-col md:flex-row gap-4 items-center">
               <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
                 <video className="w-full" controls>
                   <source src="/video/intro-video.mp4" type="video/mp4" />
                 </video>
               </div>
-              <p className="order-end mt-6 text-md w-full md:w-3/4 leading-8 text-gray-600">
-                Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
-              </p>
+              <div className="order-end mt-6 text-md w-full md:w-3/4">
+                <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
+                  Kompetisi Mendongeng Tingkat Nasional
+                </h1>
+                <p className=" leading-8 text-gray-600">
+                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -262,9 +270,9 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
-              <p className="mt-8">Copyright ©2024 All rights reserved</p>
-            </div>
-            <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
+              <div className="flex flex-row">
+                <img src="" alt="" />
+              </div>
               <p className="mt-8">Copyright ©2024 All rights reserved</p>
             </div>
           </div>
