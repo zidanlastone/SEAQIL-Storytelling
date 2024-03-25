@@ -203,7 +203,7 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
             <div className="flex flex-col md:flex-row gap-4 items-center">
               <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
                 <video className="w-full" controls>
-                  <source src="/video/intro-video.mp4" type="video/mp4" />
+                  <source src="/video/intro-video-v2.mp4" type="video/mp4" />
                 </video>
               </div>
               <div className="order-end mt-6 text-md w-full md:w-3/4">
@@ -270,8 +270,14 @@ function LandingPage({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVe
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
-              <div className="flex flex-row">
-                <img src="" alt="" />
+                <p>Our Sponsors:</p>
+              <div className="flex flex-row justify-center">
+                <div className="h-12 w-36  p-1 m-1">
+                    <img className="object-cover"  src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
+                </div>
+                <div className="h-12 w-28 p-1 m-1">
+                    <img className="object-contain"  src="/image/sponsors/sierra.png" alt="upi" />
+                </div>
               </div>
               <p className="mt-8">Copyright ©2024 All rights reserved</p>
             </div>
