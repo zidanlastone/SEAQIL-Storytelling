@@ -18,7 +18,7 @@ export function Sidebar() {
                 ))}
 
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <NavLink href={route('profile')} active={route().current('profile')}>
+                    <NavLink href={route('profile.edit')} active={route().current('profile.edit')}>
                         Profile
                     </NavLink>
                 </div>
