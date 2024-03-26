@@ -10,13 +10,19 @@ import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRow
 import { useMemo, useState } from "react";
 import ParticipantForm from "./Partials/ParticipantForm";
 import DeleteParticipant from "./Partials/DeleteParticipant";
+import ConditionalRender from "@/Components/ConditionalRender";
 
-export default function List({ auth, participants = [], users, languages, categories, level_of_participant }: PageProps<{
+type Can = {
+  [key: string]: boolean
+}
+
+export default function List({ auth, participants = [], users, languages, categories, level_of_participant, can }: PageProps<{
   participants: Participant[],
   users: User[],
   languages: Language[],
   categories: Category[],
-  level_of_participant: LevelOfParticipant[]
+  level_of_participant: LevelOfParticipant[],
+  can: Can
 }>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
@@ -62,9 +68,9 @@ export default function List({ auth, participants = [], users, languages, catego
     columnHelper.accessor(row => row.payment_receipt, {
       header: 'Bukti Bayar',
       id: 'table-header-payment_receipt',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-      filterFn: 'includesString',
+      cell: info =>  (
+        <a href={'/storage/' + info?.getValue() as string}>Lihat</a>
+      ),
     }),
     columnHelper.accessor(row => row.certificate, {
       header: 'Sertifikat',
@@ -84,6 +90,7 @@ export default function List({ auth, participants = [], users, languages, catego
       id: 'table-header-action',
       header: 'Aksi',
       cell: (_props) => (
+        <ConditionalRender key={_props.getValue()} condition={can['edit.participant']}>
         <div key={_props.getValue()}>
           <button
             type="button"
@@ -98,6 +105,7 @@ export default function List({ auth, participants = [], users, languages, catego
             Hapus
           </button>
         </div>
+        </ConditionalRender>
       ),
       footer: props => props.column.id,
     }),
@@ -123,9 +131,9 @@ export default function List({ auth, participants = [], users, languages, catego
   return (
     <AuthenticatedLayout
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Admin | Tingkatan Partisipan </h2>}>
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Partisipan</h2>}>
 
-      <Head title="Admin | Tingkatan Partisipan" />
+      <Head title="Tingkatan Partisipan" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -133,7 +141,9 @@ export default function List({ auth, participants = [], users, languages, catego
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
               <div className="md:mx-2 my-2 order-first">
-                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+                <ConditionalRender condition={can['edit.participant']}>
+                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+                </ConditionalRender>
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput

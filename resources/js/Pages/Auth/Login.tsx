@@ -30,9 +30,9 @@ export default function Login({ status, canResetPassword }: { status?: string, c
         <GuestLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && <div className="my-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <form onSubmit={submit} className='w-4/5 mx-auto'>
+            <form onSubmit={submit} className='w-4/5 mx-auto my-6'>
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 

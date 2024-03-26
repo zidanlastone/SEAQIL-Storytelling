@@ -23,6 +23,8 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
   });
 
   const submit: FormEventHandler = (e) => {
+
+    console.log(data)
     e.preventDefault();
     if (mode == 'create') {
       post(route('category.store'), { forceFormData: true });
@@ -49,10 +51,10 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
           <InputLabel htmlFor="category_name" value="Nama Kategori" />
           <TextInput
             id="name"
-            name="name"
+            name="nacategory_nameme"
             value={data.category_name}
             className="my-2 block w-full"
-            autoComplete="name"
+            autoComplete="category_name"
             isFocused={true}
             onChange={(e) => setData('category_name', e.target.value)}
             required
@@ -98,7 +100,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton className="ms-4" disabled={processing}>
-            Tambah Data
+            { mode == 'create'  ? 'Tambah Data': 'Ubah Data'}
           </PrimaryButton>
         </div>
       </form>

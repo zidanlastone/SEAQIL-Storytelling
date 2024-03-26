@@ -15,7 +15,7 @@ import ConditionalRender from '@/Components/ConditionalRender';
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
-  { name: 'Tata Cara Partisipasi ', href: '#teknis-lomba' },
+  { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
   // { name: 'FAQ', href: '#' },
 ]
@@ -48,14 +48,14 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                 {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
-                <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+                <a key={item.name} href={item.href} className="text-md font-semibold leading-6 text-gray-900">
                   {item.name}
                 </a>
               ))}
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               {auth.user ? (
-                <div className="leading-6 text-sm">
+                <div className="leading-6 text-md">
                   <Link
                     href={route('dashboard')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
@@ -65,7 +65,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                 </div>
               ) : (
 
-                <div className="leading-6 text-sm">
+                <div className="leading-6 text-md">
                   <Link
                     href={route('login')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
@@ -82,7 +82,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
-                    Register Participant
+                    Registrasi Partisipasi
                   </Link>
                 </div>
               )}
@@ -145,7 +145,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                         href={route('register.participant')}
                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                       >
-                        Register
+                        Registrasi Partisipasi
                       </Link>
                     </div>
                   )}
@@ -243,7 +243,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
               {categories.map(item => {
                 return (
                   <Link key={item.id} href={route('landing.category', { category: item.id })} className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                    {item.category_name}
+                    <img src={'/storage/' + item.image} alt={item.category_name} />
                   </Link>
                 )
               })}
@@ -254,18 +254,49 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
           <div className="text-left">
             <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
-              Teknis Pelaksanaan Lomba
+              Mekanisme Pelaksanaan
             </h1>
             <div className="flex flex-col md:flex-row gap-4">
               <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
-                <p>Batas waktu pendaftaran: 25 April 2024</p>
-                <p>Teknikal Meeting dan Webinar: 27 April 2024</p>
-                <p>Pengumpulan Karya Video Lomba: 27 April - 11 Mei 2024</p>
-                <p>Babak Final: 21 Mei 2024 </p>
-                <p>
-                  Biaya pendaftaran lomba sebesar Rp.50.000 per orang.
-                  Pastikan telah melakukan transfer pembayaran biaya pendaftaran sebelum mengisi form data peserta ini. Transfer dapat dilakukan melalui rekening Virtual Account BNI 9882 4474 2223 1991 Atas Nama TRIDAYA OLIMPIADE.
-                </p>
+
+                <ol className="list-decimal list-inside my-6">
+                  <li>
+                    Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
+                  </li>
+                  <li>
+                    Peserta melakukan pendaftaran kompetisi melalui laman https://kompetisimendongeng.qiteplanguage.org dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
+                  </li>
+                  <li>
+                    Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
+                  </li>
+                  <li>
+                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran.
+                  </li>
+
+                  <li>
+                    Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
+                    <ol className="list-alpha list-inside ml-4">
+                      <li>a.	Login pada laman https://kompetisimendongeng.qiteplanguage.org menggunakan email dan password yang dikirim ke email pendaftar</li>
+                      <li>b.	Masuk ke menu “Unggah Karya”  </li>
+                      <li>c.	Klik tautan unggah karya, kemudian unggah video ke dalam folder google drive yang telah disediakan</li>
+                      <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah video pada folder yang disediakan</li>
+                      <li>e.	Klik “Daftarkan”</li>
+                      <li>f.	Peserta akan menerima email notifikasi unggah hasil karya</li>
+                    </ol>
+                  </li>
+                  <li>Peserta yang lulus seleksi awal oleh dewan juri, akan mengikuti seleksi akhir secara langsung baik daring maupun luring.</li>
+                </ol>
+
+                <div>
+                  <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
+                  <ol className="list-decimal list-inside">
+                    <li>Pendaftaran Peserta: 29 Maret - 31 Mei 2024</li>
+                    <li>Pengumpulan Karya (Penyisihan): 29 Maret—31 Mei 2024</li>
+                    <li>Pengumuman Finalis: 13 Juni 2024</li>
+                    <li>Babak Final: 20 Juni 2024</li>
+                  </ol>
+                </div>
+
               </div>
             </div>
           </div>
@@ -274,8 +305,8 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
 
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
-            <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
-              <p>Our Sponsors:</p>
+            <div className="flex-auto w-5/6 items-center justify-center text-center py-16">
+              <p>Sponsor:</p>
               <div className="flex flex-row justify-center">
                 <div className="h-12 w-36  p-1 m-1">
                   <img className="object-cover" src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
@@ -284,7 +315,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
                 </div>
               </div>
-              <p className="mt-8">Copyright ©2024 All rights reserved</p>
+              {/* <p className="mt-8">Copyright ©2024 All rights reserved</p> */}
             </div>
           </div>
         </footer>

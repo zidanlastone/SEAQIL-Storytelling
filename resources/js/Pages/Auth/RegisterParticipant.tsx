@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import ComboBoxInput, { ComboBoxData } from '@/Components/ComboBoxInput';
 import { Language, Category, LevelOfParticipant } from '@/types';
+import SponsorHeader from '@/Components/SponsorHeader';
 
 
 type RegisterParticipantProps = {
@@ -106,12 +107,12 @@ export default function RegisterParticipant({
     <GuestLayout>
       <Head title="Register" />
 
-      <form onSubmit={submit} >
+      <form onSubmit={submit} className="w-5/6 mx-auto my-6" >
 
-        <div className='grid grid-col-2'>
+        <div className='grid grid-col-2 my-6'>
           <div>
             <div>
-              <InputLabel htmlFor="name" value="Name" />
+              <InputLabel htmlFor="name" value="Nama Lengkap" />
 
               <TextInput
                 id="name"
@@ -128,7 +129,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="email" value="Email" />
+              <InputLabel htmlFor="email" value="Alamat Surel" />
 
               <TextInput
                 id="email"
@@ -138,6 +139,7 @@ export default function RegisterParticipant({
                 className="mt-1 block w-full"
                 autoComplete="username"
                 onChange={(e) => setData('email', e.target.value)}
+                placeholder="Contoh: email@gmail.com"
                 required
               />
 
@@ -145,7 +147,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="password" value="Password" />
+              <InputLabel htmlFor="password" value="Kata Sandi" />
 
               <TextInput
                 id="password"
@@ -162,7 +164,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+              <InputLabel htmlFor="password_confirmation" value="Konfirmasi Kata Sandi" />
 
               <TextInput
                 id="password_confirmation"
@@ -197,14 +199,13 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
+              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp (Khusus jenjang SD, SMP, SMA dan Sederajat)" />
               <TextInput
                 id="whatsapp_contact"
                 type="tel"
                 className="mt-1 block w-full"
                 value={data.whatsapp_contact as string}
                 onChange={(e) => setData('whatsapp_contact', e.target.value)}
-                required
                 autoComplete="phone"
               />
 
@@ -245,7 +246,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="country" value="Negara" />
+              <InputLabel htmlFor="country" value="Negara Asal Partisipan" />
 
               <TextInput
                 id="country"
@@ -339,7 +340,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="level_of_participant_id" value="Pilih Tingkatan Partisipan" />
+              <InputLabel htmlFor="level_of_participant_id" value="Pilih Jenjang Pendidikan" />
               <ComboBoxInput
                 data={combo_level_of_participants}
                 id="level_of_participant_id"

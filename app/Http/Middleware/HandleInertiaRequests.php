@@ -34,6 +34,7 @@ class HandleInertiaRequests extends Middleware
     {
         $user = $request->user();
         $menus = [];
+        $roles = [];
 
         $locale = $request->input('locale');
         $where = [
@@ -46,8 +47,10 @@ class HandleInertiaRequests extends Middleware
                 $where['language_id'] = $language->id;
         }
 
+        
         if ($user) {
-            $menus = Menu::whereIn('roles', $user->roles()->pluck('name'))
+            $roles = $user->roles()->pluck('name');;
+            $menus = Menu::whereIn('roles', $roles)
                 ->where($where)
                 ->get()
                 ->unique('route');
@@ -58,7 +61,8 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $user,
-                'menus' => $menus
+                'menus' => $menus,
+                'roles' => $roles
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

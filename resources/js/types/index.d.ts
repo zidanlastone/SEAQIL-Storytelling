@@ -32,7 +32,6 @@ export interface User {
     password: string,
     email_verified_at?: string,
     created_at?: string,
-    roles: RoleAuthorization[]
 }
 
 export interface Roles {
@@ -98,6 +97,7 @@ export interface Slider {
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User,
+        roles: string[],
         menus: Menu[]
     };
     ziggy: Config & { location: string };

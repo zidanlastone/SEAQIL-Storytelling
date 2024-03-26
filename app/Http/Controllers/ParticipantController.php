@@ -22,28 +22,40 @@ class ParticipantController extends Controller
      */
     public function index()
     {
+
+        $user = Auth::user();
         $profile = Auth::user()->profile;
 
         $users = User::all();
         $categories = Category::all();
         $language = Language::all();
         $levelOfParticipant = LevelOfParticipant::all();
+
         $participant = Participant::with([
             'user',
             'category',
             'language',
             'level_of_participant'
-        ])->get();
+        ])
+        ->has('user');
 
+        if($user->hasRole('participant')){
+            $participant->where([
+                'user_id' => $user->id
+            ]);
+        }
 
         return Inertia::render('Participant/List', [
             'status' => session('status'),
             'profile' => $profile,
             'users' => $users,
-            'participants' => $participant,
+            'participants' => $participant->get(),
             'categories' => $categories,
             'languages' => $language,
-            'level_of_participant' => $levelOfParticipant
+            'level_of_participant' => $levelOfParticipant,
+            'can' => [
+                'edit.participant' => Auth::user()->can('edit.participant')
+            ] 
         ]);
     }
     /**

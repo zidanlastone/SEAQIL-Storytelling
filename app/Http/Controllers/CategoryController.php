@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
         if ($request->file('image')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
-            $path = $request->file('image')->storeAs('image', $filename, 'public');
+            $path = $request->file('image')->storeAs('image/category/', $filename, 'public');
             Category::create([
                 'category_name' => $request->category_name,
                 'description' => $request->description,
@@ -78,11 +78,12 @@ class CategoryController extends Controller
         //
         if ($request->file('image')->isValid()) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
-            $path = $request->file('image')->storeAs('image', $filename, 'public');
+            $path = $request->file('image')->storeAs('image/category/', $filename, 'public');
             $category->image = $path;
         }
 
         $category->category_name = $request->category_name;
+        $category->description = $request->description;
         $category->save();
 
         return to_route('category.index');
