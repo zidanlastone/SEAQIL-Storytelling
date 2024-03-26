@@ -1,21 +1,16 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
-  "node_modules/swiper/modules/pagination.css": [
-    "/build/assets/LandingPage-qnhfaNg6.js",
-    "/build/assets/LandingPage-D8Wd3hRX.css"
-  ],
-  "node_modules/swiper/swiper.css": [
-    "/build/assets/LandingPage-qnhfaNg6.js",
-    "/build/assets/LandingPage-D8Wd3hRX.css"
-  ],
   "resources/js/Components/ApplicationLogo.tsx": [
     "/build/assets/ApplicationLogo-t-7Hr4ud.js"
   ],
   "resources/js/Components/Checkbox.tsx": [
-    "/build/assets/Login-CA9Ubn3P.js"
+    "/build/assets/Login-Dqas6ySK.js"
   ],
   "resources/js/Components/ComboBoxInput.tsx": [
     "/build/assets/ComboBoxInput-Cjtp4iA-.js"
+  ],
+  "resources/js/Components/ConditionalRender.tsx": [
+    "/build/assets/ConditionalRender-BtHY1tZZ.js"
   ],
   "resources/js/Components/DangerButton.tsx": [
     "/build/assets/DeleteUserForm-CzoMIIkc.js"
@@ -51,8 +46,7 @@
     "/build/assets/CreateUserForm-DiO-vRaz.js"
   ],
   "resources/js/Components/SponsorHeader.tsx": [
-    "/build/assets/LandingPage-qnhfaNg6.js",
-    "/build/assets/LandingPage-D8Wd3hRX.css"
+    "/build/assets/SponsorHeader-CMGWAJKN.js"
   ],
   "resources/js/Components/Table/RowContent.tsx": [
     "/build/assets/RowHeader-DZs0yCuy.js"
@@ -67,7 +61,7 @@
     "/build/assets/AuthenticatedLayout-D_Z4Iohc.js"
   ],
   "resources/js/Layouts/GuestLayout.tsx": [
-    "/build/assets/GuestLayout-DGd2MRp4.js"
+    "/build/assets/GuestLayout-Dg9kH1f8.js"
   ],
   "resources/js/Layouts/Partials/NavbarCloseButton.tsx": [
     "/build/assets/AuthenticatedLayout-D_Z4Iohc.js"
@@ -76,44 +70,48 @@
     "/build/assets/AuthenticatedLayout-D_Z4Iohc.js"
   ],
   "resources/js/Pages/Auth/ConfirmPassword.tsx": [
-    "/build/assets/ConfirmPassword-Gn2HSHjM.js"
+    "/build/assets/ConfirmPassword-BkvAy1TA.js"
   ],
   "resources/js/Pages/Auth/ForgotPassword.tsx": [
-    "/build/assets/ForgotPassword-Dk9Jx-Lt.js"
+    "/build/assets/ForgotPassword-BRVmamxY.js"
   ],
   "resources/js/Pages/Auth/Login.tsx": [
-    "/build/assets/Login-CA9Ubn3P.js"
+    "/build/assets/Login-Dqas6ySK.js"
   ],
   "resources/js/Pages/Auth/Register.tsx": [
-    "/build/assets/Register-BNqhdjS6.js"
+    "/build/assets/Register-BcrcwFwG.js"
   ],
   "resources/js/Pages/Auth/RegisterParticipant.tsx": [
-    "/build/assets/RegisterParticipant-DqzY3wav.js"
+    "/build/assets/RegisterParticipant-Cq2kQjZ7.js"
   ],
   "resources/js/Pages/Auth/ResetPassword.tsx": [
-    "/build/assets/ResetPassword-FKU7M4Rj.js"
+    "/build/assets/ResetPassword-6t4BXfTb.js"
   ],
   "resources/js/Pages/Auth/VerifyEmail.tsx": [
-    "/build/assets/VerifyEmail-ecIfYGpG.js"
+    "/build/assets/VerifyEmail-CYhZq6nj.js"
   ],
   "resources/js/Pages/Category/List.tsx": [
-    "/build/assets/List-DKJMCPxu.js"
+    "/build/assets/List-x0u-Duhk.js"
   ],
   "resources/js/Pages/Category/Partials/CategoryForm.tsx": [
-    "/build/assets/CategoryForm-Cz2CKiUT.js"
+    "/build/assets/CategoryForm-Dr-ciRui.js"
   ],
   "resources/js/Pages/Category/Partials/DeleteCategory.tsx": [
     "/build/assets/DeleteCategory-Dhn11_fA.js"
   ],
   "resources/js/Pages/Dashboard.tsx": [
-    "/build/assets/Dashboard-QNMuoWkg.js"
+    "/build/assets/Dashboard-BheE_0pm.js"
+  ],
+  "resources/js/Pages/LandingCategory.tsx": [
+    "/build/assets/LandingCategory-CuGY_83s.js",
+    "/build/assets/pagination-D8Wd3hRX.css"
   ],
   "resources/js/Pages/LandingPage.tsx": [
-    "/build/assets/LandingPage-qnhfaNg6.js",
-    "/build/assets/LandingPage-D8Wd3hRX.css"
+    "/build/assets/LandingPage-C3S1U83p.js",
+    "/build/assets/pagination-D8Wd3hRX.css"
   ],
   "resources/js/Pages/LevelOfParticipant/List.tsx": [
-    "/build/assets/List-Du7H120U.js"
+    "/build/assets/List-DqElGcmq.js"
   ],
   "resources/js/Pages/LevelOfParticipant/Partials/DeleteLevelOfParticipant.tsx": [
     "/build/assets/DeleteLevelOfParticipant-5zN5LPV3.js"
@@ -122,7 +120,7 @@
     "/build/assets/LevelOfParticipantForm-DvmfmVfr.js"
   ],
   "resources/js/Pages/Participant/List.tsx": [
-    "/build/assets/List-CeKJuNss.js"
+    "/build/assets/List-C5LcOwjJ.js"
   ],
   "resources/js/Pages/Participant/Partials/DeleteParticipant.tsx": [
     "/build/assets/DeleteParticipant-DxRUmp79.js"
@@ -149,13 +147,13 @@
     "/build/assets/Register-l0sNRNKZ.js"
   ],
   "resources/js/Pages/Slider/List.tsx": [
-    "/build/assets/List-B1cb5zDx.js"
+    "/build/assets/List-DHcnFHIY.js"
   ],
   "resources/js/Pages/Slider/Partials/DeleteSlider.tsx": [
     "/build/assets/DeleteSlider-CWbck554.js"
   ],
   "resources/js/Pages/Slider/Partials/SliderForm.tsx": [
-    "/build/assets/SliderForm-BQTmoI-H.js"
+    "/build/assets/SliderForm-DRmYOAA8.js"
   ],
   "resources/js/Pages/Users/Edit.tsx": [
     "/build/assets/Edit-CubUjQau.js"
