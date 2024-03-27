@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,9 +14,9 @@ return new class extends Migration
         Schema::create('creations', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Participant::class, 'id_participant');
-            $table->string('title');                    // untuk judul karya yang di upload
-            $table->string('upload_location');          // untuk link lokasi file peserta mengupload karyanya, preferensi google drive
-            $table->enum('upload_status', ['0', '1']);  // untuk menetukan apakah peserta sudah melakukan upload karya
+            $table->string('title');                      // untuk judul karya yang di upload
+            $table->string('upload_location')->nullable();// untuk link lokasi file peserta mengupload karyanya, preferensi google drive
+            $table->enum('upload_status', ['0', '1']);    // untuk menetukan apakah peserta sudah melakukan upload karya
             $table->timestamps();
         });
     }

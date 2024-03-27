@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterParticipantRequest;
+
 use App\Models\Category;
 use App\Models\I18n\Language;
+use App\Models\Participant\Creation;
 use App\Models\Participant\Participant;
 use App\Models\Participant\LevelOfParticipant;
 use App\Models\User;
 use App\Models\Profile;
+
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+// use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -40,15 +44,8 @@ class RegisteredParticipantController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterParticipantRequest $request): RedirectResponse
     {
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -70,11 +67,11 @@ class RegisteredParticipantController extends Controller
             'pwd' => $request->password,
         ]);
 
-        if ($request->file('payment_receipt')->isValid()) {
+        if ($request->hasFile('payment_receipt')) {
             $filename = \Carbon\Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
             $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
 
-            Participant::create([
+            $participant = Participant::create([
                 'user_id' => $user->id,
                 'category_id' => $request->category_id,
                 'language_id' => $request->language_id,
@@ -82,6 +79,13 @@ class RegisteredParticipantController extends Controller
                 'status_verifikasi' => '0',
                 'payment_receipt' => $path,
                 'certificate' => '',
+            ]);
+
+            Creation::create([
+                'id_participant' => $participant->id,
+                'title' => $request->title,
+                'upload_location' => null,
+                'upload_status' => '0',
             ]);
         }
 

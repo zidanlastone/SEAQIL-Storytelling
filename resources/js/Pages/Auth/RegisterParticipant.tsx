@@ -115,7 +115,7 @@ export default function RegisterParticipant({
           <div>
             <div>
               <InputLabel htmlFor="name">
-              Nama Lengkap <span className="text-red-500">*</span>
+                Nama Lengkap <span className="text-red-500">*</span>
               </InputLabel>
 
               <TextInput
@@ -134,7 +134,7 @@ export default function RegisterParticipant({
 
             <div className="mt-4">
               <InputLabel htmlFor="email">
-              Alamat Surel <span className="text-red-500">*</span>
+                Alamat Surel <span className="text-red-500">*</span>
               </InputLabel>
 
               <TextInput
@@ -173,7 +173,7 @@ export default function RegisterParticipant({
 
             <div className="mt-4">
               <InputLabel htmlFor="password_confirmation"  >
-              Konfirmasi Kata Sandi <span className="text-red-500">*</span>
+                Konfirmasi Kata Sandi <span className="text-red-500">*</span>
               </InputLabel>
 
               <TextInput
@@ -407,7 +407,6 @@ export default function RegisterParticipant({
                 name="payment_receipt"
                 className="my-2 block w-full"
                 autoComplete="image"
-                isFocused={true}
                 onChange={(e: any) => {
                   if (e.target.files) {
                     setData('payment_receipt', e.target.files[0])
@@ -438,7 +437,7 @@ export default function RegisterParticipant({
           </Link>
 
           <PrimaryButton className="ms-4" disabled={processing}>
-            Register
+            Daftar
           </PrimaryButton>
         </div>
       </form>

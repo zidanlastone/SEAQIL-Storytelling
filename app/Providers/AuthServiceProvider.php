@@ -15,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        Gate::before(function($user, $ability){
-            return  $user->hasRole('administrator') ? true : null; 
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('administrator') ? true : null;
         });
     }
 
@@ -27,8 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         //
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
-            // $user = Auth::user()->user->with('profile');
-            // dd($notifiable);
             return (new MailMessage)
                 ->level('info')
                 ->greeting(null)
@@ -36,8 +34,8 @@ class AuthServiceProvider extends ServiceProvider
                 ->subject('Kompetisi Mendongeng Multibahasa di Era Digital')
                 ->line('Terima kasih sudah melakukan pendaftaran Kompetisi Mendongeng Multibahasa di Era Digital.')
                 ->line('Saat ini bukti pembayaran yang Anda unggah sedang diverifikasi oleh panitia.')
-                ->line('Email:'. $notifiable->email)
-                ->line('Kata Sandi:'. $notifiable?->profile?->pwd || '')
+                ->line('Username/Email: ' . $notifiable->email)
+                ->lineIf($notifiable->profile != null, 'Kata Sandi: ' . $notifiable?->profile->pwd)
                 ->line('Silahkan Klik Tombol berikut untuk melakukan verifikasi Email')
                 ->action('Verifikasi Alamat Surel', $url)
                 ->line('Silakan bergabung juga ke grup Whatsapp http://xxxx dan telegram http://xxx untuk mendapatkan update informasi terbaru.')
