@@ -17,7 +17,7 @@ const navigation = [
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
   { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
-  { name: 'QNA', href: '/qna' },
+  { name: 'Q & A', href: '/qna' },
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
@@ -45,7 +45,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
                 <span className="sr-only">SEAQIL Storytelling</span>
-                {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
                 <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900">
@@ -72,17 +71,11 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   >
                     Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
-                  {/* <Link
-                    href={route('register')}
-                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
-                  >
-                    Register
-                  </Link> */}
                   <Link
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
-                    Registrasi Partisipasi
+                    Registrasi Peserta
                   </Link>
                 </div>
               )}
@@ -94,7 +87,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">SEAQIL Storytelling</span>
-                  {/* <ApplicationLogo className="h-8 w-auto" /> */}
                 </a>
                 <button
                   type="button"
@@ -135,17 +127,11 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                       >
                         Log in
                       </Link>
-                      {/* <Link
-                        href={route('register')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Register
-                      </Link> */}
                       <Link
                         href={route('register.participant')}
                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                       >
-                        Registrasi Partisipasi
+                        Registrasi Peserta
                       </Link>
                     </div>
                   )}
@@ -295,7 +281,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
                 </div>
               </div>
-              {/* <p className="mt-8">Copyright ©2024 All rights reserved</p> */}
             </div>
           </div>
         </footer>

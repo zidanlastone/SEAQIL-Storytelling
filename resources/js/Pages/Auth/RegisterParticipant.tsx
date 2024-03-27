@@ -8,6 +8,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import ComboBoxInput, { ComboBoxData } from '@/Components/ComboBoxInput';
 import { Language, Category, LevelOfParticipant } from '@/types';
 import SponsorHeader from '@/Components/SponsorHeader';
+import SelectInput from '@/Components/SelectInput';
 
 
 type RegisterParticipantProps = {
@@ -356,45 +357,54 @@ export default function RegisterParticipant({
               <InputLabel htmlFor="category_id"  >
                 Pilih Kategori <span className="text-red-500">*</span>
               </InputLabel>
-              <ComboBoxInput
-                data={combo_category}
+              <SelectInput
+                className="w-full"
                 id="category_id"
-                onChange={(value) => {
-                  setSelectedCategory(value)
-                  setData('category_id', value.id)
-                }}
-                value={selectedCategory} />
-              <InputError message={errors.payment_receipt} className="mt-2" />
+                onChange={(e) => {
+                  setData('category_id', parseInt(e.target.value))
+                }}>
+                {combo_category.map(item => (
+                  <option value={item.id} className="w-full" selected={data.category_id == item.id} >{item.value}</option>
+                ))}
+              </SelectInput>
+
+              <InputError message={errors.category_id} className="mt-2" />
             </div>
 
             <div className="mt-4">
               <InputLabel htmlFor="language_id" >
                 Pilih Bahasa <span className="text-red-500">*</span>
               </InputLabel>
-              <ComboBoxInput
-                data={combo_languages}
+
+              <SelectInput
+                className="w-full"
                 id="language_id"
-                onChange={(value) => {
-                  setSelectedLanguage(value)
-                  setData('language_id', value.id)
-                }}
-                value={selectedLanguage} />
-              <InputError message={errors.payment_receipt} className="mt-2" />
+                onChange={(e) => {
+                  setData('language_id', parseInt(e.target.value))
+                }}>
+                {combo_languages.map(item => (
+                  <option value={item.id} className="min-w-full" selected={data.language_id == item.id}>{item.value}</option>
+                ))}
+              </SelectInput>
+
+              <InputError message={errors.language_id} className="mt-2" />
             </div>
 
             <div className="mt-4">
               <InputLabel htmlFor="level_of_participant_id" >
                 Jenjang Kelas
               </InputLabel>
-              <ComboBoxInput
-                data={combo_level_of_participants}
+              <SelectInput
+                className="w-full"
                 id="level_of_participant_id"
-                onChange={(value) => {
-                  setSelectedLOP(value)
-                  setData('level_of_participant_id', value.id)
-                }}
-                value={selectedLOP} />
-              <InputError message={errors.payment_receipt} className="mt-2" />
+                onChange={(e) => {
+                  setData('level_of_participant_id', parseInt(e.target.value))
+                }}>
+                {combo_level_of_participants.map(item => (
+                  <option value={item.id} className="w-full" selected={data.level_of_participant_id == item.id}>{item.value}</option>
+                ))}
+              </SelectInput>
+              <InputError message={errors.level_of_participant_id} className="mt-2" />
             </div>
 
             <div className="mt-4">

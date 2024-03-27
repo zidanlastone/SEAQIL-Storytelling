@@ -72,12 +72,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   >
                     Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
-                  {/* <Link
-                    href={route('register')}
-                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
-                  >
-                    Register
-                  </Link> */}
                   <Link
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
@@ -94,7 +88,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">SEAQIL Storytelling</span>
-                  {/* <ApplicationLogo className="h-8 w-auto" /> */}
                 </a>
                 <button
                   type="button"
@@ -227,10 +220,10 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   Kompetisi Mendongeng Tingkat Nasional
                 </h1>
                 <p className=" leading-8 text-gray-600">
-                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024. 
+                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
                 </p>
                 <p className=" leading-8 text-gray-600">
-                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024. 
+                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
                 </p>
               </div>
             </div>
@@ -318,7 +311,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
                 </div>
               </div>
-              {/* <p className="mt-8">Copyright ©2024 All rights reserved</p> */}
             </div>
           </div>
         </footer>

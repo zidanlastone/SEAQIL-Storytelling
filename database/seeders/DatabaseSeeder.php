@@ -93,19 +93,66 @@ class DatabaseSeeder extends Seeder
 
         LevelOfParticipant::insert([
             [
-                'level_name' => 'Sekolah Dasar',
-                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar',
+                'level_name' => 'SD/Sederajat Kelas 1',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 1',
                 'is_deleted' => '0'
             ],
             [
-                'level_name' => 'Sekolah Menengah Pertama',
-                'description' => 'Tingkatan yang dikhususkan untuk sekolah menengah pertama',
+                'level_name' => 'SD/Sederajat Kelas 2',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 2',
                 'is_deleted' => '0'
             ],
             [
-                'level_name' => 'Sekolah Menengah Atas',
-                'description' => 'Tingkatan yang dikhususkan untuk sekolah menengah atas',
-                'is_deleted' => '0',
+                'level_name' => 'SD/Sederajat Kelas 3',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 3',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SD/Sederajat Kelas 4',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 4',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SD/Sederajat Kelas 5',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 5',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SD/Sederajat Kelas 6',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah dasar kelas 6',
+                'is_deleted' => '0'
+            ],
+            // SMP/Sederajat
+            [
+                'level_name' => 'SMP/Sederajat Kelas 7',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah pertama kelas 7',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SMP/Sederajat Kelas 8',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah pertama kelas 8',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SMP/Sederajat Kelas 9',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah pertama kelas 9',
+                'is_deleted' => '0'
+            ],
+            // SMA Sederajat
+            [
+                'level_name' => 'SMA/Sederajat Kelas 10',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah atas kelas 10',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SMA/Sederajat Kelas 11',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah atas kelas 11',
+                'is_deleted' => '0'
+            ],
+            [
+                'level_name' => 'SMA/Sederajat Kelas 12',
+                'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah atas kelas 12',
+                'is_deleted' => '0'
             ],
         ]);
 
