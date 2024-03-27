@@ -46,10 +46,10 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
                 <span className="sr-only">SEAQIL Storytelling</span>
-                <ApplicationLogo className="h-8 w-auto" />
+                {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
-                <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+                <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900">
                   {item.name}
                 </a>
               ))}
