@@ -14,11 +14,11 @@ import ConditionalRender from '@/Components/ConditionalRender';
 import CategoryForm from './Category/Partials/CategoryForm';
 
 const navigation = [
-  { name: 'Home', href: '/' },
+  { name: 'Beranda', href: '/' },
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
-  { name: 'Tata Cara Partisipasi ', href: '#teknis-lomba' },
+  { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
-  // { name: 'FAQ', href: '#' },
+  { name: 'QNA', href: '/qna' },
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{ laravelVersion: string, phpVersion: string, category: Category }>) {
@@ -173,10 +173,10 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
           <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-5 my-16">
             <div className="text-left">
               <div className="flex flex-col md:flex-row gap-4 items-center">
-                <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
-                  <img className='w-full' src={category.image} alt="" />
+                <div className="order-start mt-6 w-full md:w-2/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
+                  <img className='w-full' src={'/storage/' +category.image} alt="" />
                 </div>
-                <div className="order-end mt-6 text-md w-full md:w-3/4">
+                <div className="order-end mt-6 text-md w-full md:w-2/4">
                   <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
                     {category.category_name}
                   </h1>
@@ -229,7 +229,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-6">
-              <p>Our Sponsors:</p>
+              <p>Didukung Oleh:</p>
               <div className="flex flex-row justify-center">
                 <div className="h-12 w-36  p-1 m-1">
                   <img className="object-cover" src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
@@ -238,7 +238,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
                   <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
                 </div>
               </div>
-              <p className="mt-8">Copyright ©2024 All rights reserved</p>
+              {/* <p className="mt-8">Copyright ©2024 All rights reserved</p> */}
             </div>
           </div>
         </footer>

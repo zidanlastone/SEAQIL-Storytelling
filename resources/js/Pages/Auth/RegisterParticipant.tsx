@@ -108,7 +108,7 @@ export default function RegisterParticipant({
       <Head title="Register" />
 
       <form onSubmit={submit} className="w-5/6 mx-auto my-6" >
-
+        <h1 className="text-lg">Formulir Registrasi Peserta</h1>
         <div className='grid grid-col-2 my-6'>
           <div>
             <div>
@@ -199,7 +199,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp (Khusus jenjang SD, SMP, SMA dan Sederajat)" />
+              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
               <TextInput
                 id="whatsapp_contact"
                 type="tel"
@@ -213,7 +213,7 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua" />
+              <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua (Khusus jenjang SD, SMP, SMA dan Sederajat)" />
 
               <TextInput
                 id="parent_contact"

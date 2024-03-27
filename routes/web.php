@@ -32,6 +32,19 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/qna', function(){
+    $sliders = Slider::all();
+    $categories = Category::all();
+    return Inertia::render('LandingPageQNA', [
+        'sliders' => $sliders,
+        'categories' => $categories,
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 Route::get('/event-category/{category}', [CategoryController::class, 'show'])->name('landing.category');
 
 Route::get('/dashboard', function () {

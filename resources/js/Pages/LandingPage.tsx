@@ -13,11 +13,11 @@ import SponsorHeader from '@/Components/SponsorHeader';
 import ConditionalRender from '@/Components/ConditionalRender';
 
 const navigation = [
-  { name: 'Home', href: '/' },
+  { name: 'Beranda', href: '/' },
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
   { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
-  // { name: 'FAQ', href: '#' },
+  { name: 'QNA', href: '/qna' },
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
@@ -48,7 +48,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                 {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
-                <a key={item.name} href={item.href} className="text-md font-semibold leading-6 text-gray-900">
+                <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900">
                   {item.name}
                 </a>
               ))}
@@ -227,7 +227,10 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   Kompetisi Mendongeng Tingkat Nasional
                 </h1>
                 <p className=" leading-8 text-gray-600">
-                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
+                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024. 
+                </p>
+                <p className=" leading-8 text-gray-600">
+                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024. 
                 </p>
               </div>
             </div>
@@ -306,7 +309,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-16">
-              <p>Sponsor:</p>
+              <p>Didukung Oleh:</p>
               <div className="flex flex-row justify-center">
                 <div className="h-12 w-36  p-1 m-1">
                   <img className="object-cover" src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
