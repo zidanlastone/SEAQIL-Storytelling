@@ -24,7 +24,57 @@ export default function Dashboard({ auth, roles }: PageProps) {
 
                             <ConditionalRender condition={auth.roles.includes('participant')}>
                                 <p>Pendaftaran Anda sudah berhasil. Saat ini sedang dilakukan proses verfikasi pembayaran oleh panitia</p>
+                                
+                                <br />
 
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Pendaftaran Peserta</p>
+                                            </td>
+                                            <td>
+                                                <p>:Sudah mendaftar</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Verifikasi Oleh Panitia</p>
+                                            </td>
+                                            <td>
+                                                <p>: Proses Verifikasi</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Status Unggah Karya</p>
+                                            </td>
+                                            <td>
+                                                <p>: Proses Verifikasi</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Seleksi Karya</p>
+                                            </td>
+                                            <td>
+                                                <p>: Proses Verifikasi</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Sertifikat</p>
+                                            </td>
+                                            <td>
+                                                <p>: Sertifikat</p>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <br />
+                                <p>Silakan bergabung juga ke grup Whatsapp http://xxxx dan telegram http://xxx untuk mendapatkan update informasi terbaru.</p>
                                 <br />
 
                                 <div>

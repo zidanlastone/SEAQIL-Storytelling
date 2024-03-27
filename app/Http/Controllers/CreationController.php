@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Participant\StoreCreationRequest;
 use App\Http\Requests\Participant\UpdateCreationRequest;
 use App\Models\Participant\Creation;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CreationController extends Controller
 {
@@ -14,6 +16,18 @@ class CreationController extends Controller
     public function index()
     {
         //
+        $where = [];
+
+        $user = Auth::user();
+
+        if($user->hasRole('participant')){
+            $participations = $user->participation()->get()->pluck('id');
+            $creations = Creation::whereIn('id_participant', $participations);
+        }
+
+        return Inertia::render("Creation/List", [
+            "creations"=> $creations->get(),
+        ]);
     }
 
     /**

@@ -26,8 +26,8 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "category_name" => "required",
-            "image" => "required|image|mimes:jpeg,jpg,png,gif",
+            "category_name" => "min:3",
+            "image" => "image|mimes:jpeg,jpg,png,gif",
             "description" => "min:3",
         ];
     }

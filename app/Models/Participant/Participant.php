@@ -48,6 +48,11 @@ class Participant extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    
+    public function creation()
+    {
+        return $this->hasMany(Creation::class);
+    }
 
     public function level_of_participant()
     {

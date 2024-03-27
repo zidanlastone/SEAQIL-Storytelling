@@ -17,7 +17,7 @@ const navigation = [
   { name: 'Kategori Peserta', href: '#kategori-lomba' },
   { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
-  { name: 'QNA', href: '/qna' },
+  { name: 'Q & A', href: '/qna' },
 ]
 
 function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
@@ -82,7 +82,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
-                    Registrasi Partisipasi
+                    Registrasi Peserta
                   </Link>
                 </div>
               )}
@@ -145,7 +145,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                         href={route('register.participant')}
                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                       >
-                        Registrasi Partisipasi
+                        Registrasi Peserta
                       </Link>
                     </div>
                   )}
@@ -168,7 +168,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
               }}
             />
           </div>
-          <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-24">
+          <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-28">
 
             <div className="justify-center">
               <Swiper

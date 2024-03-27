@@ -94,6 +94,15 @@ export interface Slider {
     source: string
 }
 
+export interface Creation {
+    id: number,
+    title: string,
+    id_participant: number,
+    upload_location: string,
+    upload_status: '0' | '1' | '2',
+}
+
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User,

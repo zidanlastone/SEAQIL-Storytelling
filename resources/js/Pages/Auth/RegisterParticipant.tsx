@@ -33,6 +33,7 @@ type InputRegisterParticipant = {
   address: string,
 
   // partisipasi lomba
+  title: string,
   payment_receipt: undefined,
   category_id: number,
   language_id: number,
@@ -59,6 +60,7 @@ export default function RegisterParticipant({
     address: '',
 
     // partisipasi lomba
+    title: '',
     payment_receipt: undefined,
     category_id: 0,
     language_id: 0,
@@ -108,11 +110,13 @@ export default function RegisterParticipant({
       <Head title="Register" />
 
       <form onSubmit={submit} className="w-5/6 mx-auto my-6" >
-        <h1 className="text-lg">Formulir Registrasi Peserta</h1>
+        <h1 className="text-lg">Formulir Registrasi Peserta Kompetisi Mendongeng</h1>
         <div className='grid grid-col-2 my-6'>
           <div>
             <div>
-              <InputLabel htmlFor="name" value="Nama Lengkap" />
+              <InputLabel htmlFor="name">
+              Nama Lengkap <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="name"
@@ -129,7 +133,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="email" value="Alamat Surel" />
+              <InputLabel htmlFor="email">
+              Alamat Surel <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="email"
@@ -147,7 +153,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="password" value="Kata Sandi" />
+              <InputLabel htmlFor="password" >
+                Kata Sandi <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="password"
@@ -164,7 +172,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="password_confirmation" value="Konfirmasi Kata Sandi" />
+              <InputLabel htmlFor="password_confirmation"  >
+              Konfirmasi Kata Sandi <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="password_confirmation"
@@ -199,7 +209,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="whatsapp_contact" value="Nomor Whatsapp" />
+              <InputLabel htmlFor="whatsapp_contact" >
+                Nomor Whatsapp <span className="text-red-500">*</span>
+              </InputLabel>
               <TextInput
                 id="whatsapp_contact"
                 type="tel"
@@ -213,7 +225,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="parent_contact" value="Nomor Whatsapp Orang Tua (Khusus jenjang SD, SMP, SMA dan Sederajat)" />
+              <InputLabel htmlFor="parent_contact" >
+                Nomor Whatsapp Orang Tua (Khusus jenjang SD, SMP, SMA dan Sederajat)
+              </InputLabel>
 
               <TextInput
                 id="parent_contact"
@@ -221,7 +235,6 @@ export default function RegisterParticipant({
                 className="mt-1 block w-full"
                 value={data.parent_contact as string}
                 onChange={(e) => setData('parent_contact', e.target.value)}
-                required
                 autoComplete="phone"
               />
 
@@ -229,7 +242,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="institution" value="Institusi" />
+              <InputLabel htmlFor="institution">
+                Institusi
+              </InputLabel>
 
               <TextInput
                 id="institution"
@@ -246,7 +261,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="country" value="Negara Asal Partisipan" />
+              <InputLabel htmlFor="country" >
+                Negara Asal Partisipan <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="country"
@@ -263,7 +280,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="province" value="Provinsi" />
+              <InputLabel htmlFor="province">
+                Provinsi <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="province"
@@ -280,7 +299,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="city" value="Kabupaten / Kota" />
+              <InputLabel htmlFor="city">
+                Kabupaten / Kota <span className="text-red-500">*</span>
+              </InputLabel>
 
               <TextInput
                 id="city"
@@ -297,7 +318,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="address" value="Alamat Lengkap" />
+              <InputLabel htmlFor="address">
+                Alamat Domisi <span className="text-red-500">*</span>
+              </InputLabel>
 
               <textarea
                 className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
@@ -314,7 +337,25 @@ export default function RegisterParticipant({
             <h2 className="my-2 text-lg">Data Partisipasi Lomba</h2>
 
             <div className="mt-4">
-              <InputLabel htmlFor="category_id" value="Pilih Kategori" />
+              <InputLabel htmlFor="category_id">
+                Judul Cerita <span className="text-red-500">*</span>
+              </InputLabel>
+              <TextInput
+                id="title"
+                type="text"
+                className="mt-1 block w-full"
+                value={data.title as string}
+                onChange={(e) => setData('title', e.target.value)}
+                required
+                placeholder="Judul Cerita"
+                autoComplete="title"
+              />
+            </div>
+
+            <div className="mt-4">
+              <InputLabel htmlFor="category_id"  >
+                Pilih Kategori <span className="text-red-500">*</span>
+              </InputLabel>
               <ComboBoxInput
                 data={combo_category}
                 id="category_id"
@@ -327,7 +368,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
+              <InputLabel htmlFor="language_id" >
+                Pilih Bahasa <span className="text-red-500">*</span>
+              </InputLabel>
               <ComboBoxInput
                 data={combo_languages}
                 id="language_id"
@@ -340,7 +383,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="level_of_participant_id" value="Pilih Jenjang Pendidikan" />
+              <InputLabel htmlFor="level_of_participant_id" >
+                Jenjang Kelas
+              </InputLabel>
               <ComboBoxInput
                 data={combo_level_of_participants}
                 id="level_of_participant_id"
@@ -353,7 +398,9 @@ export default function RegisterParticipant({
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="image" value="Bukti Pembayaran" />
+              <InputLabel htmlFor="image" >
+                Bukti Pembayaran (File PDF atau Gambar) <span className="text-red-500">*</span>
+              </InputLabel>
               <TextInput
                 id="image"
                 type="file"
@@ -374,12 +421,20 @@ export default function RegisterParticipant({
           </div>
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="flex items-center justify-end mt-4 gap-4">
+
           <Link
             href={route('login')}
-            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="underline mx-2 text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Already registered?
+            Sudah mendaftar?
+          </Link>
+
+          <Link
+            href={'/'}
+            className="text-sm py-2 px-4 bg-slate-200 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Kembali
           </Link>
 
           <PrimaryButton className="ms-4" disabled={processing}>

@@ -17,9 +17,9 @@ type CategoryInsert = {
 function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Category, mode?: 'create' | 'update' }) {
 
   const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<CategoryInsert>({
-    category_name: item?.category_name || '',
+    category_name: item?.category_name as string,
+    description: item?.description as string,
     image: undefined,
-    description: item?.description || ''
   });
 
   const submit: FormEventHandler = (e) => {

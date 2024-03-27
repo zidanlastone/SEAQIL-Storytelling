@@ -2,7 +2,7 @@ import React from 'react'
 
 function SponsorHeader() {
   return (
-    <div className="flex flex-row mx-auto w-full text-center justify-center gap-x-2">
+    <div className="flex flex-row mx-auto w-full text-center justify-center gap-x-2 my-4">
         <div className="h-16 w-16 p-1 m-1">
             <img className="object-cover"  src="/image/sponsors/tutwuri-handayani.png" alt="tutwurihandayani" />
         </div>

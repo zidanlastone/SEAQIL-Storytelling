@@ -76,7 +76,8 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
-        if ($request->file('image')->isValid()) {
+        // dd($request->all());
+        if ($request->hasFile('image')) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->image->getClientOriginalName();
             $path = $request->file('image')->storeAs('image/category/', $filename, 'public');
             $category->image = $path;

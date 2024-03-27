@@ -14,6 +14,11 @@ export function Sidebar() {
                         Profile
                     </NavLink>
                 </div>
+                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <NavLink href={route('creation.index')} active={route().current('creation.index')}>
+                        Profile
+                    </NavLink>
+                </div>
                 
                 {menus && menus.map(item => (
                     <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" key={item.route}>
