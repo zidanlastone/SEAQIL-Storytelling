@@ -151,7 +151,7 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                       <ConditionalRender condition={roles.includes('participant')}>
                         <li>
                           <Link href={route('creation.index')} className={"block px-2 py-3 border-indigo-400 text-gray-900 focus:border-indigo-700"}>
-                            Karya
+                            Unggah Karya
                           </Link>
                         </li>
                       </ConditionalRender>
@@ -274,7 +274,7 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                   <ConditionalRender condition={roles.includes('participant')}>
                     <li>
                       <Link href={route('creation.index')}>
-                        Karya
+                       Unggah Karya
                       </Link>
                     </li>
                   </ConditionalRender>

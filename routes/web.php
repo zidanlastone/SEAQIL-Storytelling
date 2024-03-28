@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SliderController;
 
 use App\Models\Category;
+use App\Models\Participant\Participant;
 use App\Models\Slider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +49,10 @@ Route::get('/qna', function(){
 Route::get('/event-category/{category}', [CategoryController::class, 'show'])->name('landing.category');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $participation = Auth::user()->with(['participation'])->first();
+    return Inertia::render('Dashboard', [
+        'participation' => $participation
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group([

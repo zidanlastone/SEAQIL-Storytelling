@@ -5,7 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import ConditionalRender from '@/Components/ConditionalRender';
 import AdminLayout from '@/Layouts/AdminLayout';
 
-export default function Dashboard({ auth }: PageProps) {
+export default function Dashboard({ auth, participation }: PageProps<{participation: any[]}>) {
 
     return (
         <AdminLayout
@@ -30,20 +30,28 @@ export default function Dashboard({ auth }: PageProps) {
 
                                 <table>
                                     <tbody>
+                                    
                                         <tr>
                                             <td>
                                                 <p>Pendaftaran Peserta</p>
                                             </td>
+
                                             <td>
-                                                <p>:Sudah mendaftar</p>
+                                                <p>: mendaftar</p>
                                             </td>
+                                            
                                         </tr>
                                         <tr>
                                             <td>
                                                 <p>Verifikasi Oleh Panitia</p>
                                             </td>
                                             <td>
+                                                {/* <ConditionalRender condition={participation[0].status_verifikasi == 0}>
                                                 <p>: Proses Verifikasi</p>
+                                                </ConditionalRender>
+                                                <ConditionalRender condition={participation[0].status_verifikasi == 1}>
+                                                <p>: Sudah Verifikasi</p>
+                                                </ConditionalRender> */}
                                             </td>
                                         </tr>
                                         <tr>
