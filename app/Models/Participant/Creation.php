@@ -15,4 +15,9 @@ class Creation extends Model
         "upload_location",
         "upload_status",
     ];
+
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class, 'id_participant', 'id');
+    }
 }

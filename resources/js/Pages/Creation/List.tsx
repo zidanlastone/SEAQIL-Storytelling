@@ -4,21 +4,28 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Category, PageProps, Slider } from "@/types";
+import { Category, Creation, PageProps, Slider } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
+import UploadCreationForm from "./Partials/UploadCreationForm";
 import CreationForm from "./Partials/CreationForm";
 import DeleteSlider from "./Partials/DeleteCreation";
 import AdminLayout from "@/Layouts/AdminLayout";
+import ConditionalRender from "@/Components/ConditionalRender";
 
-export default function List({ auth, creations = [] }: PageProps<{ creations: any[] }>) {
+type CreationProps = {
+  creations: Creation[],
+  creation?: Creation
+};
+
+export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
-  const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Slider, show: boolean }>({ item: undefined, show: false });
+  const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });
 
-  const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Slider, show: boolean }>({ item: undefined, show: false });
+  const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -28,6 +35,20 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
     columnHelper.accessor(row => row.title, {
       header: 'Judul Karya',
       id: 'table-header-title',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.participant.user.name, {
+      header: 'Nama Peserta',
+      id: 'table-header-participant_user',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.participant.category.category_name, {
+      header: 'Kategori Lomba',
+      id: 'table-header-category-category_name',
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
@@ -49,18 +70,18 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
       header: 'Aksi',
       cell: (_props) => (
         <div key={_props.getValue()}>
-          {/* <button
+          <button
             type="button"
             className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white"
             onClick={() => setShowUpdateDialog({ item: _props.row.original, show: true })}>
             Edit
-          </button> */}
-          {/* <button
+          </button>
+          <button
             type="button"
             className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white"
             onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>
             Hapus
-          </button> */}
+          </button>
         </div>
       ),
       footer: props => props.column.id,
@@ -90,47 +111,51 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Karya Peserta</h2>}>
 
-      <Head title="Admin | Category Management" />
+      <Head title="Admin | Karya Peserta" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+      <div className="py-2">
+        <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
-            <h2 className="text-lg font-semibold">Unggah Karya Video</h2>
-            <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
-            <ul className="list-disc ml-4 my-4">
-              <li>Durasi maksimal 8 menit</li>
-              <li>Resolusi video minimal 1920x1080 piksel</li>
-            </ul>
+            <ConditionalRender condition={auth.roles.includes('participant')}>
+              <h2 className="text-lg font-semibold">Unggah Karya Video</h2>
+              <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
+              <ul className="list-disc ml-4 my-4">
+                <li>Durasi maksimal 8 menit</li>
+                <li>Resolusi video minimal 1920x1080 piksel</li>
+              </ul>
 
-            
+              <ConditionalRender condition={creation != undefined} >
+                <UploadCreationForm item={creation} mode="update" />
+              </ConditionalRender>
+            </ConditionalRender>
 
-            <CreationForm />
-
-            {/* <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
-              <div className="md:mx-2 my-2 order-first">
-                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Submit Data</PrimaryButton>
+            <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
+              <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
+                {/* <div className="md:mx-2 my-2 order-first">
+                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Submit Data</PrimaryButton>
+                </div> */}
+                <div className="md:mx-2 my-2 order-last">
+                  <DebouncedInput
+                    value={getColumnFilterValue('table-header-category_name')}
+                    onChange={value => setColumnFilters([{ value, id: 'table-header-category_name' }])}
+                    className="px-2 py-2 font-sm shadow border rounded"
+                    placeholder="Cari Judul Karya"
+                  />
+                </div>
               </div>
-              <div className="md:mx-2 my-2 order-last">
-                <DebouncedInput
-                  value={getColumnFilterValue('table-header-category_name')}
-                  onChange={value => setColumnFilters([{ value, id: 'table-header-category_name' }])}
-                  className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Nama Kategori"
-                />
-              </div>
-            </div>
 
-            <div className="w-full overflow-x-auto">
-              <table className="table-auto w-full">
-                <thead>
-                  {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
-                </thead>
-                <tbody className="bg-white">
-                  {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
-                </tbody>
-              </table>
-            </div> */}
+              <div className="w-full overflow-x-auto">
+                <table className="table-auto w-full">
+                  <thead>
+                    {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
+                  </thead>
+                  <tbody className="bg-white">
+                    {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
+                  </tbody>
+                </table>
+              </div>
+            </ConditionalRender>
 
           </section>
         </div>
@@ -138,17 +163,17 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
 
       {/* Create mode */}
       <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
-        {/* <CreationForm mode="create"
+        <CreationForm mode="create"
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowCreateDialog(false)} /> */}
+          onComplete={() => setShowCreateDialog(false)} />
       </Modal>
 
       {/* update mode */}
       <Modal show={showUpdateDialog.show} onClose={() => setShowUpdateDialog({ item: undefined, show: false })}>
-        {/* <CreationForm mode="update"
+        <CreationForm mode="update"
           item={showUpdateDialog.item}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} /> */}
+          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
 
       {/* update delete prompt */}

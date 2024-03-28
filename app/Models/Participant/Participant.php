@@ -41,22 +41,22 @@ class Participant extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
-    
+
     public function creation()
     {
-        return $this->hasMany(Creation::class);
+        return $this->hasOne(Creation::class, 'id_participant');
     }
 
     public function level_of_participant()
     {
-        return $this->belongsTo(LevelOfParticipant::class);
+        return $this->belongsTo(LevelOfParticipant::class, 'level_of_participant_id');
     }
 
     public function language()

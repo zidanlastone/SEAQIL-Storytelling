@@ -99,7 +99,7 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
       <Head title="Admin | Slider Management" />
 
       <div className="py-2">
-        <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
@@ -108,10 +108,10 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput
-                  value={getColumnFilterValue('table-header-category_name')}
-                  onChange={value => setColumnFilters([{ value, id: 'table-header-category_name' }])}
+                  value={getColumnFilterValue('table-header-title')}
+                  onChange={value => setColumnFilters([{ value, id: 'table-header-title' }])}
                   className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Nama Kategori"
+                  placeholder="Cari Nama Slider"
                 />
               </div>
             </div>

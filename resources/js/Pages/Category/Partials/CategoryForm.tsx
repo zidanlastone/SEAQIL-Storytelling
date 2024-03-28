@@ -29,7 +29,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
     if (mode == 'create') {
       post(route('category.store'), { forceFormData: true });
     } else if (mode == 'update' && item != undefined) {
-      patch(route('category.update', { category: item?.id }), { forceFormData: true });
+      post(route('category.update', { category: item?.id, _method: 'PATCH' }), { forceFormData: true });
     }
   };
 
@@ -51,7 +51,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
           <InputLabel htmlFor="category_name" value="Nama Kategori" />
           <TextInput
             id="name"
-            name="nacategory_nameme"
+            name="category_name"
             value={data.category_name}
             className="my-2 block w-full"
             autoComplete="category_name"
@@ -63,7 +63,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div>
-          <InputLabel htmlFor="address" value="Deskripsi" />
+          <InputLabel htmlFor="description" value="Deskripsi" />
 
           <textarea
             className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
@@ -100,7 +100,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton className="ms-4" disabled={processing}>
-            { mode == 'create'  ? 'Tambah Data': 'Ubah Data'}
+            {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>
         </div>
       </form>

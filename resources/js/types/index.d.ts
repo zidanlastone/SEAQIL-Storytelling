@@ -78,7 +78,10 @@ export interface Participant {
     payment_receipt?: string,
     certificate?: string,
     status_verifikasi: number
+    creation?: Creation
 }
+
+
 
 export interface LevelOfParticipant {
     id: number,
@@ -100,6 +103,7 @@ export interface Creation {
     id_participant: number,
     upload_location: string,
     upload_status: '0' | '1' | '2',
+    participan?: Participant
 }
 
 

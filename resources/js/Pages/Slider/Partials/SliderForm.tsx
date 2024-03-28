@@ -29,7 +29,7 @@ function SliderForm({ onComplete, className, item, mode = 'create' }: { onComple
     if (mode == 'create') {
       post(route('slider.store'), { forceFormData: true });
     } else if (mode == 'update' && item != undefined) {
-      patch(route('slider.update', { slider: item?.id }), { forceFormData: true });
+      post(route('slider.update', { slider: item?.id, _method: 'PATCH' }), { forceFormData: true });
     }
   };
 
@@ -37,6 +37,7 @@ function SliderForm({ onComplete, className, item, mode = 'create' }: { onComple
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
         onComplete();
+        console.log('wasSuccessful', wasSuccessful, typeof onComplete == 'function')
       }
     }
   }, [wasSuccessful])

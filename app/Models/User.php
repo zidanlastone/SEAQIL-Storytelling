@@ -57,8 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
-    public function participation(): HasMany
+    public function participation(): HasOne
     {
-        return $this->hasMany(Participant::class);
+        return $this->hasOne(Participant::class, 'user_id');
     }
 }

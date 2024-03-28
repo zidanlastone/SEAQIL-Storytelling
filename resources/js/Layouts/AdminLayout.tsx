@@ -35,6 +35,11 @@ const filters = [
         label: 'Sertifikat',
         href: route('creation.index')
       },
+      {
+        value: 'pengguna',
+        label: 'Pengguna',
+        href: route('admin.users.index')
+      },
     ],
   },
   {
@@ -70,7 +75,7 @@ const filters = [
     options: [
       {
         value: 'external-service-config',
-        label: 'Peserta Lomba',
+        label: 'External Service',
         href: route('admin.external-service-config.index')
       },
       {
@@ -274,7 +279,7 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                   <ConditionalRender condition={roles.includes('participant')}>
                     <li>
                       <Link href={route('creation.index')}>
-                       Unggah Karya
+                        Unggah Karya
                       </Link>
                     </li>
                   </ConditionalRender>

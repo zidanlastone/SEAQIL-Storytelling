@@ -10,6 +10,7 @@ import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRow
 import { useMemo, useState } from "react";
 import LevelOfParticipantForm from "./Partials/LevelOfParticipantForm";
 import DeleteLevelOfParticipant from "./Partials/DeleteLevelOfParticipant";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 export default function List({ auth, level_of_participants = [] }: PageProps<{ level_of_participants: LevelOfParticipant[] }>) {
 
@@ -72,14 +73,15 @@ export default function List({ auth, level_of_participants = [] }: PageProps<{ l
   }
 
   return (
-    <AuthenticatedLayout
+    <AdminLayout
+      roles={auth.roles}
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tingkatan Partisipan </h2>}>
 
       <Head title="Admin | Tingkatan Partisipan" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+      <div className="py-2">
+        <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
@@ -132,6 +134,6 @@ export default function List({ auth, level_of_participants = [] }: PageProps<{ l
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
-    </AuthenticatedLayout>
+    </AdminLayout>
   )
 }

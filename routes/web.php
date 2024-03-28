@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\I18n\LanguageController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
@@ -33,7 +34,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/qna', function(){
+Route::get('/qna', function () {
     $sliders = Slider::all();
     $categories = Category::all();
     return Inertia::render('LandingPageQNA', [
@@ -48,12 +49,7 @@ Route::get('/qna', function(){
 
 Route::get('/event-category/{category}', [CategoryController::class, 'show'])->name('landing.category');
 
-Route::get('/dashboard', function () {
-    $participation = Auth::user()->with(['participation'])->first();
-    return Inertia::render('Dashboard', [
-        'participation' => $participation
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group([
     'middleware' => ['auth', 'verified', 'role:administrator'],

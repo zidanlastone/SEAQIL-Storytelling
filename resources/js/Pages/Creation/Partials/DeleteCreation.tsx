@@ -2,22 +2,22 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Category, Slider, User } from '@/types';
+import { Category, Creation, Slider, User } from '@/types';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useRef } from 'react'
 
-function DeleteSlider({ className, item, onComplete }: { className?: string, item?: Slider, onComplete: () => void }) {
+function DeleteCreation({ className, item, onComplete }: { className?: string, item?: Creation, onComplete: () => void }) {
 
   const { data, delete: destroy, reset, processing, setData, errors, recentlySuccessful, wasSuccessful } = useForm<{ title?: string }>({
     title: item?.title
   });
 
-  const deleteUser: FormEventHandler = (e) => {
+  const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (item != undefined) {
-      destroy(route('slider.destroy', { slider: item.id }), {
+      destroy(route('creation.destroy', { slider: item.id }), {
         preserveScroll: true,
         onSuccess: () => reset(),
         onError: (errors) => {
@@ -43,17 +43,17 @@ function DeleteSlider({ className, item, onComplete }: { className?: string, ite
           Apakah Anda yakin ingin menghapus Slider ini?
         </p>
       </header>
-      <form onSubmit={deleteUser} className="mt-6 space-y-6">
+      <form onSubmit={submit} className="mt-6 space-y-6">
 
         <div>
-          <InputLabel htmlFor="image" value="Slider" />
+          <InputLabel htmlFor="image" value="Judul Karya" />
           <TextInput
             id="image"
             type="text"
             name="title"
             value={data.title}
             className="my-2 block w-full"
-            autoComplete="category_name"
+            autoComplete="title"
             isFocused={true}
             onChange={(e) => setData('title', e.target.value)}
             required
@@ -79,4 +79,4 @@ function DeleteSlider({ className, item, onComplete }: { className?: string, ite
   )
 }
 
-export default DeleteSlider
+export default DeleteCreation
