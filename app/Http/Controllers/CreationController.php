@@ -19,14 +19,15 @@ class CreationController extends Controller
         $where = [];
 
         $user = Auth::user();
+        $creations = Creation::where($where);
 
-        if($user->hasRole('participant')){
+        if ($user->hasRole('participant')) {
             $participations = $user->participation()->get()->pluck('id');
-            $creations = Creation::whereIn('id_participant', $participations);
+            $creations = $creations->whereIn('id_participant', $participations);
         }
 
         return Inertia::render("Creation/List", [
-            "creations"=> $creations->get(),
+            "creations" => $creations->get(),
         ]);
     }
 

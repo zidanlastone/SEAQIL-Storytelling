@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         //
         
         if(Schema::hasTable("external_service_configs")){
-            $email_config = DB::table('external_service_configs')->where(['service_name' => 'email-service'])->first();
+            $email_config = DB::table('external_service_configs')->where(['service_name' => 'email-configuration'])->first();
             if($email_config){
                 config(['mail.default' => $email_config->protocol]);
                 config(['mail.mailers.smtp.host' => $email_config->host]);

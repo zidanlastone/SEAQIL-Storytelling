@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->enum('gender', ['L', 'P']);
             $table->string('whatsapp_contact');             // untuk menyimpan kontak nomor wahatsapp peserta
-            $table->string('parent_contact');
+            $table->string('parent_contact')->nullable();
             $table->string('institution')->nullable();
             $table->string('country');
             $table->string('province');

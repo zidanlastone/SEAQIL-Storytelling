@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, InputHTMLAttributes, ReactNode, Children, ReactElement, cloneElement } from 'react';
 
 export default forwardRef(function SelectInput(
-    { className = '', isFocused = false, children , ...props }: InputHTMLAttributes<HTMLSelectElement> & { isFocused?: boolean },
+    { className = '', isFocused = false, children, ...props }: InputHTMLAttributes<HTMLSelectElement> & { isFocused?: boolean },
     ref
 ) {
     const localRef = useRef<HTMLSelectElement>(null);
@@ -25,7 +25,7 @@ export default forwardRef(function SelectInput(
             }
             ref={localRef}
         >
-          {children}
+            {children}
         </select>
     );
 });
