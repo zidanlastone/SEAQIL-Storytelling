@@ -10,6 +10,7 @@ import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRow
 import { useMemo, useState } from "react";
 import CategoryForm from "./Partials/CategoryForm";
 import DeleteCategory from "./Partials/DeleteCategory";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 export default function List({ auth, categories = [] }: PageProps<{ categories: Category[] }>) {
 
@@ -78,7 +79,8 @@ export default function List({ auth, categories = [] }: PageProps<{ categories: 
   }
 
   return (
-    <AuthenticatedLayout
+    <AdminLayout
+      roles={auth.roles}
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Kategori</h2>}>
 
@@ -138,6 +140,6 @@ export default function List({ auth, categories = [] }: PageProps<{ categories: 
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
-    </AuthenticatedLayout>
+    </AdminLayout>
   )
 }

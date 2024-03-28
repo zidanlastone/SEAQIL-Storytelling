@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
 
         
         if ($user) {
-            $roles = $user->roles()->pluck('name');;
+            $roles = $user->roles()->pluck('name');
             $menus = Menu::whereIn('roles', $roles)
                 ->where($where)
                 ->get()

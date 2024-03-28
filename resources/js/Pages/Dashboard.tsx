@@ -3,12 +3,13 @@ import { Head, Link } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 import ConditionalRender from '@/Components/ConditionalRender';
+import AdminLayout from '@/Layouts/AdminLayout';
 
-export default function Dashboard({ auth, roles }: PageProps) {
+export default function Dashboard({ auth }: PageProps) {
 
-    
     return (
-        <AuthenticatedLayout
+        <AdminLayout
+            roles={auth.roles}
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
         >
@@ -91,6 +92,6 @@ export default function Dashboard({ auth, roles }: PageProps) {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AdminLayout>
     );
 }

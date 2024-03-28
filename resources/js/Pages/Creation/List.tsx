@@ -10,6 +10,7 @@ import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRow
 import { useMemo, useState } from "react";
 import CreationForm from "./Partials/CreationForm";
 import DeleteSlider from "./Partials/DeleteCreation";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 export default function List({ auth, creations = [] }: PageProps<{ creations: any[] }>) {
 
@@ -84,7 +85,8 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
   }
 
   return (
-    <AuthenticatedLayout
+    <AdminLayout
+      roles={auth.roles}
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Karya Peserta</h2>}>
 
@@ -155,6 +157,6 @@ export default function List({ auth, creations = [] }: PageProps<{ creations: an
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
-    </AuthenticatedLayout>
+    </AdminLayout>
   )
 }

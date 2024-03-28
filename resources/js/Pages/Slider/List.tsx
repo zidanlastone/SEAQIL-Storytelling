@@ -4,12 +4,13 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Category, PageProps, Slider } from "@/types";
+import { Category, PageProps, Roles, Slider } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
 import SliderForm from "./Partials/SliderForm";
 import DeleteSlider from "./Partials/DeleteSlider";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider[] }>) {
 
@@ -90,14 +91,15 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
   }
 
   return (
-    <AuthenticatedLayout
+    <AdminLayout
+      roles={auth.roles}
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Kategori</h2>}>
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Slider</h2>}>
 
-      <Head title="Admin | Category Management" />
+      <Head title="Admin | Slider Management" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+      <div className="py-2">
+        <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
@@ -150,6 +152,6 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
-    </AuthenticatedLayout>
+    </AdminLayout>
   )
 }

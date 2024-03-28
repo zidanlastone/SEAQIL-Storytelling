@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import ParticipantForm from "./Partials/ParticipantForm";
 import DeleteParticipant from "./Partials/DeleteParticipant";
 import ConditionalRender from "@/Components/ConditionalRender";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 type Can = {
   [key: string]: boolean
@@ -129,7 +130,8 @@ export default function List({ auth, participants = [], users, languages, catego
   }
 
   return (
-    <AuthenticatedLayout
+    <AdminLayout
+      roles={auth.roles}
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Partisipan</h2>}>
 
@@ -199,6 +201,6 @@ export default function List({ auth, participants = [], users, languages, catego
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           item={showDeleteDialog.item} onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
       </Modal>
-    </AuthenticatedLayout>
+    </AdminLayout>
   )
 }

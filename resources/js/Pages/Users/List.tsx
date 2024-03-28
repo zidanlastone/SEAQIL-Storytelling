@@ -13,7 +13,7 @@ import AdminDeleteUserForm from "./Partials/AdminDeleteUserForm";
 import AdminLayout from "@/Layouts/AdminLayout";
 
 
-export default function List({ auth, users = [], roles = [] }: PageProps<{ users: User[], roles: Roles[] }>) {
+export default function List({ auth, users = [], roles = [] }: PageProps<{ users: User[], roles: Roles[]}>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
@@ -79,13 +79,14 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
   return (
     <AdminLayout
+      roles={auth.roles}
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">User Management</h2>}>
 
       <Head title="Admin | User Management" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+      <div className="py-2">
+        <div className="max-w-8xl mx-auto sm:px-6 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
