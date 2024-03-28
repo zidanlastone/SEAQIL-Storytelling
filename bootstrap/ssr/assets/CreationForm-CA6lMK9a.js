@@ -1,0 +1,86 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { I as InputError } from "./InputError-cRVTeK4i.js";
+import { I as InputLabel } from "./InputLabel-uXgJWz9w.js";
+import { P as PrimaryButton } from "./PrimaryButton-C-TDjBGq.js";
+import { T as TextInput } from "./TextInput-CL99szxP.js";
+import { useForm } from "@inertiajs/react";
+import { useEffect } from "react";
+function CreationForm({ onComplete, className, item, mode = "create" }) {
+  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm({
+    title: (item == null ? void 0 : item.title) || "Karya 1",
+    upload_location: (item == null ? void 0 : item.upload_location) || "",
+    upload_status: (item == null ? void 0 : item.upload_status) || "0"
+  });
+  const submit = (e) => {
+    e.preventDefault();
+    if (mode == "create") {
+      post(route("creation.store"), { forceFormData: true });
+    } else if (mode == "update" && item != void 0) {
+      patch(route("creation.update", { creation: item == null ? void 0 : item.id }), { forceFormData: true });
+    }
+  };
+  useEffect(() => {
+    if (wasSuccessful) {
+      if (typeof onComplete == "function") {
+        onComplete();
+      }
+    }
+  }, [wasSuccessful]);
+  return /* @__PURE__ */ jsxs("section", { className, children: [
+    /* @__PURE__ */ jsx("header", { children: /* @__PURE__ */ jsx("h2", { className: "text-lg font-medium text-gray-900", children: "Tambah Data Karya Peserta" }) }),
+    /* @__PURE__ */ jsxs("form", { onSubmit: submit, className: "flex flex-col gap-4", children: [
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(InputLabel, { htmlFor: "category_name", value: "Judul Karya" }),
+        /* @__PURE__ */ jsx(
+          TextInput,
+          {
+            id: "title",
+            name: "title",
+            value: data.title,
+            className: "my-2 block w-full",
+            autoComplete: "category_name",
+            isFocused: true,
+            onChange: (e) => setData("title", e.target.value),
+            required: true
+          }
+        ),
+        /* @__PURE__ */ jsx(InputError, { message: errors.title, className: "mt-2" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(InputLabel, { htmlFor: "category_name", value: "Lokasi Upload" }),
+        /* @__PURE__ */ jsx(
+          TextInput,
+          {
+            id: "title",
+            name: "upload_location",
+            value: data.upload_location,
+            className: "my-2 block w-full",
+            autoComplete: "upload_location",
+            isFocused: true,
+            onChange: (e) => setData("upload_location", e.target.value),
+            required: true
+          }
+        ),
+        /* @__PURE__ */ jsx(InputError, { message: errors.upload_location, className: "mt-2" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(InputLabel, { htmlFor: "upload_status", value: "Jenis Kelamin" }),
+        /* @__PURE__ */ jsxs("div", { className: "flex flex-row gap-4", children: [
+          /* @__PURE__ */ jsxs("label", { htmlFor: "upload_status-l", children: [
+            /* @__PURE__ */ jsx("input", { type: "radio", id: "upload_status-l", name: "upload_status", value: "0", checked: data.upload_status == "0", onChange: (e) => setData("upload_status", "0") }),
+            " Belum Upload"
+          ] }),
+          /* @__PURE__ */ jsxs("label", { htmlFor: "upload_status-p", children: [
+            /* @__PURE__ */ jsx("input", { type: "radio", id: "upload_status-p", name: "upload_status", value: "1", checked: data.upload_status == "1", onChange: (e) => setData("upload_status", "1") }),
+            " Sudah Upload"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx(InputError, { className: "mt-2", message: errors.upload_status })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "flex items-center justify-end mt-4", children: /* @__PURE__ */ jsx(PrimaryButton, { className: "ms-4", disabled: processing, children: mode == "create" ? "Tambah Data" : "Ubah Data" }) })
+    ] })
+  ] });
+}
+export {
+  CreationForm as default
+};

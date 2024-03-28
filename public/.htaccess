@@ -3,6 +3,7 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    Options +FollowSymLinks
     RewriteEngine On
 
     # Handle Authorization Header
@@ -18,4 +19,13 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+<IfModule mod_php8.c>
+    php_value display_errors on 
+    php_value display_startup_errors on
+    php_value memory_limit 512M
+</IfModule>
+
+<IfModule mime_module>
+    AddHandler application/x-httpd-alt-php82___lsphp .php .php8 phtml
 </IfModule>

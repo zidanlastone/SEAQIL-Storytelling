@@ -11,7 +11,7 @@ class StoreExternalServiceConfigRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,13 @@ class StoreExternalServiceConfigRequest extends FormRequest
     {
         return [
             //
+            "service_name" => ["required", "string"],
+            "protocol" => ["required", "string"],
+            "host" => ["required", "string"],
+            "port" => ["required", "number"],
+            "timeout" => ["required", "number"],
+            "username" => ["required", "string"],
+            "password" => ["required", "string"],
         ];
     }
 }
