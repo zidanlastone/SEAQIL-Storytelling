@@ -55,7 +55,7 @@ function ParticipantForm({
     if (mode == 'create') {
       post(route('participant.store'), { forceFormData: true });
     } else if (mode == 'update' && item != undefined) {
-      patch(route('participant.update', { participant: item?.id }), { forceFormData: true });
+      post(route('participant.update', { participant: item?.id, _method: 'PATCH' }), { forceFormData: true });
     }
   };
 
@@ -191,7 +191,6 @@ function ParticipantForm({
             autoComplete="name"
             isFocused={true}
             onChange={(e) => setData('certificate', e.target.value)}
-            required
           />
           <InputError message={errors.certificate} className="mt-2" />
         </div>

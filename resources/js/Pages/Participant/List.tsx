@@ -38,6 +38,9 @@ export default function List({ auth, participants = [], users, languages, catego
 
 
   const columns = useMemo(() => [
+    columnHelper.accessor(row => row.id, {
+      header: "No", cell: info => parseInt(info.row.id) + 1,
+    }),
     columnHelper.accessor(row => row.user.name, {
       header: 'Nama Partisipan',
       id: 'table-header-participant_name',
@@ -69,7 +72,7 @@ export default function List({ auth, participants = [], users, languages, catego
     columnHelper.accessor(row => row.payment_receipt, {
       header: 'Bukti Bayar',
       id: 'table-header-payment_receipt',
-      cell: info =>  (
+      cell: info => (
         <a href={'/storage/' + info?.getValue() as string}>Lihat</a>
       ),
     }),
@@ -82,30 +85,35 @@ export default function List({ auth, participants = [], users, languages, catego
     }),
     columnHelper.accessor(row => row.status_verifikasi, {
       header: 'Status Verifikasi',
-      id: 'table-header-status_verifikasi',
-      cell: info => info.getValue(),
+      id: 'table-header-description',
+      cell: info => {
+        if (info.getValue() == 1) {
+          return <span className="px-3 py-1 rounded bg-green-400 shadow">Sudah</span>
+        } else {
+          return <span className="px-3 py-1 rounded bg-yellow-400 shadow">Belum</span>
+        }
+      },
       footer: props => props.column.id,
-      filterFn: 'includesString',
     }),
     columnHelper.accessor(row => row.id, {
       id: 'table-header-action',
       header: 'Aksi',
       cell: (_props) => (
         <ConditionalRender key={_props.getValue()} condition={can['edit.participant']}>
-        <div key={_props.getValue()}>
-          <button
-            type="button"
-            className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white"
-            onClick={() => setShowUpdateDialog({ item: _props.row.original, show: true })}>
-            Edit
-          </button>
-          <button
-            type="button"
-            className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white"
-            onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>
-            Hapus
-          </button>
-        </div>
+          <div key={_props.getValue()}>
+            <button
+              type="button"
+              className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white"
+              onClick={() => setShowUpdateDialog({ item: _props.row.original, show: true })}>
+              Edit
+            </button>
+            <button
+              type="button"
+              className="px-3 py-1 mr-1 bg-red-500 rounded-md text-white"
+              onClick={() => setShowDeleteDialog({ item: _props.row.original, show: true })}>
+              Hapus
+            </button>
+          </div>
         </ConditionalRender>
       ),
       footer: props => props.column.id,
@@ -137,8 +145,8 @@ export default function List({ auth, participants = [], users, languages, catego
 
       <Head title="Tingkatan Partisipan" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+      <div className="py-2">
+        <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
@@ -152,7 +160,7 @@ export default function List({ auth, participants = [], users, languages, catego
                   value={getColumnFilterValue('table-header-participant_name')}
                   onChange={value => setColumnFilters([{ value, id: 'table-header-participant_name' }])}
                   className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Tingkatan Partisipan"
+                  placeholder="Cari Nama Partisipan"
                 />
               </div>
             </div>

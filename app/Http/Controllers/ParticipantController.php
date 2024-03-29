@@ -37,13 +37,15 @@ class ParticipantController extends Controller
             'language',
             'level_of_participant'
         ])
-        ->has('user');
+            ->has('user');
 
-        if($user->hasRole('participant')){
+        if ($user->hasRole('participant')) {
             $participant->where([
                 'user_id' => $user->id
             ]);
         }
+
+        $participant->orderBy('status_verifikasi', 'asc');
 
         return Inertia::render('Participant/List', [
             'status' => session('status'),
@@ -55,7 +57,7 @@ class ParticipantController extends Controller
             'level_of_participant' => $levelOfParticipant,
             'can' => [
                 'edit.participant' => Auth::user()->can('edit.participant')
-            ] 
+            ]
         ]);
     }
     /**
@@ -111,7 +113,7 @@ class ParticipantController extends Controller
      */
     public function update(UpdateParticipantRequest $request, Participant $participant)
     {
-        if ($request->file('payment_receipt')->isValid()) {
+        if ($request->hasFile('payment_receipt')) {
             $filename = Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
             $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
             $participant->payment_receipt = $path;
@@ -126,7 +128,7 @@ class ParticipantController extends Controller
         $participant->save();
 
         if ($participant) {
-            return to_route('admin.participant.index');
+            return to_route('participant.index');
         }
 
         if ($request->accepts('application/json')) {
