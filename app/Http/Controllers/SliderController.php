@@ -58,6 +58,7 @@ class SliderController extends Controller
     public function show(Slider $slider)
     {
         //
+        return to_route("slider.index");
     }
 
     /**
@@ -66,6 +67,7 @@ class SliderController extends Controller
     public function edit(Slider $slider)
     {
         //
+        return to_route("slider.index");
     }
 
     /**

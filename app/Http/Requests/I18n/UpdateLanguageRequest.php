@@ -11,6 +11,9 @@ class UpdateLanguageRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->hasRole("administrator") || $this->user()->hasRole("operator")) {
+            return true;
+        }
         return false;
     }
 
@@ -22,7 +25,8 @@ class UpdateLanguageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "code" => ["required", "string"],
+            "name" => ["required", "string"]
         ];
     }
 }

@@ -60,7 +60,7 @@ const filters = [
       {
         value: 'bahasa',
         label: 'Bahasa',
-        href: '/language'
+        href: route('language.index')
       },
       {
         value: 'jenjang-pendidikan',
