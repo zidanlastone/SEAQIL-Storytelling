@@ -6,6 +6,7 @@ use App\Http\Requests\ExternalServiceConfig\StoreExternalServiceConfigRequest;
 use App\Http\Requests\ExternalServiceConfig\UpdateExternalServiceConfigRequest;
 use App\Models\ExternalServiceConfig;
 use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class ExternalServiceConfigController extends Controller
 {
@@ -14,7 +15,10 @@ class ExternalServiceConfigController extends Controller
      */
     public function index()
     {
-        //
+        $configs = ExternalServiceConfig::all();
+        return Inertia::render('ExternalServiceConfig/List', [
+            'configs' => $configs
+        ]);
     }
 
     /**
@@ -23,6 +27,7 @@ class ExternalServiceConfigController extends Controller
     public function create()
     {
         //
+        return to_route('admin.external-service-config.index');
     }
 
     /**
@@ -31,6 +36,17 @@ class ExternalServiceConfigController extends Controller
     public function store(StoreExternalServiceConfigRequest $request)
     {
         //
+        $externalServiceConfig = new ExternalServiceConfig();
+        $externalServiceConfig->service_name = $request->service_name;
+        $externalServiceConfig->protocol = $request->protocol;
+        $externalServiceConfig->host = $request->host;
+        $externalServiceConfig->port = $request->port;
+        $externalServiceConfig->timeout = $request->timeout;
+        $externalServiceConfig->username = $request->username;
+        $externalServiceConfig->password = $request->password;
+        $externalServiceConfig->save();
+
+        return to_route('admin.external-service-config.index');
     }
 
     /**
@@ -39,6 +55,7 @@ class ExternalServiceConfigController extends Controller
     public function show(ExternalServiceConfig $externalServiceConfig)
     {
         //
+        return to_route('admin.external-service-config.index');
     }
 
     /**
@@ -47,6 +64,7 @@ class ExternalServiceConfigController extends Controller
     public function edit(ExternalServiceConfig $externalServiceConfig)
     {
         //
+        return to_route('admin.external-service-config.index');
     }
 
     /**
@@ -54,7 +72,18 @@ class ExternalServiceConfigController extends Controller
      */
     public function update(UpdateExternalServiceConfigRequest $request, ExternalServiceConfig $externalServiceConfig)
     {
-        //
+        // update data
+        $externalServiceConfig->service_name = $request->service_name;
+        $externalServiceConfig->protocol = $request->protocol;
+        $externalServiceConfig->host = $request->host;
+        $externalServiceConfig->port = $request->port;
+        $externalServiceConfig->timeout = $request->timeout;
+        $externalServiceConfig->username = $request->username;
+        $externalServiceConfig->password = $request->password;
+
+        $externalServiceConfig->save();
+
+        return to_route('admin.external-service-config.index');
     }
 
     /**
@@ -62,6 +91,7 @@ class ExternalServiceConfigController extends Controller
      */
     public function destroy(ExternalServiceConfig $externalServiceConfig)
     {
-        //
+        $externalServiceConfig->delete();
+        return to_route('admin.external-service-config.index');
     }
 }

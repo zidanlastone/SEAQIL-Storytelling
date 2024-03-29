@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ExternalServiceConfigController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -59,7 +60,7 @@ Route::group([
     $route->resource('users', UserController::class);
     $route->resource('role', RoleController::class);
     $route->resource('permission', PermissionController::class);
-    $route->resource('external-service-config', PermissionController::class);
+    $route->resource('external-service-config', ExternalServiceConfigController::class);
     $route->put('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.password.update');
 });
 

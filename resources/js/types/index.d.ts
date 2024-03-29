@@ -106,6 +106,17 @@ export interface Creation {
     participan?: Participant
 }
 
+export interface ExternalServiceConfig {
+    id: number,
+    service_name: string,
+    protocol: string,
+    host: string,
+    port: number,
+    timeout: number,
+    username: string,
+    password: string
+}
+
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {

@@ -11,7 +11,10 @@ class StoreExternalServiceConfigRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if ($this->user()->can("create.external-service-config")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -26,10 +29,10 @@ class StoreExternalServiceConfigRequest extends FormRequest
             "service_name" => ["required", "string"],
             "protocol" => ["required", "string"],
             "host" => ["required", "string"],
-            "port" => ["required", "number"],
-            "timeout" => ["required", "number"],
-            "username" => ["required", "string"],
-            "password" => ["required", "string"],
+            "port" => ["required", "integer"],
+            "timeout" => ["required", "integer"],
+            "username" => ["string", "nullable"],
+            "password" => ["string", "nullable"],
         ];
     }
 }

@@ -10,6 +10,9 @@ class UpdateExternalServiceConfigRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if ($this->user()->can("update.external-service-config")) {
+            return true;
+        }
         return false;
     }
 
@@ -21,7 +24,13 @@ class UpdateExternalServiceConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "service_name" => ["required", "string"],
+            "protocol" => ["required", "string"],
+            "host" => ["required", "string"],
+            "port" => ["required", "integer"],
+            "timeout" => ["required", "integer"],
+            "username" => ["string", "nullable"],
+            "password" => ["string", "nullable"],
         ];
     }
 }
