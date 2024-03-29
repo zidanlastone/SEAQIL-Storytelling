@@ -117,6 +117,12 @@ export interface ExternalServiceConfig {
     password: string
 }
 
+export interface QuestionAndAnswer {
+    id: number,
+    question: string,
+    answer: string,
+}
+
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {

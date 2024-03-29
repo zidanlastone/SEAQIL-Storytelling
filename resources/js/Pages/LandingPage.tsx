@@ -14,8 +14,8 @@ import ConditionalRender from '@/Components/ConditionalRender';
 
 const navigation = [
   { name: 'Beranda', href: '/' },
-  { name: 'Kategori Peserta', href: '#kategori-lomba' },
-  { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
+  { name: 'Kategori Peserta', href: '/' + '#kategori-lomba' },
+  { name: 'Mekanisme Pelaksanaan', href: '/' + '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
   { name: 'Q & A', href: '/qna' },
 ]
@@ -148,7 +148,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
           </Dialog>
         </header>
 
-        <div className="relative isolate px-6 pt-10 lg:px-8">
+        <div className="relative isolate px-6 pt-16 lg:px-8">
           <div
             className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"

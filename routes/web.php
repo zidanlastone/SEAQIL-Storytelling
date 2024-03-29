@@ -11,10 +11,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CreationController;
 use App\Http\Controllers\LevelOfParticipantController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\QuestionAndAnswerController;
 use App\Http\Controllers\SliderController;
 
 use App\Models\Category;
-use App\Models\Participant\Participant;
 use App\Models\Slider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +61,7 @@ Route::group([
     $route->resource('role', RoleController::class);
     $route->resource('permission', PermissionController::class);
     $route->resource('external-service-config', ExternalServiceConfigController::class);
+    $route->resource('question-and-answer', QuestionAndAnswerController::class);
     $route->put('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.password.update');
 });
 

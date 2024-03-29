@@ -1,6 +1,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Category, PageProps, Slider } from '@/types'
-import { Dialog } from '@headlessui/react';
+import { Category, PageProps, QuestionAndAnswer, Slider } from '@/types'
+import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
 import { useState } from 'react';
@@ -14,13 +14,53 @@ import ConditionalRender from '@/Components/ConditionalRender';
 
 const navigation = [
   { name: 'Beranda', href: '/' },
-  { name: 'Kategori Peserta', href: '#kategori-lomba' },
-  { name: 'Mekanisme Pelaksanaan', href: '#teknis-lomba' },
+  { name: 'Kategori Peserta', href: '/' + '#kategori-lomba' },
+  { name: 'Mekanisme Pelaksanaan', href: '/' + '#teknis-lomba' },
   // { name: 'Kontak', href: '#' },
   { name: 'Q & A', href: '/qna' },
 ]
 
-function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
+type QNAPageProps = {
+  question_and_answers: QuestionAndAnswer[]
+}
+
+
+function Acordion({ question, answer }: { question: string, answer: string }) {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="bg-white my-2 shadow-md rounded-lg py-4" onClick={() => { setIsOpen(!isOpen) }}>
+
+      <div className="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+        <h2 className="flex-start">{question}</h2>
+        <svg
+          className="flex-end fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+      </div>
+
+      <Transition
+        show={isOpen}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-350"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className={"justify-between items-center font-semibold p-3 ml-4 w-4/5"}>
+          <p>{answer}</p>
+        </div>
+      </Transition>
+    </div>
+  )
+}
+
+
+
+function LandingPage({ auth, question_and_answers = [] }: PageProps<QNAPageProps>) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -141,7 +181,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
           </Dialog>
         </header>
 
-        <div className="relative isolate px-6 pt-10 lg:px-8">
+        <div className="relative isolate px-6 pt-16 lg:px-8">
           <div
             className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
@@ -154,36 +194,21 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
               }}
             />
           </div>
-          <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-24">
+          <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-36 my-28 min-h-96 align-middle">
+            <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
+              QNA
+            </h1>
 
-            <div className="justify-center">
-              <Swiper
-                pagination={{
-                  dynamicBullets: true,
-                }}
-                modules={[Pagination]}
-                className="mySwiper rounded-md"
-              >
-                {sliders.map(item => {
-                  if (item.type == 'image') {
-                    return (
-                      <SwiperSlide key={item.id}>
-                        <img className="rounded-lg w-full" src={'/storage/' + item.source} alt="" />
-                      </SwiperSlide>
-                    )
-                  }
-                  if (item.type == 'video') {
-                    return (
-                      <SwiperSlide key={item.id}>
-                        <video className="rounded-lg w-full" controls>
-                          <source src={'/storage/' + item.source} />
-                        </video>
-                      </SwiperSlide>
-                    )
-                  }
-                })}
-              </Swiper>
-            </div>
+            {question_and_answers.map(item => (
+              <>
+                <Acordion
+                  key={item.id}
+                  question={item.question}
+                  answer={item.answer} />
+              </>
+            ))}
+
+
           </div>
 
           <div
@@ -197,74 +222,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
               }}
             />
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="kategori-lomba">
-          <div className="text-left">
-            <h1 className="text-xl text-center font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
-              Kategori Lomba
-            </h1>
-            <div className="flex flex-col sm:flex-row md:flex-row flex-wrap gap-6 my-16 justify-center items-center">
-              {categories.map(item => {
-                return (
-                  <Link key={item.id} href={route('landing.category', { category: item.id })} className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
-                    <img src={'/storage/' + item.image} alt={item.category_name} />
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
-          <div className="text-left">
-            <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
-              QNA
-            </h1>
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
-
-                <ol className="list-decimal list-inside my-6">
-                  <li>
-                    Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
-                  </li>
-                  <li>
-                    Peserta melakukan pendaftaran kompetisi melalui laman https://kompetisimendongeng.qiteplanguage.org dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
-                  </li>
-                  <li>
-                    Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
-                  </li>
-                  <li>
-                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran.
-                  </li>
-
-                  <li>
-                    Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
-                    <ol className="list-alpha list-inside ml-4">
-                      <li>a.	Login pada laman https://kompetisimendongeng.qiteplanguage.org menggunakan email dan password yang dikirim ke email pendaftar</li>
-                      <li>b.	Masuk ke menu “Unggah Karya”  </li>
-                      <li>c.	Klik tautan unggah karya, kemudian unggah video ke dalam folder google drive yang telah disediakan</li>
-                      <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah video pada folder yang disediakan</li>
-                      <li>e.	Klik “Daftarkan”</li>
-                      <li>f.	Peserta akan menerima email notifikasi unggah hasil karya</li>
-                    </ol>
-                  </li>
-                  <li>Peserta yang lulus seleksi awal oleh dewan juri, akan mengikuti seleksi akhir secara langsung baik daring maupun luring.</li>
-                </ol>
-
-                <div>
-                  <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
-                  <ol className="list-decimal list-inside">
-                    <li>Pendaftaran Peserta: 29 Maret - 31 Mei 2024</li>
-                    <li>Pengumpulan Karya (Penyisihan): 29 Maret—31 Mei 2024</li>
-                    <li>Pengumuman Finalis: 13 Juni 2024</li>
-                    <li>Babak Final: 20 Juni 2024</li>
-                  </ol>
-                </div>
-
-              </div>
-            </div>
           </div>
         </div>
 

@@ -15,6 +15,7 @@ const subCategories = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Profil', href: route('profile.edit') },
 ]
+
 const filters = [
   {
     id: 'partisipan',
@@ -65,6 +66,11 @@ const filters = [
         value: 'jenjang-pendidikan',
         label: 'Jenjang Pendidikan',
         href: route('level-of-participant.index')
+      },
+      {
+        value: 'question-and-answer',
+        label: 'Question and Answer',
+        href: route('admin.question-and-answer.index')
       },
     ],
   },
