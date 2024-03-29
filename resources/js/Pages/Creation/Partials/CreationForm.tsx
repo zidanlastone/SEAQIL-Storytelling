@@ -23,9 +23,9 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
     if (mode == 'create') {
-      post(route('creation.store'), { forceFormData: true });
+      post(route('creation.store'), { forceFormData: false });
     } else if (mode == 'update' && item != undefined) {
-      patch(route('creation.update', { creation: item?.id }), { forceFormData: true });
+      patch(route('creation.update', { creation: item?.id }), { forceFormData: false });
     }
   };
 
@@ -40,17 +40,31 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Tambah Data Karya Peserta</h2>
+        <h2 className="text-lg font-medium text-gray-900"> {mode == "create" ? 'Tambah' : 'Ubah'} Data Karya Peserta</h2>
       </header>
       <form onSubmit={submit} className="flex flex-col gap-4">
+
         <div>
-          <InputLabel htmlFor="category_name" value="Judul Karya" />
+          <InputLabel htmlFor="participant_name" value="Nama Peserta" />
+          <TextInput
+            id="participant_name"
+            name="participant_name"
+            value={item?.participant?.user.name}
+            className="my-2 block w-full"
+            autoComplete="participant_name"
+            isFocused={true}
+            disabled
+          />
+        </div>
+
+        <div>
+          <InputLabel htmlFor="title" value="Judul Karya" />
           <TextInput
             id="title"
             name="title"
             value={data.title}
             className="my-2 block w-full"
-            autoComplete="category_name"
+            autoComplete="title"
             isFocused={true}
             onChange={(e) => setData('title', e.target.value)}
             required
@@ -59,7 +73,7 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div>
-          <InputLabel htmlFor="category_name" value="Lokasi Upload" />
+          <InputLabel htmlFor="upload_location" value="Lokasi Upload" />
           <TextInput
             id="title"
             name="upload_location"
@@ -74,7 +88,7 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div>
-          <InputLabel htmlFor="upload_status" value="Jenis Kelamin" />
+          <InputLabel htmlFor="upload_status" value="Status Unggah" />
           <div className="flex flex-row gap-4">
             <label htmlFor="upload_status-l">
               <input type="radio" id="upload_status-l" name="upload_status" value={"0"} checked={data.upload_status == '0'} onChange={(e) => setData('upload_status', '0')} /> Belum Upload

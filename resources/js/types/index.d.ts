@@ -101,7 +101,7 @@ export interface Creation {
     id_participant: number,
     upload_location: string,
     upload_status: '0' | '1' | '2',
-    participan?: Participant
+    participant?: Participant
 }
 
 export interface ExternalServiceConfig {

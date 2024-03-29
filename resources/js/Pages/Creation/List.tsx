@@ -27,17 +27,14 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });
 
+
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const columnHelper = createColumnHelper<any>();
 
   const columns = useMemo(() => [
-    columnHelper.accessor(row => row.title, {
-      header: 'Judul Karya',
-      id: 'table-header-title',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-      filterFn: 'includesString',
+    columnHelper.accessor(row => row.id, {
+      header: "No", cell: info => parseInt(info.row.id) + 1,
     }),
     columnHelper.accessor(row => row.participant.user.name, {
       header: 'Nama Peserta',
@@ -53,16 +50,49 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
       footer: props => props.column.id,
       filterFn: 'includesString',
     }),
-    columnHelper.accessor(row => row.upload_location, {
-      header: 'Lokasi Upload',
-      id: 'table-header-upload_location',
+    columnHelper.accessor(row => row.participant.language.name, {
+      header: 'Bahasa',
+      id: 'table-header-category-language_name',
       cell: info => info.getValue(),
       footer: props => props.column.id,
+      filterFn: 'includesString',
     }),
+    columnHelper.accessor(row => row.title, {
+      header: 'Judul Karya',
+      id: 'table-header-title',
+      cell: info => info.getValue(),
+      footer: props => props.column.id,
+      filterFn: 'includesString',
+    }),
+
     columnHelper.accessor(row => row.upload_status, {
       header: 'Status Upload',
       id: 'table-header-description',
-      cell: info => info.getValue(),
+      cell: info => {
+        if (info.getValue() == 1) {
+          return <span className="px-3 py-1 rounded bg-green-400 shadow">Sudah</span>
+        } else {
+          return <span className="px-3 py-1 rounded bg-yellow-400 shadow">Belum</span>
+        }
+      },
+      footer: props => props.column.id,
+    }),
+    columnHelper.accessor(row => row.upload_location, {
+      header: 'Tautan karya',
+      id: 'table-header-upload_location',
+      cell: (info) => (
+        <div key={info.getValue()}>
+          <button type="button" onClick={() => {
+            if (info.getValue() != null) {
+              window.open(info.getValue())
+            }
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+          </button>
+        </div>
+      ),
       footer: props => props.column.id,
     }),
     columnHelper.accessor(row => row.id, {
@@ -137,8 +167,8 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
                 </div> */}
                 <div className="md:mx-2 my-2 order-last">
                   <DebouncedInput
-                    value={getColumnFilterValue('table-header-category_name')}
-                    onChange={value => setColumnFilters([{ value, id: 'table-header-category_name' }])}
+                    value={getColumnFilterValue('table-header-title')}
+                    onChange={value => setColumnFilters([{ value, id: 'table-header-title' }])}
                     className="px-2 py-2 font-sm shadow border rounded"
                     placeholder="Cari Judul Karya"
                   />

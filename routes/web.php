@@ -38,7 +38,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'dekripsi_lomba' => $dekripsi_lomba,
-        'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan,
+        'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan
     ]);
 });
 
