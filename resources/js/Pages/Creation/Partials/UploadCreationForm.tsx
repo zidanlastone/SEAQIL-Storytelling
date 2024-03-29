@@ -45,9 +45,7 @@ function UploadCreationForm({ onComplete, className, item, mode = 'create' }: { 
     <section className={className}>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div className="mt-4">
-          <InputLabel className="text-4xl font-semibold" htmlFor="title" >
-            {data.title}
-          </InputLabel>
+          <p className='text-3xl font-semibold  text-gray-700'>{data.title}</p>
 
           <ConditionalRender condition={data.upload_status != '1'}>
             <InputLabel className="text-2xl font-semibold" htmlFor="title" >
