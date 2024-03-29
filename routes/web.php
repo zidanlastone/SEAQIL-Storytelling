@@ -17,6 +17,7 @@ use App\Http\Controllers\SliderController;
 
 use App\Models\Category;
 use App\Models\PageSection;
+use App\Models\QuestionAndAnswer;
 use App\Models\Slider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::get('/', function () {
 Route::get('/qna', function () {
     $sliders = Slider::all();
     $categories = Category::all();
+    $qna = QuestionAndAnswer::all();
     return Inertia::render('LandingPageQNA', [
         'sliders' => $sliders,
         'categories' => $categories,
@@ -52,6 +54,7 @@ Route::get('/qna', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'question_and_answers' => $qna,
     ]);
 });
 

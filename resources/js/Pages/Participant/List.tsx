@@ -62,27 +62,27 @@ export default function List({ auth, participants = [], users, languages, catego
       footer: props => props.column.id,
       filterFn: 'includesString',
     }),
-    columnHelper.accessor(row => row.level_of_participant?.level_name, {
-      header: 'Tingkatan Partisipan',
-      id: 'table-header-level_of_participant',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-      filterFn: 'includesString',
-    }),
-    columnHelper.accessor(row => row.payment_receipt, {
-      header: 'Bukti Bayar',
-      id: 'table-header-payment_receipt',
-      cell: info => (
-        <a href={'/storage/' + info?.getValue() as string}>Lihat</a>
-      ),
-    }),
-    columnHelper.accessor(row => row.certificate, {
-      header: 'Sertifikat',
-      id: 'table-header-certificate',
-      cell: info => info.getValue(),
-      footer: props => props.column.id,
-      filterFn: 'includesString',
-    }),
+    // columnHelper.accessor(row => row.level_of_participant?.level_name, {
+    //   header: 'Tingkatan Partisipan',
+    //   id: 'table-header-level_of_participant',
+    //   cell: info => info.getValue(),
+    //   footer: props => props.column.id,
+    //   filterFn: 'includesString',
+    // }),
+    // columnHelper.accessor(row => row.payment_receipt, {
+    //   header: 'Bukti Bayar',
+    //   id: 'table-header-payment_receipt',
+    //   cell: info => (
+    //     <a href={'/storage/' + info?.getValue() as string}>Lihat</a>
+    //   ),
+    // }),
+    // columnHelper.accessor(row => row.certificate, {
+    //   header: 'Sertifikat',
+    //   id: 'table-header-certificate',
+    //   cell: info => info.getValue(),
+    //   footer: props => props.column.id,
+    //   filterFn: 'includesString',
+    // }),
     columnHelper.accessor(row => row.status_verifikasi, {
       header: 'Status Verifikasi',
       id: 'table-header-description',
