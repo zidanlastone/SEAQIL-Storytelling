@@ -81,8 +81,6 @@ export interface Participant {
     creation?: Creation
 }
 
-
-
 export interface LevelOfParticipant {
     id: number,
     level_name: string,
@@ -121,6 +119,13 @@ export interface QuestionAndAnswer {
     id: number,
     question: string,
     answer: string,
+}
+
+export interface PageSection {
+    id: number,
+    language_id: number,
+    section: string,
+    content: string
 }
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\I18n\LanguageController;
+use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CreationController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\QuestionAndAnswerController;
 use App\Http\Controllers\SliderController;
 
 use App\Models\Category;
+use App\Models\PageSection;
 use App\Models\Slider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,9 @@ Route::get('/', function () {
     $sliders = Slider::all();
     $categories = Category::all();
 
+    $dekripsi_lomba = PageSection::where(['section' => 'dekripsilomba'])->first();
+    $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->first();
+
     return Inertia::render('LandingPage', [
         'sliders' => $sliders,
         'categories' => $categories,
@@ -32,6 +37,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'dekripsi_lomba' => $dekripsi_lomba,
+        'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan,
     ]);
 });
 
@@ -62,6 +69,7 @@ Route::group([
     $route->resource('permission', PermissionController::class);
     $route->resource('external-service-config', ExternalServiceConfigController::class);
     $route->resource('question-and-answer', QuestionAndAnswerController::class);
+    $route->resource('page_section', PageSectionController::class);
     $route->put('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.password.update');
 });
 

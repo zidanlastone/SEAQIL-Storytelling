@@ -72,6 +72,11 @@ const filters = [
         label: 'Question and Answer',
         href: route('admin.question-and-answer.index')
       },
+      {
+        value: 'page_section',
+        label: 'Page Section',
+        href: route('admin.page_section.index')
+      },
     ],
   },
 

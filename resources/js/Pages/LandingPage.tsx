@@ -1,5 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Category, PageProps, Slider } from '@/types'
+import { Category, PageProps, PageSection, Slider } from '@/types'
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
@@ -20,7 +20,15 @@ const navigation = [
   { name: 'Q & A', href: '/qna' },
 ]
 
-function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categories = [] }: PageProps<{ laravelVersion: string, phpVersion: string, sliders: Slider[], categories: Category[] }>) {
+type LandingPageProps = {
+  laravelVersion: string,
+  phpVersion: string,
+  sliders: Slider[],
+  categories: Category[],
+  deskripsi_lomba: PageSection
+}
+
+function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba }: PageProps<LandingPageProps>) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -45,7 +53,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
                 <span className="sr-only">SEAQIL Storytelling</span>
-                {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
                 <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900">
@@ -128,12 +135,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                       >
                         Log in
                       </Link>
-                      {/* <Link
-                        href={route('register')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Register
-                      </Link> */}
                       <Link
                         href={route('register.participant')}
                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
@@ -220,10 +221,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
                   Kompetisi Mendongeng Tingkat Nasional
                 </h1>
                 <p className=" leading-8 text-gray-600">
-                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
-                </p>
-                <p className=" leading-8 text-gray-600">
-                  Salah satu upaya mengkombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD, SMP, SMA, Umum & Mahasiswa, Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidkan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024.
+                  <div dangerouslySetInnerHTML={{ __html: deskripsi_lomba.content }}></div>
                 </p>
               </div>
             </div>
@@ -255,7 +253,9 @@ function LandingPage({ auth, laravelVersion, phpVersion, sliders = [], categorie
             <div className="flex flex-col md:flex-row gap-4">
               <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
 
-                <ol className="list-decimal list-inside my-6">
+                <div dangerouslySetInnerHTML={{ __html: mekanisme_pelaksanaan.content }}></div>
+
+                <ol className="list-decimal list-inside my-6 hidden">
                   <li>
                     Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
                   </li>
