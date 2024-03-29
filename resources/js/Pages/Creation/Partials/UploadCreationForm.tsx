@@ -45,14 +45,14 @@ function UploadCreationForm({ onComplete, className, item, mode = 'create' }: { 
     <section className={className}>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div className="mt-4">
-          <InputLabel className="text-3xl font-semibold" htmlFor="title" >
+          <InputLabel className="text-4xl font-semibold" htmlFor="title" >
             {data.title}
           </InputLabel>
 
           <ConditionalRender condition={data.upload_status != '1'}>
-            <InputLabel className="text-xl font-semibold" htmlFor="title" >
+            <InputLabel className="text-2xl font-semibold" htmlFor="title" >
               Tautan Unggah Video: <br />
-              <a href="" className="text-blue-400">https://docs.google.com/spreadsheets/d/1TBLdFubH7Fmp6W4UBDd2ZEY1H-yIxp5z4-V3DplY220/edit#gid=1280851324</a>
+              <a href={item?.upload_location} className="text-blue-400">{item?.upload_location}</a>
             </InputLabel>
           </ConditionalRender>
         </div>

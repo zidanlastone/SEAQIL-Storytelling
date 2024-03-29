@@ -27,7 +27,7 @@ Route::get('/', function () {
     $sliders = Slider::all();
     $categories = Category::all();
 
-    $dekripsi_lomba = PageSection::where(['section' => 'dekripsilomba'])->first();
+    $dekripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->first();
     $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->first();
 
     return Inertia::render('LandingPage', [
