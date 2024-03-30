@@ -99,7 +99,7 @@ class CreationController extends Controller
         $creation->title = $request->title;
         $creation->save();
 
-        return to_route('creation.index', $creation);
+        return to_route('creation.index');
     }
 
     /**
@@ -108,5 +108,7 @@ class CreationController extends Controller
     public function destroy(Creation $creation)
     {
         //
+        $creation->delete();
+        return to_route('creation.index');
     }
 }

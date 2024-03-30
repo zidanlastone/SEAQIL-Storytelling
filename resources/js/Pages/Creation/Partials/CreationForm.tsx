@@ -23,14 +23,16 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
     if (mode == 'create') {
-      post(route('creation.store'), { forceFormData: false });
+      post(route('creation.store'));
     } else if (mode == 'update' && item != undefined) {
-      patch(route('creation.update', { creation: item?.id }), { forceFormData: false });
+      patch(route('creation.update', { creation: item?.id }));
     }
   };
 
+
   useEffect(() => {
     if (wasSuccessful) {
+      console.log('wasSuccessful', wasSuccessful);
       if (typeof onComplete == 'function') {
         onComplete();
       }

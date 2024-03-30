@@ -11,7 +11,7 @@ import { FormEventHandler, useEffect, useMemo, useState } from 'react';
 type ParticipantInsert = {
   user_id?: number | null,
   payment_receipt?: File,
-  status_verifikasi?: number,
+  status_verifikasi?: "0" | "1",
   category_id?: number | null,
   language_id?: number | null,
   level_of_participant_id?: number | null,
@@ -43,7 +43,7 @@ function ParticipantForm({
   const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<ParticipantInsert>({
     user_id: item?.user_id || null,
     payment_receipt: undefined,
-    status_verifikasi: item?.status_verifikasi,
+    status_verifikasi: item?.status_verifikasi as Participant['status_verifikasi'] || "0",
     category_id: item?.category_id || null,
     language_id: item?.language_id || null,
     level_of_participant_id: item?.level_of_participant_id || null,
@@ -105,7 +105,7 @@ function ParticipantForm({
       <header>
         <h2 className="text-lg font-medium text-gray-900">Tambah Data Tingkatan Partisipan</h2>
       </header>
-      <form onSubmit={submit} className="flex flex-col gap-4">
+      <form onSubmit={submit} className="flex flex-col gap-4 max-h-screen overflow-auto">
         <div>
           <InputLabel htmlFor="user_id" value="Pilih User" />
           <ComboBoxInput
@@ -182,20 +182,6 @@ function ParticipantForm({
         </div>
 
         <div>
-          <InputLabel htmlFor="certificate" value="Link Sertifikat" />
-          <TextInput
-            id="name"
-            name="name"
-            value={data.certificate}
-            className="my-2 block w-full"
-            autoComplete="name"
-            isFocused={true}
-            onChange={(e) => setData('certificate', e.target.value)}
-          />
-          <InputError message={errors.certificate} className="mt-2" />
-        </div>
-
-        <div>
           <InputLabel htmlFor="status_verifikasi" value="Status Verifikasi" />
           <div className="flex flex-row gap-4">
             <label htmlFor="status_verifikasi-l">
@@ -208,6 +194,19 @@ function ParticipantForm({
           <InputError className="mt-2" message={errors.status_verifikasi} />
         </div>
 
+        <div>
+          <InputLabel htmlFor="certificate" value="Link Sertifikat" />
+          <TextInput
+            id="name"
+            name="name"
+            value={data.certificate}
+            className="my-2 block w-full"
+            autoComplete="name"
+            isFocused={true}
+            onChange={(e) => setData('certificate', e.target.value)}
+          />
+          <InputError message={errors.certificate} className="mt-2" />
+        </div>
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton className="ms-4" disabled={processing}>

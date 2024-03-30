@@ -24,8 +24,6 @@ function UploadCreationForm({ onComplete, className, item, mode = 'create' }: { 
     upload_status: item?.upload_status as string || '0'
   });
 
-  console.log(data)
-
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
     if (mode == 'update' && item != undefined) {
@@ -45,28 +43,30 @@ function UploadCreationForm({ onComplete, className, item, mode = 'create' }: { 
     <section className={className}>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div className="mt-4">
-          <p className='text-3xl font-semibold  text-gray-700'>{data.title}</p>
+          <h2 className='text-xl font-semibold  text-gray-700'>{data.title}</h2>
 
-          <ConditionalRender condition={data.upload_status != '1'}>
+          <ConditionalRender condition={item?.upload_status != '1'}>
             <InputLabel className="text-2xl font-semibold" htmlFor="title" >
               Tautan Unggah Video: <br />
-              <a href={item?.upload_location} className="text-blue-400">{item?.upload_location}</a>
+              <a href={item?.upload_location} target="_blank" className="text-blue-400">{item?.upload_location}</a>
             </InputLabel>
           </ConditionalRender>
         </div>
 
-        <ConditionalRender condition={data.upload_status != '1'}>
+        <ConditionalRender condition={item?.upload_status != '1'}>
           <div>
             <InputLabel htmlFor="upload_status">
               <Checkbox className="mr-2"
                 id="upload_status"
-                value="1"
                 name='upload_status'
                 required
                 checked={data.upload_status == '1'}
                 onChange={(e) => {
-                  setData('upload_status', e.target.value)
-                  console.log(e.target.value)
+                  if (e.target.checked) {
+                    setData('upload_status', "1")
+                  } else {
+                    setData('upload_status', "0")
+                  }
                 }} />
               Saya sudah mengunggah video pada tautan google drive yang disediakan panitia
             </InputLabel>
@@ -76,15 +76,15 @@ function UploadCreationForm({ onComplete, className, item, mode = 'create' }: { 
 
 
           <div className="flex items-center justify-start mt-4">
-            <PrimaryButton className="" disabled={processing}>
+            <PrimaryButton disabled={processing}>
               Daftarkan Karya
             </PrimaryButton>
           </div>
         </ConditionalRender>
 
-        <ConditionalRender condition={data.upload_status == '1'}>
+        <ConditionalRender condition={item?.upload_status == '1'}>
           <InputLabel className="w-1/2 text-xl font-semibold text-center mx-auto" htmlFor="title" >
-            Terima Kasih sudah melakukan konfirmasi bahwa anda sudah mengunggah video pada tempat yang kami sediakan.
+            Terima kasih sudah melakukan konfirmasi bahwa anda sudah mengunggah video pada tempat yang kami sediakan.
           </InputLabel>
         </ConditionalRender>
 

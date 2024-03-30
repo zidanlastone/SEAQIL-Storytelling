@@ -50,7 +50,7 @@ function Acordion({ question, answer }: { question: string, answer: string }) {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className={"justify-between items-center font-semibold p-3 ml-4 w-4/5"}>
+        <div className={"justify-between items-center p-3 ml-4 w-4/5"}>
           <p>{answer}</p>
         </div>
       </Transition>
@@ -196,7 +196,7 @@ function LandingPage({ auth, question_and_answers = [] }: PageProps<QNAPageProps
           </div>
           <div className="mx-auto max-w-7xl py-8 sm:py-22 lg:py-36 my-28 min-h-96 align-middle">
             <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
-              QNA
+              Q & A
             </h1>
 
             {question_and_answers.map(item => (

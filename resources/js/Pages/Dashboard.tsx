@@ -20,6 +20,8 @@ type DashboardProps = {
 
 export default function Dashboard({ auth, participation, counts }: PageProps<DashboardProps>) {
 
+  console.log(participation);
+
   return (
     <AdminLayout
       roles={auth.roles}
@@ -65,7 +67,7 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       </td>
                       <td>
                         <div className="flex flex-row items-center">:
-                          <ConditionalRender condition={participation?.status_verifikasi == 0}>
+                          <ConditionalRender condition={participation?.status_verifikasi != null}>
                             <div className="flex flex-row text-green-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -83,17 +85,17 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       <td>
                         <div className="flex flex-row items-center">
                           :
-                          <ConditionalRender condition={participation?.status_verifikasi == 0}>
+                          <ConditionalRender condition={participation?.status_verifikasi == "0"}>
                             <div className="flex flex-row text-red-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
 
-                              <p>Belum Verifikasi</p>
+                              <p>Sedang Verifikasi</p>
                             </div>
                           </ConditionalRender>
-                          <ConditionalRender condition={participation?.status_verifikasi == 1}>
-                            <div className="flex flex-row text-green-500 items-center">:
+                          <ConditionalRender condition={participation?.status_verifikasi == "1"}>
+                            <div className="flex flex-row text-green-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
@@ -146,7 +148,7 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                             </div>
                           </ConditionalRender>
                           <ConditionalRender condition={participation?.creation?.upload_status == "2"}>
-                            <div className="flex flex-row text-yellow-500 items-center">:
+                            <div className="flex flex-row text-yellow-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
@@ -163,7 +165,7 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       <td>
                         <div className="flex flex-row items-center">
                           :
-                          <ConditionalRender condition={participation?.certificate == ""}>
+                          <ConditionalRender condition={participation?.certificate == null}>
                             <div className="flex flex-row text-yellow-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
@@ -171,14 +173,13 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                               <p>Belum Tersedia</p>
                             </div>
                           </ConditionalRender>
-                          <ConditionalRender condition={participation?.certificate != ""}>
-                            <div className="flex flex-row text-yellow-500 items-center">:
+                          <ConditionalRender condition={participation?.certificate != null}>
+                            <div className="flex flex-row text-blue-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                               </svg>
                               <p>
-                                Sertifikat dapat di unduh pada :
-                                <a href={participation?.certificate}>{participation?.certificate}</a>
+                                <a href={participation?.certificate} target='_blank'>Unduh</a>
                               </p>
                             </div>
                           </ConditionalRender>
@@ -190,8 +191,8 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                 </table>
 
                 <br />
-                <p>Silakan bergabung juga ke grup Whatsapp  <a className='text-blue-400' href="https://bit.ly/PesertaKompetisiMendongeng2024 ">https://bit.ly/PesertaKompetisiMendongeng2024</a>
-                  dan telegram <a className='text-blue-400' href="https://bit.ly/PesertaKompetisiMendongeng2024_Tele">https://bit.ly/PesertaKompetisiMendongeng2024_Tele</a> untuk mendapatkan update informasi terbaru.</p>
+                <p>Silakan bergabung juga ke grup Whatsapp  <a className='text-blue-400' href="https://bit.ly/PesertaKompetisiMendongeng2024 " target='_blank'>https://bit.ly/PesertaKompetisiMendongeng2024</a>
+                  dan telegram <a className='text-blue-400' href="https://bit.ly/PesertaKompetisiMendongeng2024_Tele" target="_blank">https://bit.ly/PesertaKompetisiMendongeng2024_Tele</a> untuk mendapatkan update informasi terbaru.</p>
                 <br />
 
                 <div>

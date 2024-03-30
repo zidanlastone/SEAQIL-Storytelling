@@ -22,7 +22,7 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
         institution: profile?.institution || '',
         country: profile?.country || '',
         province: profile?.province || '',
-        city: profile?.city || '',  
+        city: profile?.city || '',
         address: profile?.address || '',
         password: '',
     });
@@ -158,20 +158,20 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
                 <div>
                     <InputLabel htmlFor="address" value="Alamat Lengkap" />
 
-                    <textarea 
-                        className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm " 
-                        name="address" id="address" rows={3} 
+                    <textarea
+                        className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
+                        name="address" id="address" rows={3}
                         defaultValue={data.address}
-                        onChange={(e) => setData('address', e.target.value)} /> 
+                        onChange={(e) => setData('address', e.target.value)} />
 
                     <InputError className="mt-2" message={errors.address} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="info_password" value="Password" />
 
                     <TextInput
-                        id="password"
+                        id="info_password"
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"

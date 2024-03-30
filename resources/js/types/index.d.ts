@@ -77,7 +77,7 @@ export interface Participant {
     level_of_participant_id: number,
     payment_receipt?: string,
     certificate?: string,
-    status_verifikasi: number
+    status_verifikasi: "0" | "1",
     creation?: Creation
 }
 

@@ -135,11 +135,13 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
     return '';
   }
 
+  console.log('update-complete', showUpdateDialog.show)
+
   return (
     <AdminLayout
       roles={auth.roles}
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Karya Peserta</h2>}>
+      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{auth.roles.includes('participant') ? 'Unggah Karya Video' : 'Unggah Karya Video Peserta'}</h2>}>
 
       <Head title="Admin | Karya Peserta" />
 
@@ -148,7 +150,6 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
           <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
             <ConditionalRender condition={auth.roles.includes('participant')}>
-              <h2 className="text-lg font-semibold">Unggah Karya Video</h2>
               <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
               <ul className="list-disc ml-4 my-4">
                 <li>Durasi maksimal 8 menit</li>
@@ -203,7 +204,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
         <CreationForm mode="update"
           item={showUpdateDialog.item}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
+          onComplete={() => setShowUpdateDialog({ item: undefined, show: false })} />
       </Modal>
 
       {/* update delete prompt */}
