@@ -30,17 +30,20 @@ function Acordion({ question, answer }: { question: string, answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white my-2 shadow-md rounded-lg py-4" onClick={() => { setIsOpen(!isOpen) }}>
+    <div className="bg-white my-2 shadow-md rounded-lg py-4 px-5" onClick={() => { setIsOpen(!isOpen) }}>
 
-      <div className="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+      <div className="flex flex-row justify-between items-center font-semibold py-2 px-4 cursor-pointer">
         <h2 className="flex-start">{question}</h2>
-        <svg
-          className="flex-end fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
-          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
+        {isOpen ? (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        )}
       </div>
-
       <Transition
         show={isOpen}
         enter="transition-opacity duration-300"
@@ -50,7 +53,7 @@ function Acordion({ question, answer }: { question: string, answer: string }) {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className={"justify-between items-center p-3 ml-4 w-4/5"}>
+        <div className={"justify-between items-center p-5 ml-4 w-4/5"}>
           <p>{answer}</p>
         </div>
       </Transition>

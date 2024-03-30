@@ -96,6 +96,14 @@ class ParticipantController extends Controller
     public function show(Participant $participant)
     {
         //
+        $participant = Participant::find($participant->id)->with([
+            'user',
+            'category',
+            'language',
+            'level_of_participant',
+            'user.profile',
+        ])->has('user');
+
         return Inertia::render('Participant/Detail', [
             'participant' => $participant->first()
         ]);
