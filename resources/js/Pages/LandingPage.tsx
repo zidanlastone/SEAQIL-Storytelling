@@ -264,7 +264,7 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                     Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
                   </li>
                   <li>
-                    Peserta melakukan pendaftaran kompetisi melalui laman <a href="https://kompetisimendongeng.qiteplanguage.org" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
+                    Peserta melakukan pendaftaran kompetisi melalui laman <a href="https://kompetisimendongeng.qiteplanguage.org" className="text-blue-400 hover:tet-blue-500" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
                   </li>
                   <li>
                     Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
@@ -276,7 +276,7 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                   <li>
                     Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
                     <ol className="list-alpha list-inside ml-4">
-                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> menggunakan email dan password yang telah didaftarkan;</li>
+                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org" className="text-blue-400 hover:tet-blue-500" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> menggunakan email dan password yang telah didaftarkan;</li>
                       <li>b.	Masuk ke menu “Unggah Karya”;</li>
                       <li>c.	Klik tautan unggah karya/video, kemudian unggah hasil karya ke dalam folder google drive yang telah disediakan;</li>
                       <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya;</li>
