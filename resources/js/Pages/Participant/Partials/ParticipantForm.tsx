@@ -105,7 +105,7 @@ function ParticipantForm({
       <header>
         <h2 className="text-lg font-medium text-gray-900">Tambah Data Tingkatan Partisipan</h2>
       </header>
-      <form onSubmit={submit} className="flex flex-col gap-4 max-h-screen overflow-auto">
+      <form onSubmit={submit} className="flex flex-col gap-4">
         <div>
           <InputLabel htmlFor="user_id" value="Pilih User" />
           <ComboBoxInput

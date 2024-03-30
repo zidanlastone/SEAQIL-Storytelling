@@ -87,7 +87,7 @@ export default function List({ auth, participants = [], users, languages, catego
       header: 'Status Verifikasi',
       id: 'table-header-description',
       cell: info => {
-        if (info.getValue() == 1) {
+        if (info.getValue() == "1") {
           return <span className="px-3 py-1 rounded bg-green-400 shadow">Sudah</span>
         } else {
           return <span className="px-3 py-1 rounded bg-yellow-400 shadow">Belum</span>
@@ -181,7 +181,7 @@ export default function List({ auth, participants = [], users, languages, catego
       </div>
 
       {/* Create mode */}
-      <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
+      <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)} >
         <ParticipantForm mode="create"
           users={users}
           categories={categories}
@@ -192,7 +192,7 @@ export default function List({ auth, participants = [], users, languages, catego
       </Modal>
 
       {/* update mode */}
-      <Modal show={showUpdateDialog.show} onClose={() => setShowUpdateDialog({ item: undefined, show: false })}>
+      <Modal show={showUpdateDialog.show} onClose={() => setShowUpdateDialog({ item: undefined, show: false })} >
         <ParticipantForm mode="update"
           item={showUpdateDialog.item}
           users={users}
