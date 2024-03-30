@@ -36,11 +36,6 @@ const filters = [
         label: 'Sertifikat',
         href: route('creation.index')
       },
-      {
-        value: 'pengguna',
-        label: 'Pengguna',
-        href: route('admin.users.index')
-      },
     ],
   },
   {
