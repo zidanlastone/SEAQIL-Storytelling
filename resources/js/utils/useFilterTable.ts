@@ -1,14 +1,14 @@
 import { RankingInfo, rankItem, compareItems } from "@tanstack/match-sorter-utils"
 import { ColumnDef, ColumnFilter, ColumnHelper, FilterFn, SortingFn, getCoreRowModel, getFilteredRowModel, sortingFns, useReactTable } from "@tanstack/react-table"
 
-// declare module '@tanstack/react-table' {
-//   interface FilterFns {
-//     fuzzy: FilterFn<unknown>
-//   }
-//   interface FilterMeta {
-//     itemRank: RankingInfo
-//   }
-// }
+declare module '@tanstack/react-table' {
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo
+  }
+}
 
 export const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item

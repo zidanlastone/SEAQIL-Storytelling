@@ -1,4 +1,5 @@
 import ComboBoxInput, { ComboBoxData } from '@/Components/ComboBoxInput';
+import ConditionalRender from '@/Components/ConditionalRender';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -118,6 +119,17 @@ function ParticipantForm({
             value={selectedUser} />
           <InputError message={errors.payment_receipt} className="mt-2" />
         </div>
+
+        <ConditionalRender condition={item?.user.profile !== null}>
+          <div>
+            <InputLabel htmlFor="whatsapp_contact" value="No HP/WhatsApp" />
+            <p className='border py-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm my-2 block w-full'>
+              <span className='ml-2'>
+                {item?.user.profile?.whatsapp_contact}
+              </span>
+            </p>
+          </div>
+        </ConditionalRender>
 
         <div>
           <InputLabel htmlFor="category_id" value="Pilih Kategori" />

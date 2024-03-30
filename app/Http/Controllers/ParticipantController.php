@@ -32,12 +32,12 @@ class ParticipantController extends Controller
         $levelOfParticipant = LevelOfParticipant::all();
 
         $participant = Participant::with([
-            'user',
             'category',
             'language',
-            'level_of_participant'
-        ])
-            ->has('user');
+            'level_of_participant',
+            'user',
+            'user.profile',
+        ])->has('user');
 
         if ($user->hasRole('participant')) {
             $participant->where([
@@ -95,8 +95,10 @@ class ParticipantController extends Controller
      */
     public function show(Participant $participant)
     {
-        // 
-        return to_route('participant.index');
+        //
+        return Inertia::render('Participant/Detail', [
+            'participant' => $participant->first()
+        ]);
     }
 
     /**

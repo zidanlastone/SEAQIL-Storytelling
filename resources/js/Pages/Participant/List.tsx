@@ -19,23 +19,24 @@ type Can = {
   [key: string]: boolean
 }
 
-declare module '@tanstack/react-table' {
-  interface FilterFns {
-    fuzzy: FilterFn<unknown>
-  }
-  interface FilterMeta {
-    itemRank: RankingInfo
-  }
-}
-
-export default function List({ auth, participants = [], users, languages, categories, level_of_participant, can }: PageProps<{
+type ParticipantListPageProps = {
   participants: Participant[],
   users: User[],
   languages: Language[],
   categories: Category[],
   level_of_participant: LevelOfParticipant[],
   can: Can
-}>) {
+};
+
+export default function List({
+  auth,
+  participants = [],
+  users,
+  languages,
+  categories,
+  level_of_participant,
+  can
+}: PageProps<ParticipantListPageProps>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
@@ -113,6 +114,14 @@ export default function List({ auth, participants = [], users, languages, catego
           <div key={_props.getValue()}>
             <button
               type="button"
+              className="px-3 py-1 mr-1 bg-blue-500 rounded-md text-white"
+              onClick={() => {
+                window.open(route('participant.show', { participant: _props.getValue() }))
+              }}>
+              Detail
+            </button>
+            <button
+              type="button"
               className="px-3 py-1 mr-1 bg-yellow-500 rounded-md text-white"
               onClick={() => setShowUpdateDialog({ item: _props.row.original, show: true })}>
               Edit
@@ -151,7 +160,7 @@ export default function List({ auth, participants = [], users, languages, catego
       user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Partisipan</h2>}>
 
-      <Head title="Tingkatan Partisipan" />
+      <Head title="Partisipan" />
 
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">

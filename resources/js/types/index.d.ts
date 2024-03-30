@@ -32,6 +32,7 @@ export interface User {
     password: string,
     email_verified_at?: string,
     created_at?: string,
+    profile?: Profile
 }
 
 export interface Roles {

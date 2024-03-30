@@ -34,4 +34,9 @@ class Profile extends Model
     protected $hidden = [
         'pwd',
     ];
+
+    protected function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
