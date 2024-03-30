@@ -170,6 +170,10 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                 pagination={{
                   dynamicBullets: true,
                 }}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: true,
+                }}
                 modules={[Pagination]}
                 className="mySwiper rounded-md"
               >
