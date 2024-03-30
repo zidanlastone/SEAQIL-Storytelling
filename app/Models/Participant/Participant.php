@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\I18n\Language;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,6 +39,16 @@ class Participant extends Model
         'password',
         'remember_token',
     ];
+
+    protected $appends = ['payment_receipt_path'];
+    protected function paymentReceiptPath(): Attribute
+    {
+        return new Attribute(
+            function () {
+                return asset('storage/' . $this->payment_receipt);
+            }
+        );
+    }
 
     public function user()
     {

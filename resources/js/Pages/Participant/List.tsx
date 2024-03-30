@@ -6,15 +6,26 @@ import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Category, Language, LevelOfParticipant, PageProps, Participant, User } from "@/types";
 import { Head, Link } from "@inertiajs/react";
-import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
+import { ColumnFiltersState, ColumnHelper, FilterFn, SortingFn, createColumnHelper, getCoreRowModel, getFilteredRowModel, sortingFns, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
 import ParticipantForm from "./Partials/ParticipantForm";
 import DeleteParticipant from "./Partials/DeleteParticipant";
 import ConditionalRender from "@/Components/ConditionalRender";
 import AdminLayout from "@/Layouts/AdminLayout";
+import { rankItem, compareItems, RankingInfo } from "@tanstack/match-sorter-utils";
+import { fuzzyFilter } from "@/utils/useFilterTable";
 
 type Can = {
   [key: string]: boolean
+}
+
+declare module '@tanstack/react-table' {
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo
+  }
 }
 
 export default function List({ auth, participants = [], users, languages, categories, level_of_participant, can }: PageProps<{
@@ -32,10 +43,9 @@ export default function List({ auth, participants = [], users, languages, catego
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Participant, show: boolean }>({ item: undefined, show: false });
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const columnHelper = createColumnHelper<Participant>();
-
 
   const columns = useMemo(() => [
     columnHelper.accessor(row => row.id, {
@@ -123,19 +133,17 @@ export default function List({ auth, participants = [], users, languages, catego
   const table = useReactTable({
     columns,
     data: participants,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
-      columnFilters
+      globalFilter
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
   });
-
-  const getColumnFilterValue = (columnId: string): string => {
-    let data = table.getState().columnFilters.find(item => item.id = columnId)
-    if (data != undefined) return data.value as string;
-    return '';
-  }
 
   return (
     <AdminLayout
@@ -157,10 +165,10 @@ export default function List({ auth, participants = [], users, languages, catego
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput
-                  value={getColumnFilterValue('table-header-participant_name')}
-                  onChange={value => setColumnFilters([{ value, id: 'table-header-participant_name' }])}
+                  value={globalFilter}
+                  onChange={value => setGlobalFilter(String(value))}
                   className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Nama Partisipan"
+                  placeholder="Cari Data Global"
                 />
               </div>
             </div>

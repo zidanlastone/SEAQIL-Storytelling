@@ -13,11 +13,13 @@ import CreationForm from "./Partials/CreationForm";
 import DeleteSlider from "./Partials/DeleteCreation";
 import AdminLayout from "@/Layouts/AdminLayout";
 import ConditionalRender from "@/Components/ConditionalRender";
+import { fuzzyFilter } from "@/utils/useFilterTable";
 
 type CreationProps = {
   creations: Creation[],
   creation?: Creation
 };
+
 
 export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
 
@@ -28,7 +30,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });
 
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const columnHelper = createColumnHelper<any>();
 
@@ -121,21 +123,17 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
   const table = useReactTable({
     columns,
     data: creations,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
-      columnFilters
+      globalFilter
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
   });
-
-  const getColumnFilterValue = (columnId: string): string => {
-    let data = table.getState().columnFilters.find(item => item.id = columnId)
-    if (data != undefined) return data.value as string;
-    return '';
-  }
-
-  console.log('update-complete', showUpdateDialog.show)
 
   return (
     <AdminLayout
@@ -168,10 +166,10 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
                 </div> */}
                 <div className="md:mx-2 my-2 order-last">
                   <DebouncedInput
-                    value={getColumnFilterValue('table-header-title')}
-                    onChange={value => setColumnFilters([{ value, id: 'table-header-title' }])}
+                    value={globalFilter}
+                    onChange={value => setGlobalFilter(String(value))}
                     className="px-2 py-2 font-sm shadow border rounded"
-                    placeholder="Cari Judul Karya"
+                    placeholder="Cari Data Global"
                   />
                 </div>
               </div>

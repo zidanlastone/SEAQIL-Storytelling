@@ -177,7 +177,15 @@ function ParticipantForm({
           <InputError message={errors.payment_receipt} className="mt-2" />
 
           {item?.payment_receipt && (
-            <p>File Sebelumnya: {item?.payment_receipt}</p>
+            <>
+              <p>File Sebelumnya:
+              </p>
+              <a
+                className="text-blue-400 hover:text-blue-500"
+                href={item.payment_receipt_path}
+                target="_blank"
+                rel="noopener noreferrer">{item?.payment_receipt_path}</a>
+            </>
           )}
         </div>
 
@@ -185,10 +193,10 @@ function ParticipantForm({
           <InputLabel htmlFor="status_verifikasi" value="Status Verifikasi" />
           <div className="flex flex-row gap-4">
             <label htmlFor="status_verifikasi-l">
-              <input type="radio" id="status_verifikasi-l" name="status_verifikasi" value={0} checked={data.status_verifikasi == 0} onChange={(e) => setData('status_verifikasi', 0)} /> Tidak Terverifikasi
+              <input type="radio" id="status_verifikasi-l" name="status_verifikasi" value={0} checked={data.status_verifikasi == "0"} onChange={(e) => setData('status_verifikasi', "0")} /> Tidak Terverifikasi
             </label>
             <label htmlFor="status_verifikasi-p">
-              <input type="radio" id="status_verifikasi-p" name="status_verifikasi" value={1} checked={data.status_verifikasi == 1} onChange={(e) => setData('status_verifikasi', 1)} /> Sudah Terverifikasi
+              <input type="radio" id="status_verifikasi-p" name="status_verifikasi" value={1} checked={data.status_verifikasi == "1"} onChange={(e) => setData('status_verifikasi', "1")} /> Sudah Terverifikasi
             </label>
           </div>
           <InputError className="mt-2" message={errors.status_verifikasi} />

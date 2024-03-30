@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import CreateForm from "./Partials/Form";
 import DeleteForm from "./Partials/DeleteForm";
 import AdminLayout from "@/Layouts/AdminLayout";
+import { fuzzyFilter } from "@/utils/useFilterTable";
 
 export default function List({ auth, page_sections = [], languages = [] }: PageProps<{ page_sections: PageSection[], languages: Language[] }>) {
 
@@ -20,7 +21,7 @@ export default function List({ auth, page_sections = [], languages = [] }: PageP
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: PageSection, show: boolean }>({ item: undefined, show: false });
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const columnHelper = createColumnHelper<PageSection>();
 
@@ -72,19 +73,17 @@ export default function List({ auth, page_sections = [], languages = [] }: PageP
   const table = useReactTable({
     columns,
     data: page_sections,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
-      columnFilters
+      globalFilter
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
   });
-
-  const getColumnFilterValue = (columnId: string): string => {
-    let data = table.getState().columnFilters.find(item => item.id = columnId)
-    if (data != undefined) return data.value as string;
-    return '';
-  }
 
   return (
     <AdminLayout
@@ -104,10 +103,10 @@ export default function List({ auth, page_sections = [], languages = [] }: PageP
               </div>
               <div className="md:mx-2 my-2 order-last">
                 <DebouncedInput
-                  value={getColumnFilterValue('table-header-section')}
-                  onChange={value => setColumnFilters([{ value, id: 'table-header-section' }])}
+                  value={globalFilter}
+                  onChange={value => setGlobalFilter(String(value))}
                   className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Pertanyaan"
+                  placeholder="Cari Data Global"
                 />
               </div>
             </div>
