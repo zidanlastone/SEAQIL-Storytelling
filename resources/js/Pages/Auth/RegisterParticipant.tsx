@@ -63,9 +63,9 @@ export default function RegisterParticipant({
     // partisipasi lomba
     title: '',
     payment_receipt: undefined,
-    category_id: 1,
-    language_id: 1,
-    level_of_participant_id: 1,
+    category_id: 0,
+    language_id: 0,
+    level_of_participant_id: 0,
   });
 
   useEffect(() => {
