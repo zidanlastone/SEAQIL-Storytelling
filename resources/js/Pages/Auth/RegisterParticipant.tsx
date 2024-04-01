@@ -253,12 +253,11 @@ export default function RegisterParticipant({
                 className="mt-1 block w-full"
                 value={data.institution as string}
                 onChange={(e) => setData('institution', e.target.value)}
-                required
                 placeholder="Contoh: Universitas Indonesia"
                 autoComplete="institution"
               />
 
-              <InputError className="mt-2" message={errors.parent_contact} />
+              <InputError className="mt-2" message={errors.institution} />
             </div>
 
             <div className="mt-4">
@@ -273,11 +272,11 @@ export default function RegisterParticipant({
                 value={data.country as string}
                 onChange={(e) => setData('country', e.target.value)}
                 required
-                placeholder="Contoh: Indonesia"
+                placeholder="Contoh: Indonesia" 
                 autoComplete="country"
               />
 
-              <InputError className="mt-2" message={errors.institution} />
+              <InputError className="mt-2" message={errors.country} />
             </div>
 
             <div className="mt-4">
@@ -364,7 +363,7 @@ export default function RegisterParticipant({
                   setData('category_id', parseInt(e.target.value))
                 }}>
                 {combo_category.map(item => (
-                  <option value={item.id} className="w-full" selected={data.category_id == item.id} >{item.value}</option>
+                  <option value={item.id} key={item.id} className="w-full" selected={data.category_id == item.id} >{item.value}</option>
                 ))}
               </SelectInput>
 
@@ -383,7 +382,7 @@ export default function RegisterParticipant({
                   setData('language_id', parseInt(e.target.value))
                 }}>
                 {combo_languages.map(item => (
-                  <option value={item.id} className="min-w-full" selected={data.language_id == item.id}>{item.value}</option>
+                  <option value={item.id} key={item.id} className="min-w-full" selected={data.language_id == item.id}>{item.value}</option>
                 ))}
               </SelectInput>
 
@@ -401,7 +400,7 @@ export default function RegisterParticipant({
                   setData('level_of_participant_id', parseInt(e.target.value))
                 }}>
                 {combo_level_of_participants.map(item => (
-                  <option value={item.id} className="w-full" selected={data.level_of_participant_id == item.id}>{item.value}</option>
+                  <option value={item.id} key={item.id} className="w-full" selected={data.level_of_participant_id == item.id}>{item.value}</option>
                 ))}
               </SelectInput>
               <InputError message={errors.level_of_participant_id} className="mt-2" />

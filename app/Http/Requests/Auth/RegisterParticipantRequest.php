@@ -33,7 +33,7 @@ class RegisterParticipantRequest extends FormRequest
       'gender' => ['required'],
       'whatsapp_contact' => ['required'],
       'parent_contact' => ['nullable'],
-      'institution' => ['string'],
+      'institution' => ['nullable'],
       'country' => ['required', 'string'],
       'province' => ['required', 'string'],
       'city' => ['required', 'string'],
