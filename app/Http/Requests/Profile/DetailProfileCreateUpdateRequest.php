@@ -16,8 +16,8 @@ class DetailProfileCreateUpdateRequest extends FormRequest
         return [
             'gender' => ['required', 'string', 'max:1'],
             'whatsapp_contact' => ['required', 'string'],
-            'parent_contact' => ['required', 'string'],
-            'institution' => ['required', 'string'],
+            'parent_contact' => ['nullable'],
+            'institution' => ['nullable'],
             'country' => ['required', 'string'],
             'province' => ['required', 'string'],
             'city' => ['required', 'string'],

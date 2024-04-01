@@ -24,7 +24,7 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
         province: profile?.province || '',
         city: profile?.city || '',
         address: profile?.address || '',
-        password: '',
+        password: profile?.pwd as string || '',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -80,7 +80,6 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
                         className="mt-1 block w-full"
                         value={data.parent_contact as string}
                         onChange={(e) => setData('parent_contact', e.target.value)}
-                        required
                         autoComplete="phone"
                     />
 
@@ -96,12 +95,11 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
                         className="mt-1 block w-full"
                         value={data.institution as string}
                         onChange={(e) => setData('institution', e.target.value)}
-                        required
                         placeholder="Contoh: Universitas Indonesia"
                         autoComplete="institution"
                     />
 
-                    <InputError className="mt-2" message={errors.parent_contact} />
+                    <InputError className="mt-2" message={errors.institution} />
                 </div>
 
                 <div>
@@ -167,7 +165,7 @@ export default function UpdateProfileDetailInformation({ mustVerifyEmail, status
                     <InputError className="mt-2" message={errors.address} />
                 </div>
 
-                <div>
+                <div className='hidden'>
                     <InputLabel htmlFor="info_password" value="Password" />
 
                     <TextInput
