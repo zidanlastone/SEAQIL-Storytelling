@@ -77,7 +77,9 @@ class ParticipantController extends Controller
                 'certificate' => $request->certificate,
                 'status_verifikasi' => $request->status_verifikasi,
                 'payment_receipt' => $path,
+                'reject_reason' => $request->reject_reasons
             ]);
+            
             if ($participant) {
                 return to_route('participant.index');
             }
@@ -135,6 +137,7 @@ class ParticipantController extends Controller
         $participant->certificate = $request->certificate;
         $participant->status_verifikasi = $request->status_verifikasi;
         $participant->level_of_participant_id = $request->level_of_participant_id;
+        $participant->reject_reason = $request->reject_reason;
         $participant->save();
 
         if ($participant) {

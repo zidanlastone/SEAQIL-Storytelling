@@ -28,6 +28,7 @@ class Participant extends Model
         'payment_receipt',
         'certificate',
         'status_verifikasi',
+        'reject_reason',
     ];
 
     /**

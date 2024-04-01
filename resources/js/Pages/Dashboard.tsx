@@ -20,6 +20,7 @@ type DashboardProps = {
 
 export default function Dashboard({ auth, participation, counts }: PageProps<DashboardProps>) {
 
+  // console.log(typeof participation?.reject_reason)
   return (
     <AdminLayout
       roles={auth.roles}
@@ -83,15 +84,24 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       <td>
                         <div className="flex flex-row items-center">
                           :
-                          <ConditionalRender condition={participation?.status_verifikasi == "0"}>
+                          <ConditionalRender condition={participation?.status_verifikasi == "0" && (participation?.reject_reason == null || participation?.reject_reason == "" ) }>
+                            <div className="flex flex-row text-yellow-600 items-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                              <p>Sedang Verifikasi</p>
+                            </div>
+                          </ConditionalRender>
+
+                          <ConditionalRender condition={participation?.reject_reason != "" || participation?.reject_reason != null || participation?.reject_reason != undefined}>
                             <div className="flex flex-row text-red-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
-
-                              <p>Sedang Verifikasi</p>
+                              <p>Ditolak, {participation?.reject_reason}</p>
                             </div>
                           </ConditionalRender>
+
                           <ConditionalRender condition={participation?.status_verifikasi == "1"}>
                             <div className="flex flex-row text-green-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

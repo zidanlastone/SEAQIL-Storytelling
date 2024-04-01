@@ -80,7 +80,8 @@ export interface Participant {
     certificate?: string,
     status_verifikasi: "0" | "1",
     creation?: Creation
-    payment_receipt_path?: string
+    payment_receipt_path?: string,
+    reject_reason?:string
 }
 
 export interface LevelOfParticipant {

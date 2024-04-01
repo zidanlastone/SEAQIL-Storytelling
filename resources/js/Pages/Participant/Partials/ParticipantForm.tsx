@@ -17,7 +17,8 @@ type ParticipantInsert = {
   category_id?: number | null,
   language_id?: number | null,
   level_of_participant_id?: number | null,
-  certificate?: string
+  certificate?: string,
+  reject_reason?: string
 }
 
 type ParticipantFormProps = {
@@ -50,6 +51,7 @@ function ParticipantForm({
     language_id: item?.language_id || null,
     level_of_participant_id: item?.level_of_participant_id || null,
     certificate: item?.certificate,
+    reject_reason: item?.reject_reason || "",
   });
 
   const submit: FormEventHandler = (e) => {
@@ -213,6 +215,21 @@ function ParticipantForm({
             </label>
           </div>
           <InputError className="mt-2" message={errors.status_verifikasi} />
+        </div>
+
+        
+        <div>
+          <InputLabel htmlFor="reject_reason" value="Alasan Gagal Verifikasi" />
+          <TextInput
+            id="reject_reason"
+            name="reject_reason"
+            value={data.reject_reason}
+            className="my-2 block w-full"
+            autoComplete="reject_reason"
+            isFocused={true}
+            onChange={(e) => setData('reject_reason', e.target.value)}
+          />
+          <InputError message={errors.reject_reason} className="mt-2" />
         </div>
 
         <div>

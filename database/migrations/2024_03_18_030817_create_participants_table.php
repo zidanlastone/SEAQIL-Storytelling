@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignIdFor(LevelOfParticipant::class, 'level_of_participant_id')->nullable(); // untuk menyimpan data jenjang pendidikan peserta
             $table->string('payment_receipt')->nullable();              // untuk url foto bukti bayar yang sudah di upload
             $table->string('certificate')->nullable();                  // untuk url google drive sertgifikat yang diterima oleh peserta
+            $table->string('reject_reason')->nullable();                  // untuk url google drive sertgifikat yang diterima oleh peserta
             $table->enum('status_verifikasi', ['0', '1']);  // untuk menunjukan bahwa peserta sudah di verifikasi
             $table->enum('is_deleted', ['0', '1']);         // mengindikasikan data di hapus
             $table->softDeletes();                          // waktu penghapusan data

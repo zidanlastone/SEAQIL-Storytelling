@@ -10,10 +10,10 @@ function SponsorHeader() {
             <img className="object-contain"  src="/image/sponsors/upi-fix.png" alt="upi" />
         </div>
         <div className="h-16 w-16 p-1 m-1">
-            <img className="object-cover"  src="/image/sponsors/qitep.png" alt="qitep" />
+            <img className="object-cover"  src="/image/sponsors/seameo.png" alt="seameo" />
         </div>
         <div className="h-16 w-16 p-1 m-1">
-            <img className="object-cover"  src="/image/sponsors/seameo.png" alt="seameo" />
+            <img className="object-cover"  src="/image/sponsors/qitep.png" alt="qitep" />
         </div>
         <div className="h-16 w-16 p-1 m-1">
             <img className="object-cover"  src="/image/sponsors/ceccep.png" alt="ceccep" />

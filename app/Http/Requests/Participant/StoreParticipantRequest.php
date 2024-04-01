@@ -32,6 +32,7 @@ class StoreParticipantRequest extends FormRequest
             'payment_receipt' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'certificate' => ['nullable'],
             'status_verifikasi' => ['required'],
+            'reject_reason' => ['nullable']
         ];
     }
 }
