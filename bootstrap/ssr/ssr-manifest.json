@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/js/Components/ApplicationLogo.tsx": [
-    "/build/assets/NavbarCloseButton-DhZx8MiO.js"
+    "/build/assets/AdminLayout-DNKnB601.js"
   ],
   "resources/js/Components/Checkbox.tsx": [
     "/build/assets/Checkbox-B46RnHis.js"
@@ -19,7 +19,7 @@
     "/build/assets/TableContent-zRVHdZtT.js"
   ],
   "resources/js/Components/Dropdown.tsx": [
-    "/build/assets/NavbarCloseButton-DhZx8MiO.js"
+    "/build/assets/AdminLayout-DNKnB601.js"
   ],
   "resources/js/Components/InputError.tsx": [
     "/build/assets/InputError-cRVTeK4i.js"
@@ -30,14 +30,8 @@
   "resources/js/Components/Modal.tsx": [
     "/build/assets/Modal-CHogBQsx.js"
   ],
-  "resources/js/Components/NavLink.tsx": [
-    "/build/assets/Edit-IybBG2tq.js"
-  ],
   "resources/js/Components/PrimaryButton.tsx": [
     "/build/assets/PrimaryButton-C-TDjBGq.js"
-  ],
-  "resources/js/Components/ResponsiveNavLink.tsx": [
-    "/build/assets/Edit-IybBG2tq.js"
   ],
   "resources/js/Components/SecondaryButton.tsx": [
     "/build/assets/DeleteUserForm-Lju8mylQ.js"
@@ -46,7 +40,7 @@
     "/build/assets/SelectInput-DYknGnd7.js"
   ],
   "resources/js/Components/SponsorHeader.tsx": [
-    "/build/assets/SponsorHeader-Dv8Bz9ew.js"
+    "/build/assets/SponsorHeader-CHFZNGbO.js"
   ],
   "resources/js/Components/Table/RowContent.tsx": [
     "/build/assets/TableContent-zRVHdZtT.js"
@@ -61,43 +55,37 @@
     "/build/assets/TextInput-CL99szxP.js"
   ],
   "resources/js/Layouts/AdminLayout.tsx": [
-    "/build/assets/AdminLayout-DmQ6hQui.js"
-  ],
-  "resources/js/Layouts/AuthenticatedLayout.tsx": [
-    "/build/assets/Edit-IybBG2tq.js"
+    "/build/assets/AdminLayout-DNKnB601.js"
   ],
   "resources/js/Layouts/GuestLayout.tsx": [
-    "/build/assets/GuestLayout-Bf_uAMHH.js"
+    "/build/assets/GuestLayout-Cp60_XPI.js"
   ],
   "resources/js/Layouts/Partials/NavbarCloseButton.tsx": [
-    "/build/assets/NavbarCloseButton-DhZx8MiO.js"
-  ],
-  "resources/js/Layouts/Partials/Sidebar.tsx": [
-    "/build/assets/Edit-IybBG2tq.js"
+    "/build/assets/AdminLayout-DNKnB601.js"
   ],
   "resources/js/Pages/Auth/ConfirmPassword.tsx": [
-    "/build/assets/ConfirmPassword-CqZYNGu7.js"
+    "/build/assets/ConfirmPassword-FlLO5LmE.js"
   ],
   "resources/js/Pages/Auth/ForgotPassword.tsx": [
-    "/build/assets/ForgotPassword-B9heC4cV.js"
+    "/build/assets/ForgotPassword-DtQSj0o0.js"
   ],
   "resources/js/Pages/Auth/Login.tsx": [
-    "/build/assets/Login-DQEZ6ThQ.js"
+    "/build/assets/Login-CU8-khQ5.js"
   ],
   "resources/js/Pages/Auth/Register.tsx": [
-    "/build/assets/Register-BB2dkKQC.js"
+    "/build/assets/Register-Cf2Tuvx5.js"
   ],
   "resources/js/Pages/Auth/RegisterParticipant.tsx": [
-    "/build/assets/RegisterParticipant-DdjZiiNv.js"
+    "/build/assets/RegisterParticipant-BAL2Jw3M.js"
   ],
   "resources/js/Pages/Auth/ResetPassword.tsx": [
-    "/build/assets/ResetPassword-F7oC1b18.js"
+    "/build/assets/ResetPassword-DLkBB3QW.js"
   ],
   "resources/js/Pages/Auth/VerifyEmail.tsx": [
-    "/build/assets/VerifyEmail-DMtYk5-6.js"
+    "/build/assets/VerifyEmail-DFVGqljj.js"
   ],
   "resources/js/Pages/Category/List.tsx": [
-    "/build/assets/List-B9-ccB65.js"
+    "/build/assets/List-tS7SyD2r.js"
   ],
   "resources/js/Pages/Category/Partials/CategoryForm.tsx": [
     "/build/assets/CategoryForm-Mm7gbw_1.js"
@@ -106,7 +94,7 @@
     "/build/assets/DeleteCategory-4pLXERhg.js"
   ],
   "resources/js/Pages/Creation/List.tsx": [
-    "/build/assets/List-CPgqUuvi.js"
+    "/build/assets/List-DbF_5sNq.js"
   ],
   "resources/js/Pages/Creation/Partials/CreationForm.tsx": [
     "/build/assets/CreationForm-BSu32chd.js"
@@ -115,13 +103,13 @@
     "/build/assets/DeleteCreation-Ctj_a1v9.js"
   ],
   "resources/js/Pages/Creation/Partials/UploadCreationForm.tsx": [
-    "/build/assets/UploadCreationForm-DC2lUiuX.js"
+    "/build/assets/UploadCreationForm-m9FcEEMK.js"
   ],
   "resources/js/Pages/Dashboard.tsx": [
-    "/build/assets/Dashboard-NNXwQSDk.js"
+    "/build/assets/Dashboard-CYPmwz_0.js"
   ],
   "resources/js/Pages/ExternalServiceConfig/List.tsx": [
-    "/build/assets/List-DqVHqsNe.js"
+    "/build/assets/List-C7yqu-dV.js"
   ],
   "resources/js/Pages/ExternalServiceConfig/Partials/DeleteForm.tsx": [
     "/build/assets/DeleteForm-Be59WHlF.js"
@@ -130,19 +118,19 @@
     "/build/assets/Form-CSKANDf0.js"
   ],
   "resources/js/Pages/LandingCategory.tsx": [
-    "/build/assets/LandingCategory-DQN5_aZ5.js",
+    "/build/assets/LandingCategory-BxbW1Pth.js",
     "/build/assets/pagination-D8Wd3hRX.css"
   ],
   "resources/js/Pages/LandingPage.tsx": [
-    "/build/assets/LandingPage-IGweaRrT.js",
+    "/build/assets/LandingPage-BnSDqKQk.js",
     "/build/assets/pagination-D8Wd3hRX.css"
   ],
   "resources/js/Pages/LandingPageQNA.tsx": [
-    "/build/assets/LandingPageQNA-Ccpchgdd.js",
+    "/build/assets/LandingPageQNA-COoV7LIi.js",
     "/build/assets/pagination-D8Wd3hRX.css"
   ],
   "resources/js/Pages/Language/List.tsx": [
-    "/build/assets/List-DuWcp3K2.js"
+    "/build/assets/List-ClvkbO3G.js"
   ],
   "resources/js/Pages/Language/Partials/DeleteForm.tsx": [
     "/build/assets/DeleteForm-ChVrLjEf.js"
@@ -151,7 +139,7 @@
     "/build/assets/Form-CQYnd9rA.js"
   ],
   "resources/js/Pages/LevelOfParticipant/List.tsx": [
-    "/build/assets/List-BZM6iJv-.js"
+    "/build/assets/List-CD1Sjzf0.js"
   ],
   "resources/js/Pages/LevelOfParticipant/Partials/DeleteLevelOfParticipant.tsx": [
     "/build/assets/DeleteLevelOfParticipant-BcwG7lZ0.js"
@@ -160,7 +148,7 @@
     "/build/assets/LevelOfParticipantForm-Bi6COmrd.js"
   ],
   "resources/js/Pages/PageSection/List.tsx": [
-    "/build/assets/List-CBsAwc8t.js"
+    "/build/assets/List-RdUF9X-E.js"
   ],
   "resources/js/Pages/PageSection/Partials/DeleteForm.tsx": [
     "/build/assets/DeleteForm-RLPMoSsG.js"
@@ -169,19 +157,19 @@
     "/build/assets/Form-DvzIHEax.js"
   ],
   "resources/js/Pages/Participant/Detail.tsx": [
-    "/build/assets/Detail-Cdql8OHk.js"
+    "/build/assets/Detail-B7yR8T5W.js"
   ],
   "resources/js/Pages/Participant/List.tsx": [
-    "/build/assets/List-r7vtd2FY.js"
+    "/build/assets/List-DURCCtJw.js"
   ],
   "resources/js/Pages/Participant/Partials/DeleteParticipant.tsx": [
     "/build/assets/DeleteParticipant-DxRUmp79.js"
   ],
   "resources/js/Pages/Participant/Partials/ParticipantForm.tsx": [
-    "/build/assets/ParticipantForm-CnvJcrJM.js"
+    "/build/assets/ParticipantForm-C5bp77BJ.js"
   ],
   "resources/js/Pages/Profile/Edit.tsx": [
-    "/build/assets/Edit-Bejz37VI.js"
+    "/build/assets/Edit-ruh8S8B7.js"
   ],
   "resources/js/Pages/Profile/Partials/DeleteUserForm.tsx": [
     "/build/assets/DeleteUserForm-Lju8mylQ.js"
@@ -196,7 +184,7 @@
     "/build/assets/UpdateProfileInformationForm-CA0_yiXA.js"
   ],
   "resources/js/Pages/QuestionAndAnswer/List.tsx": [
-    "/build/assets/List-DCrPm2g3.js"
+    "/build/assets/List-BX9HoP4j.js"
   ],
   "resources/js/Pages/QuestionAndAnswer/Partials/DeleteForm.tsx": [
     "/build/assets/DeleteForm-Dxsv2Yqn.js"
@@ -208,19 +196,19 @@
     "/build/assets/Register-l0sNRNKZ.js"
   ],
   "resources/js/Pages/Slider/List.tsx": [
-    "/build/assets/List-COyt-a82.js"
+    "/build/assets/List-FWNLbuID.js"
   ],
   "resources/js/Pages/Slider/Partials/DeleteSlider.tsx": [
     "/build/assets/DeleteSlider-_ZyhWxgk.js"
   ],
   "resources/js/Pages/Slider/Partials/SliderForm.tsx": [
-    "/build/assets/SliderForm-B-olkW-n.js"
+    "/build/assets/SliderForm-Bf_bHyzT.js"
   ],
   "resources/js/Pages/Users/Edit.tsx": [
-    "/build/assets/Edit-IybBG2tq.js"
+    "/build/assets/Edit-BonXmOZw.js"
   ],
   "resources/js/Pages/Users/List.tsx": [
-    "/build/assets/List-kqzxscDO.js"
+    "/build/assets/List-CoBPMnMd.js"
   ],
   "resources/js/Pages/Users/Partials/AdminDeleteUserForm.tsx": [
     "/build/assets/AdminDeleteUserForm-dhuAKa3P.js"
@@ -232,14 +220,14 @@
     "/build/assets/CreateUserForm-uIq4C2VE.js"
   ],
   "resources/js/Pages/Users/Partials/UpdateUserForm.tsx": [
-    "/build/assets/UpdateUserForm-CCt-MlQv.js"
+    "/build/assets/UpdateUserForm-BV9YRP2P.js"
   ],
   "resources/js/Pages/Welcome.tsx": [
     "/build/assets/Welcome-BqiWpI5K.js"
   ],
   "resources/js/ssr.tsx": [],
   "resources/js/utils/date.ts": [
-    "/build/assets/UpdateUserForm-CCt-MlQv.js"
+    "/build/assets/UpdateUserForm-BV9YRP2P.js"
   ],
   "resources/js/utils/useFilterTable.ts": [
     "/build/assets/TableContent-zRVHdZtT.js"
