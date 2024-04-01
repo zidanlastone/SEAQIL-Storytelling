@@ -63,9 +63,9 @@ export default function RegisterParticipant({
     // partisipasi lomba
     title: '',
     payment_receipt: undefined,
-    category_id: 0,
-    language_id: 0,
-    level_of_participant_id: 0,
+    category_id: 1,
+    language_id: 1,
+    level_of_participant_id: 1,
   });
 
   useEffect(() => {
@@ -359,9 +359,11 @@ export default function RegisterParticipant({
               <SelectInput
                 className="w-full"
                 id="category_id"
+                required
                 onChange={(e) => {
                   setData('category_id', parseInt(e.target.value))
                 }}>
+                <option>Pilih Opsi</option>
                 {combo_category.map(item => (
                   <option value={item.id} key={item.id} className="w-full" selected={data.category_id == item.id} >{item.value}</option>
                 ))}
@@ -378,9 +380,11 @@ export default function RegisterParticipant({
               <SelectInput
                 className="w-full"
                 id="language_id"
+                required
                 onChange={(e) => {
                   setData('language_id', parseInt(e.target.value))
                 }}>
+                <option>Pilih Opsi</option>
                 {combo_languages.map(item => (
                   <option value={item.id} key={item.id} className="min-w-full" selected={data.language_id == item.id}>{item.value}</option>
                 ))}
@@ -396,9 +400,11 @@ export default function RegisterParticipant({
               <SelectInput
                 className="w-full"
                 id="level_of_participant_id"
+                required
                 onChange={(e) => {
                   setData('level_of_participant_id', parseInt(e.target.value))
                 }}>
+                <option>Pilih Opsi</option>
                 {combo_level_of_participants.map(item => (
                   <option value={item.id} key={item.id} className="w-full" selected={data.level_of_participant_id == item.id}>{item.value}</option>
                 ))}
