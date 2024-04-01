@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import { Category, ExternalServiceConfig, PageProps, Roles } from '@/types';
+import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useState } from 'react';
 
@@ -12,7 +13,7 @@ type ExternalServiceConfigInsert = Omit<ExternalServiceConfig, 'id'>
 
 function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: ExternalServiceConfig, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<ExternalServiceConfigInsert>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<ExternalServiceConfigInsert>({
     service_name: item?.service_name || '',
     protocol: item?.protocol || '',
     host: item?.host || '',
@@ -36,7 +37,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -148,6 +149,16 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

@@ -23,6 +23,8 @@ type CreationProps = {
 
 export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
 
+  console.log(creations, creation);
+
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });

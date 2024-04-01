@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import { Category, Language, LevelOfParticipant, PageProps, Participant, Roles, User } from '@/types';
+import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useMemo, useState } from 'react';
 
@@ -41,7 +42,7 @@ function ParticipantForm({
   level_of_participants
 }: ParticipantFormProps) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<ParticipantInsert>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<ParticipantInsert>({
     user_id: item?.user_id || null,
     payment_receipt: undefined,
     status_verifikasi: item?.status_verifikasi as Participant['status_verifikasi'] || "0",
@@ -63,7 +64,7 @@ function ParticipantForm({
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -229,6 +230,16 @@ function ParticipantForm({
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import { Category, ExternalServiceConfig, Language, PageProps, PageSection, QuestionAndAnswer, Roles } from '@/types';
+import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useMemo, useState } from 'react';
 
@@ -20,7 +21,7 @@ type PageSectionProps = {
 
 function CategoryForm({ onComplete, className, item, mode = 'create', languages = [] }: PageSectionProps) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<PageSectionInsert>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<PageSectionInsert>({
     language_id: item?.language_id || 0,
     section: item?.section || '',
     content: item?.content || '',
@@ -40,7 +41,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -101,6 +102,16 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
 
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

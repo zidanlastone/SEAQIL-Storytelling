@@ -36,8 +36,7 @@ function SliderForm({ onComplete, className, item, mode = 'create' }: { onComple
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
-        console.log('wasSuccessful', wasSuccessful, typeof onComplete == 'function')
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])

@@ -33,7 +33,7 @@ class CreationController extends Controller
             'participant.language' => function ($query) {
                 $query->select('id', 'name');
             },
-        ]);
+        ])->has('participant');
 
         // dd($creations->first()->participant->user->id);
 

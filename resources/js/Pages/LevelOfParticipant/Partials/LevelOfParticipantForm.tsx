@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { LevelOfParticipant } from '@/types';
+import { Transition } from '@headlessui/react';
 import {  useForm } from '@inertiajs/react';
 import { FormEventHandler, useEffect } from 'react';
 
@@ -13,7 +14,7 @@ export type InsertLevelOfParticipant = {
 
 function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: LevelOfParticipant, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<InsertLevelOfParticipant>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<InsertLevelOfParticipant>({
     level_name: item?.level_name || '',
     description: item?.description || ''
   });
@@ -30,7 +31,7 @@ function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -69,6 +70,16 @@ function LevelOfParticipantForm({ onComplete, className, item, mode = 'create' }
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

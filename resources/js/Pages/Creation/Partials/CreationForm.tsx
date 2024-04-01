@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Creation } from '@/types';
+import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import React, { FormEventHandler, useEffect } from 'react'
 
@@ -14,7 +15,7 @@ type CreationInsert = {
 
 function CreationForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Creation, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<CreationInsert>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<CreationInsert>({
     title: item?.title as string || 'Karya 1',
     upload_location: item?.upload_location as string || '',
     upload_status: item?.upload_status as string || '0'
@@ -32,9 +33,8 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
 
   useEffect(() => {
     if (wasSuccessful) {
-      console.log('wasSuccessful', wasSuccessful);
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -56,6 +56,7 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
             autoComplete="participant_name"
             isFocused={true}
             disabled
+            readOnly
           />
         </div>
 
@@ -103,6 +104,16 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

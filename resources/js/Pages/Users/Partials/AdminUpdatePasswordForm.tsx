@@ -73,17 +73,16 @@ function AdminUpdatePasswordForm({className, user}: {className?: string, user: U
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
+                <Transition
+                    show={recentlySuccessful}
+                    enter="transition ease-in-out"
+                    enterFrom="opacity-0"
+                    leave="transition ease-in-out"
+                    leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
-                    </Transition>
+                    <p className="text-sm text-gray-600">Saved.</p>
+                </Transition>
+                <PrimaryButton disabled={processing}>Delete</PrimaryButton>
                 </div>
             </form>
         </section>

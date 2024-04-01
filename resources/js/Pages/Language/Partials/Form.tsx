@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Language } from '@/types';
+import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useEffect } from 'react';
 
@@ -11,7 +12,7 @@ type LanguageInsert = Omit<Language, 'id'>
 
 function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Language, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<LanguageInsert>({
+  const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<LanguageInsert>({
     name: item?.name || '',
     code: item?.code || '',
   });
@@ -30,7 +31,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -71,6 +72,16 @@ function CategoryForm({ onComplete, className, item, mode = 'create' }: { onComp
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600 mr-2">Saved.</p>
+            </Transition>
+          
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

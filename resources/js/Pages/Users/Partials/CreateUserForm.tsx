@@ -4,12 +4,13 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import { PageProps, Roles } from '@/types';
+import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useState } from 'react';
 
 function CreateUserForm({ onComplete, className, roles }: { onComplete?: () => void, className?: string, roles?: Roles[] }) {
 
-  const { data, setData, post, processing, errors, reset, wasSuccessful } = useForm({
+  const { data, setData, post, processing, errors, reset, wasSuccessful, recentlySuccessful } = useForm({
     name: '',
     email: '',
     password: '',
@@ -31,7 +32,7 @@ function CreateUserForm({ onComplete, className, roles }: { onComplete?: () => v
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
@@ -133,9 +134,16 @@ function CreateUserForm({ onComplete, className, roles }: { onComplete?: () => v
         )}
 
         <div className="flex items-center justify-end mt-4">
-          <PrimaryButton className="ms-4" disabled={processing}>
-            Tambah Data
-          </PrimaryButton>
+          <Transition
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600">Saved.</p>
+          </Transition>
+          <PrimaryButton disabled={processing}>Delete</PrimaryButton>
         </div>
       </form>
     </section>

@@ -36,10 +36,11 @@ function AdminDeleteUserForm({ className, user, onComplete }: { className?: stri
   useEffect(() => {
     if (wasSuccessful) {
       if (typeof onComplete == 'function') {
-        onComplete();
+        setTimeout(onComplete, 2000)
       }
     }
   }, [wasSuccessful])
+
 
   return (
     <section className={className}>
@@ -83,17 +84,16 @@ function AdminDeleteUserForm({ className, user, onComplete }: { className?: stri
           <InputError message={errors.email_confirmation} className="mt-2" />
         </div>
         <div className="flex items-center gap-4">
-          <PrimaryButton disabled={processing}>Delete</PrimaryButton>
-
           <Transition
-            show={recentlySuccessful}
-            enter="transition ease-in-out"
-            enterFrom="opacity-0"
-            leave="transition ease-in-out"
-            leaveTo="opacity-0"
-          >
-            <p className="text-sm text-gray-600">Saved.</p>
+              show={recentlySuccessful}
+              enter="transition ease-in-out"
+              enterFrom="opacity-0"
+              leave="transition ease-in-out"
+              leaveTo="opacity-0"
+            >
+              <p className="text-sm text-gray-600">Saved.</p>
           </Transition>
+          <PrimaryButton disabled={processing}>Delete</PrimaryButton>
         </div>
       </form>
     </section>
