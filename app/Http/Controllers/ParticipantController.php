@@ -98,7 +98,9 @@ class ParticipantController extends Controller
     public function show(Participant $participant)
     {
         //
-        $participant = Participant::find($participant->id)->with([
+
+        // dd($participant);
+        $participant = Participant::where(['id' => $participant->id])->with([
             'user',
             'category',
             'language',
