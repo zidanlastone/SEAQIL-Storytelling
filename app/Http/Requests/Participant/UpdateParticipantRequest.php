@@ -28,7 +28,7 @@ class UpdateParticipantRequest extends FormRequest
             'user_id' => ['required'],
             'category_id' => ['required'],
             'language_id' => ['required'],
-            'level_of_participant_id' => ['required'],
+            'level_of_participant_id' => ['nullable'],
             'payment_receipt' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'certificate' => ['nullable'],
             'status_verifikasi' => ['required'],

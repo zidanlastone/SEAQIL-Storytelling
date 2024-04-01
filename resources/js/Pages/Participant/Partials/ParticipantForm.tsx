@@ -144,7 +144,7 @@ function ParticipantForm({
               setData('category_id', value.id)
             }}
             value={selectedCategory} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
+          <InputError message={errors.category_id} className="mt-2" />
         </div>
 
         <div>
@@ -157,7 +157,7 @@ function ParticipantForm({
               setData('language_id', value.id)
             }}
             value={selectedLanguage} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
+          <InputError message={errors.language_id} className="mt-2" />
         </div>
 
         <div>
@@ -170,7 +170,7 @@ function ParticipantForm({
               setData('level_of_participant_id', value.id)
             }}
             value={selectedLOP} />
-          <InputError message={errors.payment_receipt} className="mt-2" />
+          <InputError message={errors.level_of_participant_id} className="mt-2" />
         </div>
 
         <div>
