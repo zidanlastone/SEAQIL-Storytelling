@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
                 ->lineIf($notifiable->profile != null, 'Kata Sandi: ' . $notifiable?->profile->pwd)
                 ->line('Silahkan Klik Tombol berikut untuk melakukan verifikasi Email')
                 ->action('Verifikasi Alamat Surel', $url)
-                ->line('Silakan bergabung juga ke grup Whatsapp <a href="https://bit.ly/PesertaKompetisiMendongeng2024" target="_blank">https://bit.ly/PesertaKompetisiMendongeng2024</a> dan telegram <a href="https://bit.ly/PesertaKompetisiMendongeng2024_Tele" target="_blank" >https://bit.ly/PesertaKompetisiMendongeng2024_Tele</a> untuk mendapatkan update informasi terbaru.')
+                ->line('Silakan bergabung juga ke grup Whatsapp [https://bit.ly/PesertaKompetisiMendongeng2024](https://bit.ly/PesertaKompetisiMendongeng2024) dan telegram  [https://bit.ly/PesertaKompetisiMendongeng2024_Tele](https://bit.ly/PesertaKompetisiMendongeng2024_Tele) untuk mendapatkan update informasi terbaru.')
                 ->line('Terima kasih');
         });
     }
