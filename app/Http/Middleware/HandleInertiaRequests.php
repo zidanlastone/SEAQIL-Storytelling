@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
                 $where['language_id'] = $language->id;
         }
 
-        
+
         if ($user) {
             $roles = $user->roles()->pluck('name');
             $menus = Menu::whereIn('roles', $roles)
@@ -62,7 +62,8 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
                 'menus' => $menus,
-                'roles' => $roles
+                'roles' => $roles,
+                'can' => []
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

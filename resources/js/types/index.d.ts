@@ -32,7 +32,8 @@ export interface User {
     password: string,
     email_verified_at?: string,
     created_at?: string,
-    profile?: Profile
+    profile?: Profile,
+    roles?: string[]
 }
 
 export interface Roles {
@@ -81,7 +82,7 @@ export interface Participant {
     status_verifikasi: "0" | "1",
     creation?: Creation
     payment_receipt_path?: string,
-    reject_reason?:string
+    reject_reason?: string
 }
 
 export interface LevelOfParticipant {

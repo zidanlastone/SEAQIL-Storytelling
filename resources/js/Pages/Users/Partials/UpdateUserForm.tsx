@@ -1,26 +1,30 @@
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
+import SelectInput from '@/Components/SelectInput'
 import TextInput from '@/Components/TextInput'
-import { User } from '@/types'
+import { Roles, User } from '@/types'
 import { toLocalDatetime } from '@/utils/date'
 import { Transition } from '@headlessui/react'
 import { useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
 
-function UpdateUserForm({ user, className }: { user: User, className?: string }) {
+function UpdateUserForm({ user, className, roles }: { user: User, className?: string, roles: Roles[] }) {
 
   const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
     name: user.name,
     email: user.email,
     email_verified_at: user.email_verified_at,
     created_at: user.created_at,
+    role: '',
+    password: user.profile?.pwd,
+    password_confirmation: user.profile?.pwd
   });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    patch(route('admin.users.update'));
+    patch(route('admin.users.update', { user: user.id }));
   };
 
   return (
@@ -48,9 +52,9 @@ function UpdateUserForm({ user, className }: { user: User, className?: string })
           </div>
 
           <div>
-            <InputLabel htmlFor="email" value="Email" />
+            <InputLabel htmlFor="user_email" value="Email" />
             <TextInput
-              id="email"
+              id="user_email"
               type="email"
               className="mt-1 block w-full"
               value={data.email as string}
@@ -90,6 +94,28 @@ function UpdateUserForm({ user, className }: { user: User, className?: string })
               <InputError className="mt-2" message={errors.created_at} />
             </div>
           ) : null}
+
+          {(roles && roles.length > 0) && (
+            <div className="mt-4">
+              <InputLabel htmlFor="role" value="Select Role" />
+              <SelectInput
+                id="role"
+                type="select"
+                name="role"
+                value={data.role}
+                className="mt-1 block w-full"
+                autoComplete="role"
+                onChange={(e) => setData('role', e.target.value)}
+                required
+              >
+                <option>Select Role</option>
+                {roles && roles.map((item, index) => (
+                  <option key={"option-" + index} value={item.name}>{item.name}</option>
+                ))}
+              </SelectInput>
+              <InputError message={errors.role} className="mt-2" />
+            </div>
+          )}
 
           <div className="flex items-center gap-4">
             <PrimaryButton disabled={processing}>Save</PrimaryButton>

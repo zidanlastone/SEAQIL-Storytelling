@@ -20,7 +20,7 @@ type DashboardProps = {
 
 export default function Dashboard({ auth, participation, counts }: PageProps<DashboardProps>) {
 
-  // console.log(typeof participation?.reject_reason)
+  console.log(!participation?.reject_reason, participation?.reject_reason != null, (participation?.reject_reason !== "" || participation?.reject_reason != null))
   return (
     <AdminLayout
       roles={auth.roles}
@@ -84,7 +84,7 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       <td>
                         <div className="flex flex-row items-center">
                           :
-                          <ConditionalRender condition={participation?.status_verifikasi == "0" && (participation?.reject_reason == null || participation?.reject_reason == "" ) }>
+                          <ConditionalRender condition={(participation?.status_verifikasi == "0" && !participation?.reject_reason) as boolean}>
                             <div className="flex flex-row text-yellow-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -93,12 +93,12 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                             </div>
                           </ConditionalRender>
 
-                          <ConditionalRender condition={participation?.reject_reason != "" || participation?.reject_reason != null || participation?.reject_reason != undefined}>
+                          <ConditionalRender condition={(participation?.status_verifikasi == "0" && participation?.reject_reason) as boolean}>
                             <div className="flex flex-row text-red-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
-                              <p>Ditolak, {participation?.reject_reason}</p>
+                              <p>Ditolak</p>
                             </div>
                           </ConditionalRender>
 
@@ -113,6 +113,19 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                         </div>
                       </td>
                     </tr>
+
+                    <ConditionalRender condition={(participation?.status_verifikasi == "0" && participation?.reject_reason) as boolean}>
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div className="flex flex-row text-red-500 items-center">
+                            *
+                            <p className='ml-2'>{participation?.reject_reason}</p>
+                          </div>
+                        </td>
+                      </tr>
+                    </ConditionalRender>
+
                     <tr>
                       <td>
                         <p>Status Unggah Karya</p>

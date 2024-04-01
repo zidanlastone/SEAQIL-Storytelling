@@ -60,6 +60,8 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
     }),
   ];
 
+  console.log(users)
+
   return (
     <AdminLayout
       roles={auth.roles}
@@ -70,14 +72,14 @@ export default function List({ auth, users = [], roles = [] }: PageProps<{ users
 
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 space-y-6">
-          
-        <TableContent <User> 
-          data={users} 
-          columns={columns} 
-          headerAction={
-            <div className="md:mx-2 my-2 order-first">
-              <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-            </div>} 
+
+          <TableContent <User>
+            data={users}
+            columns={columns}
+            headerAction={
+              <div className="md:mx-2 my-2 order-first">
+                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+              </div>}
           />
 
         </div>

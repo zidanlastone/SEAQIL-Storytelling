@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\TranslationLoader\LanguageLine;
 
 class DatabaseSeeder extends Seeder
 {
@@ -158,6 +159,16 @@ class DatabaseSeeder extends Seeder
                 'level_name' => 'Lainnya',
                 'description' => 'Tingkatan yang dikhususkan untuk khalayak umum',
                 'is_deleted' => '0'
+            ],
+        ]);
+
+        LanguageLine::create([
+            'group' => 'validation',
+            'key' => 'required',
+            'text' => [
+                'en' => 'This is a required field',
+                'nl' => 'Dit is een verplicht veld',
+                'id' => 'Harap isi kolom ini'
             ],
         ]);
 

@@ -22,8 +22,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
-        $roles = DB::table('roles')->get(); 
+        $users = User::get();
+        $roles = DB::table('roles')->get();
 
         return Inertia::render('Users/List', [
             'users' => $users,
@@ -38,8 +38,8 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
             'email_verified_at' => \Carbon\Carbon::now()
         ]);
@@ -65,8 +65,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        $roles = DB::table('roles')->get();
+        $user = User::where(['id' => $user->id])->with(['profile'])->first();
+
         return Inertia::render('Users/Edit', [
             'user' => $user,
+            'roles' => $roles,
             'status' => session('status'),
         ]);
     }
@@ -76,12 +80,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->name     = $request->name;
-        $user->email    = $request->email;
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        if(!$user->hasRole($request->role)){
+        if (!$user->hasRole($request->role)) {
             $user->assignRole($request->role);
         }
 
@@ -107,7 +111,7 @@ class UserController extends Controller
     public function destroy(DeleteUserRequest $request, User $user)
     {
 
-        if($request->validated()){
+        if ($request->validated()) {
             $user->delete();
             // TODO: melakukan notifikasi terhadap data yang dihapus
 
