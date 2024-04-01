@@ -154,6 +154,11 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Tingkatan yang dikhususkan untuk sekolah menegah atas kelas 12',
                 'is_deleted' => '0'
             ],
+            [
+                'level_name' => 'Lainnya',
+                'description' => 'Tingkatan yang dikhususkan untuk khalayak umum',
+                'is_deleted' => '0'
+            ],
         ]);
 
         $this->call([

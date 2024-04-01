@@ -12,6 +12,7 @@ import CreateForm from "./Partials/Form";
 import DeleteForm from "./Partials/DeleteForm";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { fuzzyFilter } from "@/utils/useFilterTable";
+import TableContent from "@/Components/Table/TableContent";
 
 export default function List({ auth, questions = [] }: PageProps<{ questions: QuestionAndAnswer[] }>) {
 
@@ -20,8 +21,6 @@ export default function List({ auth, questions = [] }: PageProps<{ questions: Qu
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: QuestionAndAnswer, show: boolean }>({ item: undefined, show: false });
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: QuestionAndAnswer, show: boolean }>({ item: undefined, show: false });
-
-  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const columnHelper = createColumnHelper<QuestionAndAnswer>();
 
@@ -62,21 +61,6 @@ export default function List({ auth, questions = [] }: PageProps<{ questions: Qu
     }),
   ], []);
 
-  const table = useReactTable({
-    columns,
-    data: questions,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
-    state: {
-      globalFilter
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: fuzzyFilter,
-  });
-
   return (
     <AdminLayout
       roles={auth.roles}
@@ -87,34 +71,16 @@ export default function List({ auth, questions = [] }: PageProps<{ questions: Qu
 
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
-          <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
+          
+        <TableContent <QuestionAndAnswer> 
+          data={questions} 
+          columns={columns} 
+          headerAction={
+            <div className="md:mx-2 my-2 order-first">
+              <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+            </div>} 
+          />
 
-            <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
-              <div className="md:mx-2 my-2 order-first">
-                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-              </div>
-              <div className="md:mx-2 my-2 order-last">
-                <DebouncedInput
-                  value={globalFilter}
-                  onChange={value => setGlobalFilter(String(value))}
-                  className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Data Global"
-                />
-              </div>
-            </div>
-
-            <div className="w-full overflow-x-auto">
-              <table className="table-auto w-full">
-                <thead>
-                  {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
-                </thead>
-                <tbody className="bg-white">
-                  {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
-                </tbody>
-              </table>
-            </div>
-
-          </section>
         </div>
       </div>
 

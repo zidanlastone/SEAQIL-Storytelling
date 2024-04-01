@@ -12,6 +12,7 @@ import SliderForm from "./Partials/SliderForm";
 import DeleteSlider from "./Partials/DeleteSlider";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { fuzzyFilter } from "@/utils/useFilterTable";
+import TableContent from "@/Components/Table/TableContent";
 
 export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider[] }>) {
 
@@ -20,8 +21,6 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Slider, show: boolean }>({ item: undefined, show: false });
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Slider, show: boolean }>({ item: undefined, show: false });
-
-  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const columnHelper = createColumnHelper<Slider>();
 
@@ -74,20 +73,6 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
     }),
   ], []);
 
-  const table = useReactTable({
-    columns,
-    data: sliders,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
-    state: {
-      globalFilter
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: fuzzyFilter,
-  });
 
   return (
     <AdminLayout
@@ -99,34 +84,16 @@ export default function List({ auth, sliders = [] }: PageProps<{ sliders: Slider
 
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
-          <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
-            <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
-              <div className="md:mx-2 my-2 order-first">
-                <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-              </div>
-              <div className="md:mx-2 my-2 order-last">
-                <DebouncedInput
-                  value={globalFilter}
-                  onChange={value => setGlobalFilter(String(value))}
-                  className="px-2 py-2 font-sm shadow border rounded"
-                  placeholder="Cari Data Global"
-                />
-              </div>
-            </div>
+        <TableContent <Slider> 
+          data={sliders} 
+          columns={columns} 
+          headerAction={
+            <div className="md:mx-2 my-2 order-first">
+              <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+            </div>} 
+          />
 
-            <div className="w-full overflow-x-auto">
-              <table className="table-auto w-full">
-                <thead>
-                  {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
-                </thead>
-                <tbody className="bg-white">
-                  {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
-                </tbody>
-              </table>
-            </div>
-
-          </section>
         </div>
       </div>
 

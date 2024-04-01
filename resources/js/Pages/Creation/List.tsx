@@ -14,6 +14,7 @@ import DeleteSlider from "./Partials/DeleteCreation";
 import AdminLayout from "@/Layouts/AdminLayout";
 import ConditionalRender from "@/Components/ConditionalRender";
 import { fuzzyFilter } from "@/utils/useFilterTable";
+import TableContent from "@/Components/Table/TableContent";
 
 type CreationProps = {
   creations: Creation[],
@@ -34,27 +35,27 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
 
   const [globalFilter, setGlobalFilter] = useState<string>('');
 
-  const columnHelper = createColumnHelper<any>();
+  const columnHelper = createColumnHelper<Creation>();
 
   const columns = useMemo(() => [
     columnHelper.accessor(row => row.id, {
       header: "No", cell: info => parseInt(info.row.id) + 1,
     }),
-    columnHelper.accessor(row => row.participant.user.name, {
+    columnHelper.accessor(row => row?.participant?.user?.name, {
       header: 'Nama Peserta',
       id: 'table-header-participant_user',
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
     }),
-    columnHelper.accessor(row => row.participant.category.category_name, {
+    columnHelper.accessor(row => row?.participant?.category?.category_name, {
       header: 'Kategori Lomba',
       id: 'table-header-category-category_name',
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
     }),
-    columnHelper.accessor(row => row.participant.language.name, {
+    columnHelper.accessor(row => row?.participant?.language?.name, {
       header: 'Bahasa',
       id: 'table-header-category-language_name',
       cell: info => info.getValue(),
@@ -69,11 +70,11 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
       filterFn: 'includesString',
     }),
 
-    columnHelper.accessor(row => row.upload_status, {
+    columnHelper.accessor(row => row?.upload_status, {
       header: 'Status Upload',
       id: 'table-header-description',
       cell: info => {
-        if (info.getValue() == 1) {
+        if (info.getValue() == "1") {
           return <span className="px-3 py-1 rounded bg-green-400 shadow">Sudah</span>
         } else {
           return <span className="px-3 py-1 rounded bg-yellow-400 shadow">Belum</span>
@@ -122,21 +123,6 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
     }),
   ], []);
 
-  const table = useReactTable({
-    columns,
-    data: creations,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
-    state: {
-      globalFilter
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: fuzzyFilter,
-  });
-
   return (
     <AdminLayout
       roles={auth.roles}
@@ -147,48 +133,29 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
 
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
-          <section className="p-4 sm:p-8 w-full bg-white shadow sm:rounded-lg">
 
-            <ConditionalRender condition={auth.roles.includes('participant')}>
-              <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
-              <ul className="list-disc ml-4 my-4">
-                <li>Durasi maksimal 8 menit</li>
-                <li>Resolusi video minimal 1920x1080 piksel</li>
-              </ul>
+        <ConditionalRender condition={auth.roles.includes('participant')}>
+          <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
+          <ul className="list-disc ml-4 my-4">
+            <li>Durasi maksimal 8 menit</li>
+            <li>Resolusi video minimal 1920x1080 piksel</li>
+          </ul>
 
-              <ConditionalRender condition={creation != undefined} >
-                <UploadCreationForm item={creation} mode="update" />
-              </ConditionalRender>
-            </ConditionalRender>
+          <ConditionalRender condition={creation != undefined} >
+            <UploadCreationForm item={creation} mode="update" />
+          </ConditionalRender>
+        </ConditionalRender>
 
-            <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
-              <div className="my-3 md:mx-2 flex flex-col md:flex-row md:justify-between">
-                {/* <div className="md:mx-2 my-2 order-first">
-                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Submit Data</PrimaryButton>
-                </div> */}
-                <div className="md:mx-2 my-2 order-last">
-                  <DebouncedInput
-                    value={globalFilter}
-                    onChange={value => setGlobalFilter(String(value))}
-                    className="px-2 py-2 font-sm shadow border rounded"
-                    placeholder="Cari Data Global"
-                  />
-                </div>
-              </div>
-
-              <div className="w-full overflow-x-auto">
-                <table className="table-auto w-full">
-                  <thead>
-                    {table.getHeaderGroups().map((headerGroup, index) => <RowHeader key={headerGroup.id + '-' + index} {...headerGroup} />)}
-                  </thead>
-                  <tbody className="bg-white">
-                    {table.getRowModel().rows.map(row => <RowContent key={row.id} {...row} />)}
-                  </tbody>
-                </table>
-              </div>
-            </ConditionalRender>
-
-          </section>
+        <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
+        <TableContent <Creation> 
+          data={creations} 
+          columns={columns} 
+          headerAction={
+            <div className="md:mx-2 my-2 order-first">
+              <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+            </div>} 
+          />
+        </ConditionalRender>
         </div>
       </div>
 
