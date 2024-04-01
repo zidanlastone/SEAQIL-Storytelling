@@ -30,7 +30,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
       <div className="bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
           <SponsorHeader />
-          <nav className="flex items-center justify-between px-6 pt-2 lg:px-8" aria-label="Global">
+          <nav className="flex items-center justify-between px-6 md:py-2 lg:px-8" aria-label="Global">
             <div className="flex lg:hidden">
               <button
                 type="button"
@@ -46,7 +46,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
             <div className="hidden lg:flex lg:gap-x-12">
               <a href="#" className="-m-1.5 p-1.5 leading-6">
                 <span className="sr-only">SEAQIL Storytelling</span>
-                {/* <ApplicationLogo className="h-8 w-auto" /> */}
               </a>
               {navigation.map((item) => (
                 <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900">
@@ -73,12 +72,6 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
                   >
                     Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
-                  {/* <Link
-                    href={route('register')}
-                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
-                  >
-                    Register
-                  </Link> */}
                   <Link
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
@@ -91,15 +84,14 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
           </nav>
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
             <div className="fixed inset-0 z-50" />
-            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-8 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">SEAQIL Storytelling</span>
-                  {/* <ApplicationLogo className="h-8 w-auto" /> */}
                 </a>
                 <button
                   type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                  className="-m-3.5 rounded-md p-2.5 text-gray-700"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="sr-only">Close menu</span>
@@ -119,37 +111,33 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
                       </a>
                     ))}
                   </div>
-                  {auth.user ? (
-                    <div className="py-6">
-                      <Link
-                        href={route('dashboard')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Dashboard
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="py-6">
-                      <Link
-                        href={route('login')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Log in
-                      </Link>
-                      {/* <Link
-                        href={route('register')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Register
-                      </Link> */}
-                      <Link
-                        href={route('register.participant')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Registrasi Peserta
-                      </Link>
-                    </div>
-                  )}
+                  <div className="w-4/5 -ml-4">
+                    {auth.user ? (
+                      <div className="py-6">
+                        <Link
+                          href={route('dashboard')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Dashboard
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="py-6">
+                        <Link
+                          href={route('login')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Log in
+                        </Link>
+                        <Link
+                          href={route('register.participant')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Registrasi Peserta
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </Dialog.Panel>

@@ -38,7 +38,7 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
       <div className="bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
           <SponsorHeader />
-          <nav className="flex items-center justify-between px-6 pt-2 lg:px-8" aria-label="Global">
+          <nav className="flex items-center justify-between px-6 md:py-2 lg:px-8" aria-label="Global">
             <div className="flex lg:hidden">
               <button
                 type="button"
@@ -92,14 +92,14 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
           </nav>
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
             <div className="fixed inset-0 z-50" />
-            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-8 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
               <div className="flex items-center justify-between">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">SEAQIL Storytelling</span>
                 </a>
                 <button
                   type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                  className="-m-3.5 rounded-md p-2.5 text-gray-700"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="sr-only">Close menu</span>
@@ -119,31 +119,33 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                       </a>
                     ))}
                   </div>
-                  {auth.user ? (
-                    <div className="py-6">
-                      <Link
-                        href={route('dashboard')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Dashboard
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="py-6">
-                      <Link
-                        href={route('login')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Log in
-                      </Link>
-                      <Link
-                        href={route('register.participant')}
-                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                      >
-                        Registrasi Peserta
-                      </Link>
-                    </div>
-                  )}
+                  <div className="w-4/5 -ml-4">
+                    {auth.user ? (
+                      <div className="py-6">
+                        <Link
+                          href={route('dashboard')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Dashboard
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="py-6">
+                        <Link
+                          href={route('login')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Log in
+                        </Link>
+                        <Link
+                          href={route('register.participant')}
+                          className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                        >
+                          Registrasi Peserta
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </Dialog.Panel>
@@ -241,10 +243,10 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
             <h1 className="text-xl text-center font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
               Kategori Lomba
             </h1>
-            <div className="flex flex-col sm:flex-row md:flex-row flex-wrap gap-6 my-16 justify-center items-center">
+            <div className="grid grid-cols-2 md:flex md:flex-row flex-wrap gap-6 my-16 justify-center items-center">
               {categories.map(item => {
                 return (
-                  <Link key={item.id} href={route('landing.category', { category: item.id })} className="w-2/4 md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
+                  <Link key={item.id} href={route('landing.category', { category: item.id })} className="w-full md:w-1/4 bg-white shadow-md rounded-md p-4 text-center">
                     <img src={'/storage/' + item.image} alt={item.category_name} />
                   </Link>
                 )
@@ -253,22 +255,26 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
           <div className="text-left">
             <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
               Mekanisme Pelaksanaan
             </h1>
             <div className="flex flex-col md:flex-row gap-4">
-              <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
+              <div className="order-start mt-6 w-full md:w-3/4 text-md leading-8 text-gray-600 text-wrap">
 
                 {/* <div dangerouslySetInnerHTML={{ __html: mekanisme_pelaksanaan?.content }}></div> */}
 
-                <ol className="list-decimal list-inside my-6">
+                <ol className="list-decimal list-inside my-6 text-balance break-words">
                   <li>
                     Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
                   </li>
                   <li>
-                    Peserta melakukan pendaftaran kompetisi melalui laman <a href="https://kompetisimendongeng.qiteplanguage.org/register-participant" className="text-blue-400 hover:tet-blue-500" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
+                    Peserta melakukan pendaftaran kompetisi melalui laman
+                    <a href="https://kompetisimendongeng.qiteplanguage.org/register-participant" className="mx-1 text-blue-400 hover:tetx-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">
+                      https://kompetisimendongeng.qiteplanguage.org
+                    </a>
+                    dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
                   </li>
                   <li>
                     Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
@@ -279,8 +285,8 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
 
                   <li>
                     Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
-                    <ol className="list-alpha list-inside ml-4">
-                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org/login" className="text-blue-400 hover:text-blue-500" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> menggunakan email dan password yang telah didaftarkan;</li>
+                    <ol className="list-alpha list-inside ml-4 text-wrap">
+                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org/login" className="mx-1 text-blue-400 hover:text-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> menggunakan email dan password yang telah didaftarkan;</li>
                       <li>b.	Masuk ke menu “Unggah Karya”;</li>
                       <li>c.	Klik tautan unggah karya/video, kemudian unggah hasil karya ke dalam folder google drive yang telah disediakan;</li>
                       <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya;</li>

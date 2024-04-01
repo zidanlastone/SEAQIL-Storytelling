@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import { Category, PageProps, Roles, Slider } from '@/types';
+import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useState } from 'react';
 
@@ -17,7 +18,7 @@ type SliderInsert = {
 
 function SliderForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Slider, mode?: 'create' | 'update' }) {
 
-  const { data, setData, post, patch, processing, errors, wasSuccessful } = useForm<SliderInsert>({
+  const { data, setData, post, processing, errors, wasSuccessful, recentlySuccessful } = useForm<SliderInsert>({
     title: item?.title || '',
     source: undefined,
     description: item?.description || '',
@@ -112,8 +113,18 @@ function SliderForm({ onComplete, className, item, mode = 'create' }: { onComple
         </div>
 
         <div className="flex items-center justify-end mt-4">
+          <Transition
+            show={recentlySuccessful}
+            enter="transition ease-in-out"
+            enterFrom="opacity-0"
+            leave="transition ease-in-out"
+            leaveTo="opacity-0"
+          >
+            <p className="text-sm text-gray-600 mr-2">Saved.</p>
+          </Transition>
+
           <PrimaryButton className="ms-4" disabled={processing}>
-            Tambah Data
+            {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>
         </div>
       </form>
