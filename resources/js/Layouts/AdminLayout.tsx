@@ -1,11 +1,11 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 
 import { Fragment, useState } from 'react'
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
+import { Dialog, Disclosure, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import ApplicationLogo from '@/Components/ApplicationLogo'
-import { Roles, User } from '@/types'
+import { User } from '@/types'
 import { Link } from '@inertiajs/react'
 import Dropdown from '@/Components/Dropdown'
 import { NavbarCloseButton } from './Partials/NavbarCloseButton'
@@ -29,11 +29,6 @@ const filters = [
       {
         value: 'creation',
         label: 'Karya Peserta',
-        href: route('creation.index')
-      },
-      {
-        value: 'certificate',
-        label: 'Sertifikat',
         href: route('creation.index')
       },
     ],
