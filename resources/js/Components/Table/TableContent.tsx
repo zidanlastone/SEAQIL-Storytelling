@@ -3,7 +3,7 @@ import PrimaryButton from '../PrimaryButton';
 import DebouncedInput from '../DebounceInput';
 import RowContent from './RowContent';
 import RowHeader from './RowHeader';
-import { ColumnDef, ColumnFilter, PaginationState, Table, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
+import { ColumnDef, ColumnFilter, PaginationState, SortingState, Table, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { fuzzyFilter } from '@/utils/useFilterTable';
 
 type TableContentProps<T> = {
@@ -16,6 +16,7 @@ type TableContentProps<T> = {
 
 function TableContent<T>({columns, data, headerAction, columnFilters, setColumnFilters}: TableContentProps<T>) {
   const [globalFilter, setGlobalFilter] = useState('');
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
@@ -29,6 +30,7 @@ function TableContent<T>({columns, data, headerAction, columnFilters, setColumnF
       fuzzy: fuzzyFilter,
     },
     state: {
+      sorting,
       pagination,
       globalFilter,
       columnFilters: columnFilters ?? undefined
@@ -36,9 +38,11 @@ function TableContent<T>({columns, data, headerAction, columnFilters, setColumnF
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters ?? undefined,
     onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
     globalFilterFn: fuzzyFilter,
   });
   

@@ -45,13 +45,12 @@ export default function List({
 
   const [showUpdateDialog, setShowUpdateDialog] = useState<{ item?: Participant, show: boolean }>({ item: undefined, show: false });
 
-  const [globalFilter, setGlobalFilter] = useState<string>('');
-
   const columnHelper = createColumnHelper<Participant>();
 
   const columns = useMemo(() => [
     columnHelper.accessor(row => row.id, {
       header: "No", cell: info => parseInt(info.row.id) + 1,
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor(row => row.user.name, {
       header: 'Nama Partisipan',
@@ -59,6 +58,7 @@ export default function List({
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor(row => row.category?.category_name, {
       header: 'Kategori',
@@ -66,6 +66,7 @@ export default function List({
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor(row => row.language?.name, {
       header: 'Bahasa',
@@ -73,6 +74,7 @@ export default function List({
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
+      sortingFn: 'alphanumeric',
     }),
     // columnHelper.accessor(row => row.level_of_participant?.level_name, {
     //   header: 'Tingkatan Partisipan',
@@ -140,20 +142,6 @@ export default function List({
     }),
   ], []);
 
-  const table = useReactTable({
-    columns,
-    data: participants,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
-    state: {
-      globalFilter
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: fuzzyFilter,
-  });
 
   return (
     <AdminLayout
