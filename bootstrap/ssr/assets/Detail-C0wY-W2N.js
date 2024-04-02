@@ -3,16 +3,21 @@ import { I as InputLabel } from "./InputLabel-uXgJWz9w.js";
 import { T as TextInput } from "./TextInput-CL99szxP.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
 import { Head } from "@inertiajs/react";
-import "react";
+import { useState } from "react";
+import UpdateCreationTitle from "./UpdateCreationTitle-QE-bBAGk.js";
 import "@headlessui/react";
 import "@heroicons/react/24/outline";
 import "@heroicons/react/20/solid";
 import "./ConditionalRender-BsoLXbpe.js";
+import "./InputError-cRVTeK4i.js";
+import "./PrimaryButton-C-TDjBGq.js";
 function Detail({
   auth,
   participant
 }) {
   var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
+  console.log(participant);
+  const [updateMode, setUpdateMode] = useState(false);
   return /* @__PURE__ */ jsxs(
     AdminLayout,
     {
@@ -74,20 +79,23 @@ function Detail({
           ] }),
           /* @__PURE__ */ jsx("hr", {}),
           /* @__PURE__ */ jsx("div", { className: "col-span-2", children: /* @__PURE__ */ jsx("h1", { children: "Data Registrasi" }) }),
-          /* @__PURE__ */ jsx("div", { className: "col-span-2", children: /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-3 gap-4", children: [
-            /* @__PURE__ */ jsxs("div", { children: [
-              /* @__PURE__ */ jsx(InputLabel, { children: "Kategori" }),
-              /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_i = participant.category) == null ? void 0 : _i.category_name, readOnly: true })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { children: [
-              /* @__PURE__ */ jsx(InputLabel, { children: "Bahasa" }),
-              /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_j = participant.language) == null ? void 0 : _j.name, readOnly: true })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { children: [
-              /* @__PURE__ */ jsx(InputLabel, { children: "Jenjang Pendidikan" }),
-              /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_k = participant.level_of_participant) == null ? void 0 : _k.level_name, readOnly: true })
+          /* @__PURE__ */ jsxs("div", { className: "col-span-2 md:grid-cols-2", children: [
+            /* @__PURE__ */ jsx("div", { className: "mb-2", children: /* @__PURE__ */ jsx(UpdateCreationTitle, { item: participant == null ? void 0 : participant.creation, updateMode, setUpdateMode }) }),
+            /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4", children: [
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx(InputLabel, { children: "Kategori" }),
+                /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_i = participant.category) == null ? void 0 : _i.category_name, readOnly: true })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx(InputLabel, { children: "Bahasa" }),
+                /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_j = participant.language) == null ? void 0 : _j.name, readOnly: true })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx(InputLabel, { children: "Jenjang Pendidikan" }),
+                /* @__PURE__ */ jsx(TextInput, { className: "w-full", value: (_k = participant.level_of_participant) == null ? void 0 : _k.level_name, readOnly: true })
+              ] })
             ] })
-          ] }) }),
+          ] }),
           /* @__PURE__ */ jsxs("div", { className: "col-span-2", children: [
             /* @__PURE__ */ jsx(InputLabel, { children: "Bukti Pembayaran" }),
             /* @__PURE__ */ jsxs("a", { className: "justify-center", href: participant.payment_receipt_path, target: "_blank", rel: "noopener noreferrer", children: [
