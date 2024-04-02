@@ -8,7 +8,7 @@ import { Category, Creation, PageProps, Slider } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
-import UploadCreationForm from "./Partials/UploadCreationForm";
+import UploadCreationForm from './Partials/UploadCreationForm';
 import CreationForm from "./Partials/CreationForm";
 import DeleteSlider from "./Partials/DeleteCreation";
 import AdminLayout from "@/Layouts/AdminLayout";
@@ -20,7 +20,6 @@ type CreationProps = {
   creations: Creation[],
   creation?: Creation
 };
-
 
 export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
 
@@ -86,7 +85,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
       header: 'Tautan karya',
       id: 'table-header-upload_location',
       cell: (info) => {
-        if(info.getValue() != null){
+        if (info.getValue() != null) {
           return (
             <div key={info.getValue()}>
               <button type="button" onClick={() => {
@@ -139,28 +138,28 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
       <div className="py-2">
         <div className="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
 
-        <ConditionalRender condition={auth.roles.includes('participant')}>
-          <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
-          <ul className="list-disc ml-4 my-4">
-            <li>Durasi maksimal 8 menit</li>
-            <li>Resolusi video minimal 1920x1080 piksel</li>
-          </ul>
+          <ConditionalRender condition={auth.roles.includes('participant')}>
+            <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
+            <ul className="list-disc ml-4 my-4">
+              <li>Durasi maksimal 8 menit</li>
+              <li>Resolusi video minimal 1920x1080 piksel</li>
+            </ul>
 
-          <ConditionalRender condition={creation != undefined} >
-            <UploadCreationForm item={creation} mode="update" />
+            <ConditionalRender condition={creation != undefined} >
+              <UploadCreationForm item={creation} mode="update" />
+            </ConditionalRender>
           </ConditionalRender>
-        </ConditionalRender>
 
-        <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
-        <TableContent <Creation> 
-          data={creations} 
-          columns={columns} 
-          headerAction={
-            <div className="md:mx-2 my-2 order-first">
-              <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-            </div>} 
-          />
-        </ConditionalRender>
+          <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
+            <TableContent <Creation>
+              data={creations}
+              columns={columns}
+              headerAction={
+                <div className="md:mx-2 my-2 order-first">
+                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+                </div>}
+            />
+          </ConditionalRender>
         </div>
       </div>
 

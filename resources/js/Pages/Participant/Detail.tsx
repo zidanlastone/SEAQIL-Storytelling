@@ -3,7 +3,8 @@ import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { PageProps, Participant } from '@/types';
 import { Head } from '@inertiajs/react';
-import React from 'react'
+import React, { useState } from 'react'
+import UpdateCreationTitle from '../Creation/Partials/UpdateCreationTitle';
 
 type ParticipantDetailPageProps = {
   participant: Participant
@@ -12,6 +13,10 @@ function Detail({
   auth,
   participant,
 }: PageProps<ParticipantDetailPageProps>) {
+
+  console.log(participant)
+
+  const [updateMode, setUpdateMode] = useState<boolean>(false);
 
   return (
     <AdminLayout
@@ -83,8 +88,14 @@ function Detail({
                 <h1>Data Registrasi</h1>
               </div>
 
-              <div className="col-span-2">
-                <div className="grid grid-cols-3 gap-4">
+
+              <div className="col-span-2 md:grid-cols-2">
+
+                <div className="mb-2">
+                  <UpdateCreationTitle item={participant?.creation} updateMode={updateMode} setUpdateMode={setUpdateMode} />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <InputLabel>Kategori</InputLabel>
                     <TextInput className="w-full" value={participant.category?.category_name} readOnly />
