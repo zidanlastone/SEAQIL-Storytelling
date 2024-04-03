@@ -162,7 +162,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
             <div className="text-left">
               <div className="flex flex-col md:flex-row gap-4 items-center">
                 <div className="order-start mt-6 w-full md:w-2/5 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
-                  <img className='w-full' src={category.image} alt="" />
+                  <img className='w-full' src={'/storage/' + category.image} alt="" />
                 </div>
                 <div className="order-end mt-6 text-md w-full md:w-3/5">
                   <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
@@ -190,43 +190,66 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-10 my-16" id="teknis-lomba">
           <div className="text-left">
             <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl">
               Mekanisme Pelaksanaan
             </h1>
             <div className="flex flex-col md:flex-row gap-4">
-              <div className="order-start mt-6 w-3/4 text-md leading-8 text-gray-600">
+              <div className="order-start mt-6 w-full md:w-3/4 text-md leading-8 text-gray-600 text-wrap">
 
-                <ol className="list-decimal list-inside my-6">
+                {/* <div dangerouslySetInnerHTML={{ __html: mekanisme_pelaksanaan?.content }}></div> */}
+
+                <ol className="list-decimal list-inside my-6 text-balance break-words">
                   <li>
-                    Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
+                  Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
                   </li>
                   <li>
-                    Peserta melakukan pendaftaran kompetisi melalui laman https://kompetisimendongeng.qiteplanguage.org dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
+                  Peserta melakukan pendaftaran kompetisi melalui laman 
+                    <a href="https://kompetisimendongeng.qiteplanguage.org/register-participant" className="mx-1 text-blue-400 hover:tetx-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">
+                      https://kompetisimendongeng.qiteplanguage.org
+                    </a>
+                    dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf.
                   </li>
                   <li>
                     Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
                   </li>
                   <li>
-                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran.
+                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran atau dapat dilihat di laman dashboard peserta setelah login.
+                  </li>
+                  <li>
+                    Karya yang dilombakan dalam kompetisi ini di Babak Penyisihan berupa video mendongeng yang dibuat oleh peserta dengan tema dongeng : “Ragam Budaya Nusantara”.
                   </li>
 
                   <li>
                     Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
-                    <ol className="list-alpha list-inside ml-4">
-                      <li>a.	Login pada laman https://kompetisimendongeng.qiteplanguage.org menggunakan email dan password yang dikirim ke email pendaftar</li>
-                      <li>b.	Masuk ke menu “Unggah Karya”  </li>
-                      <li>c.	Klik tautan unggah karya, kemudian unggah video ke dalam folder google drive yang telah disediakan</li>
-                      <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah video pada folder yang disediakan</li>
-                      <li>e.	Klik “Daftarkan”</li>
-                      <li>f.	Peserta akan menerima email notifikasi unggah hasil karya</li>
+                    <ol className="list-alpha list-inside ml-4 text-wrap">
+                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org/login" className="mx-1 text-blue-400 hover:text-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">
+                        https://kompetisimendongeng.qiteplanguage.org
+                        </a> menggunakan email dan password yang telah didaftarkan;
+                      </li>
+                      <li>b.	Masuk ke menu “Unggah Karya”;</li>
+                      <li>c.	Klik tautan unggah karya/video, kemudian unggah hasil karya ke dalam folder google drive yang telah disediakan;</li>
+                      <li>d.  Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya</li>
+                      <li>e.	Klik “Daftarkan Karya” untuk mengirimkan pernyataan dan hasil karya dapat dinilai oleh panitia/juri;</li>
                     </ol>
                   </li>
-                  <li>Peserta yang lulus seleksi awal oleh dewan juri, akan mengikuti seleksi akhir secara langsung baik daring maupun luring.</li>
+                  <li>
+                    Pada Babak Penyisihan, karya video lomba peserta yang lulus verifikasi sesuai ketentuan video yang dibuat, akan dilakukan penilaian oleh dewan juri dan akan ditentukan peserta yang lolos ke babak selanjutnya (Babak Final).
+                  </li>
+                  <li>
+                    Pada Babak Final, akan dilakukan secara daring melalui zoom, peserta akan diminta menampilkan/perform live online mendongeng di depan dewan juri dengan cerita dongeng yang berbeda dari karya yang dikumpulkan pada saat Babak Penyisihan.
+                  </li>
+                  <li>
+                    Ketentuan lomba di Babak Final akan dibahas lebih detail di teknikal meeting.
+                  </li>
+                  <li>
+                    Pengumuman dan informasi lainnya akan disampaikan secara berkala melalui grup whatsapp atau telegram peserta lomba.
+                  </li>
+
                 </ol>
 
-                <div>
+                <div className='my-4'>
                   <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
                   <ol className="list-decimal list-inside">
                     <li>Pendaftaran Peserta: 29 Maret - 31 Mei 2024</li>
@@ -234,6 +257,12 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }: PageProps<{
                     <li>Pengumuman Finalis: 13 Juni 2024</li>
                     <li>Babak Final: 20 Juni 2024</li>
                   </ol>
+                </div>
+
+                <div className='my-4'>
+                  <h2 className='text-lg font-semibold'>Narahubung</h2>
+                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+6281223337333">0812-2333-7333</a> (WINA)</p>
+                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+628567788023">0856-7788-023</a> (ERI)</p>
                 </div>
 
               </div>
