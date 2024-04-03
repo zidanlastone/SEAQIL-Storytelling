@@ -315,12 +315,6 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                 </ol>
 
                 <div className='my-4'>
-                  <h2 className='text-lg font-semibold'>Narahubung</h2>
-                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+6281223337333">0812-2333-7333</a> (WINA)</p>
-                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+628567788023">0856-7788-023</a> (ERI)</p>
-                </div>
-
-                <div>
                   <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
                   <ol className="list-decimal list-inside">
                     <li>Pendaftaran Peserta: 29 Maret - 31 Mei 2024</li>
@@ -328,6 +322,12 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                     <li>Pengumuman Finalis: 13 Juni 2024</li>
                     <li>Babak Final: 20 Juni 2024</li>
                   </ol>
+                </div>
+
+                <div className='my-4'>
+                  <h2 className='text-lg font-semibold'>Narahubung</h2>
+                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+6281223337333">0812-2333-7333</a> (WINA)</p>
+                  <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+628567788023">0856-7788-023</a> (ERI)</p>
                 </div>
 
               </div>
