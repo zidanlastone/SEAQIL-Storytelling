@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 config(['mail.mailers.smtp.username' => $email_config->username]);
                 config(['mail.mailers.smtp.password' => $email_config->password]);
                 config(['mail.mailers.form.address' => $email_config->username]);
-                config(['mail.mailers.form.name' => 'si-mase']);
+                config(['mail.mailers.form.name' => $email_config->username]);
             }
         }
     }

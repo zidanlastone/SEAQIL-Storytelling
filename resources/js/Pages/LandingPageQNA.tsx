@@ -29,6 +29,8 @@ function Acordion({ question, answer }: { question: string, answer: string }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const checkAnswerIslist = answer.split(":")
+
   return (
     <div className="bg-white my-2 shadow-md rounded-lg py-4 px-5" onClick={() => { setIsOpen(!isOpen) }}>
 
@@ -54,13 +56,12 @@ function Acordion({ question, answer }: { question: string, answer: string }) {
         leaveTo="opacity-0"
       >
         <div className={"justify-between items-center p-5 ml-4 w-4/5"}>
-          <p>{answer}</p>
+          <div dangerouslySetInnerHTML={{__html: answer}}></div>
         </div>
       </Transition>
     </div>
   )
 }
-
 
 
 function LandingPage({ auth, question_and_answers = [] }: PageProps<QNAPageProps>) {

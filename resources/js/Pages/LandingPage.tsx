@@ -225,13 +225,13 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
               </div>
               <div className="order-end mt-6 text-md w-full md:w-3/4">
                 <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
-                  Kompetisi Mendongeng Tingkat Nasional
+                KOMPETISI MENDONGENG MULTIBAHASA DI ERA DIGITAL
                 </h1>
                 <p className=" leading-8 text-gray-600 my-2">
-                  Salah satu upaya mengombinasikan antara metode konvensional mendongeng dengan penetrasi digital serta keunikan ragam budaya Indonesia yaitu melalui sebuah kompetisi mendongeng untuk siswa SD & Sederajat, SMP & Sederajat, SMA & Sederajat, Mahasiswa, Guru, dan Umum. Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidikan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI), SEAMEO QITEP in Language (SEAQIL), SEAMEO CECCEP, Kelompok Pencinta Bacaan Anak (KPBA), dan Himpunan Sarjana-Kesusastraan Indonesia (HISKI) menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG DI ERA DIGITAL TINGKAT NASIONAL TAHUN 2024
+                  Merupakan upaya pengkombinasian antara metode mendongeng konvensional dengan penetrasi digital serta keunikan ragam budaya Indonesia, yaitu melalui sebuah kompetisi mendongeng untuk jenjang SD, SMP, SMA, Mahasiswa, Guru, dan Umum. Kegiatan ini merupakan kompetisi pada tingkat Nasional. Lembaga Pendidikan Tridaya (Tridaya Group) bekerja sama dengan Fakultas Pendidikan Bahasa dan Sastra Universitas Pendidikan Indonesia (FPBS UPI) dan SEAMEO Regional Center for Quality Improvement of Teachers and Education Personnel (QITEP) in Language (SEAQIL) akan menyelenggarakan kegiatan yang berjudul KOMPETISI MENDONGENG MULTIBAHASA DI ERA DIGITAL TINGKAT NASIONAL 2024.
                 </p>
                 <p className=" leading-8 text-gray-600 my-2">
-                  Kompetisi Mendongeng Multibahasa di Era Digital ini dapat dijadikan ajang mempromosikan keanekaragaman budaya dan linguistik di tengah konektivitas global. Melalui kompetisi ini, peserta dari berbagai latar belakang budaya dan bahasa dapat berbagi cerita dalam bahasa asli mereka atau bahasa lain yang mereka kuasai, menciptakan sebuah lingkungan yang kaya akan keberagaman. Selain itu, dengan dukungan teknologi digital, kompetisi ini juga mendorong inovasi dalam presentasi cerita, memungkinkan penggunaan berbagai alat bantu digital seperti animasi dan visualisasi interaktif untuk meningkatkan pengalaman mendengarkan. Ini membawa cerita-cerita dari berbagai tradisi ke era digital dengan cara yang menarik dan relevan, menciptakan pengalaman mendongeng yang lebih mendalam dan menyeluruh bagi para pendengar.
+                  Kompetisi ini dapat dijadikan ajang mempromosikan keanekaragaman budaya dan linguistik di tengah konektivitas global. Melalui kompetisi ini, peserta dari berbagai latar belakang budaya dan bahasa dapat berbagi cerita dalam bahasa asli mereka atau bahasa lain yang mereka kuasai, menciptakan sebuah lingkungan yang kaya akan keberagaman. Selain itu, dengan dukungan teknologi digital, kompetisi ini juga mendorong inovasi dalam presentasi cerita, memungkinkan penggunaan berbagai alat bantu digital seperti animasi dan visualisasi interaktif untuk meningkatkan pengalaman mendengarkan. Ini membawa cerita-cerita dari berbagai tradisi ke era digital dengan cara yang menarik dan relevan, menciptakan pengalaman mendongeng yang lebih mendalam dan menyeluruh bagi para pendengar.
                 </p>
               </div>
             </div>
@@ -267,10 +267,10 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
 
                 <ol className="list-decimal list-inside my-6 text-balance break-words">
                   <li>
-                    Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
+                  Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
                   </li>
                   <li>
-                    Peserta melakukan pendaftaran kompetisi melalui laman
+                  Peserta melakukan pendaftaran kompetisi melalui laman 
                     <a href="https://kompetisimendongeng.qiteplanguage.org/register-participant" className="mx-1 text-blue-400 hover:tetx-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">
                       https://kompetisimendongeng.qiteplanguage.org
                     </a>
@@ -280,25 +280,36 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                     Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran.
                   </li>
                   <li>
-                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran atau dapat dilihat di laman dashboard peserta setelah login..
+                    Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran atau dapat dilihat di laman dashboard peserta setelah login.
+                  </li>
+                  <li>
+                    Karya yang dilombakan dalam kompetisi ini di Babak Penyisihan berupa video mendongeng yang dibuat oleh peserta dengan tema dongeng : “Ragam Budaya Nusantara”.
                   </li>
 
                   <li>
                     Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:
                     <ol className="list-alpha list-inside ml-4 text-wrap">
-                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org/login" className="mx-1 text-blue-400 hover:text-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">https://kompetisimendongeng.qiteplanguage.org</a> menggunakan email dan password yang telah didaftarkan;</li>
+                      <li>a.	Login pada laman <a href="https://kompetisimendongeng.qiteplanguage.org/login" className="mx-1 text-blue-400 hover:text-blue-500 text-wrap" target="_blank" rel="noopener noreferrer">
+                        https://kompetisimendongeng.qiteplanguage.org
+                        </a> menggunakan email dan password yang telah didaftarkan;
+                      </li>
                       <li>b.	Masuk ke menu “Unggah Karya”;</li>
                       <li>c.	Klik tautan unggah karya/video, kemudian unggah hasil karya ke dalam folder google drive yang telah disediakan;</li>
-                      <li>d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya;</li>
+                      <li>d.  Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya</li>
                       <li>e.	Klik “Daftarkan Karya” untuk mengirimkan pernyataan dan hasil karya dapat dinilai oleh panitia/juri;</li>
-                      <li>f.	Peserta akan menerima email notifikasi unggah hasil karya</li>
                     </ol>
                   </li>
                   <li>
-                    Peserta yang lulus seleksi awal oleh panitia, akan mengikuti seleksi akhir secara daring.
+                    Pada Babak Penyisihan, karya video lomba peserta yang lulus verifikasi sesuai ketentuan video yang dibuat, akan dilakukan penilaian oleh dewan juri dan akan ditentukan peserta yang lolos ke babak selanjutnya (Babak Final).
                   </li>
                   <li>
-                    Pengumuman akan diupdate secara berkala melalui grup whatsapp atau telegram.
+                    Pada Babak Final, akan dilakukan secara daring melalui zoom, peserta akan diminta menampilkan/perform live online mendongeng di depan dewan juri dengan cerita dongeng yang berbeda dari karya yang dikumpulkan pada saat Babak Penyisihan.
+                  </li>
+                  <li>
+                    Ketentuan lomba di Babak Final akan dibahas lebih detail di teknikal meeting.
+                  </li>
+                  <li>
+                    Pengumuman dan informasi lainnya akan disampaikan secara berkala melalui grup whatsapp atau telegram peserta lomba.
                   </li>
 
                 </ol>

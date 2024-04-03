@@ -142,8 +142,10 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
         <ConditionalRender condition={auth.roles.includes('participant')}>
           <p>Peserta berhak mengunggah satu video dengan ketentuan</p>
           <ul className="list-disc ml-4 my-4">
-            <li>Durasi maksimal 8 menit</li>
-            <li>Resolusi video minimal 1920x1080 piksel</li>
+            <li>Karya berbentuk video dengan format *.mp4</li>
+            <li>Karya merupakan buatan sendiri</li>
+            <li>Video dibuat dengan resolusi 1080p dan berdurasi maksimal 8 menit</li>
+            <li>Ukuran file video tidak melebihi 200MB</li>
           </ul>
 
           <ConditionalRender condition={creation != undefined} >
