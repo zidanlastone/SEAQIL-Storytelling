@@ -94,7 +94,7 @@
     "/build/assets/DeleteCategory-4pLXERhg.js"
   ],
   "resources/js/Pages/Creation/List.tsx": [
-    "/build/assets/List-DbF_5sNq.js"
+    "/build/assets/List-DXt6VjjR.js"
   ],
   "resources/js/Pages/Creation/Partials/CreationForm.tsx": [
     "/build/assets/CreationForm-BSu32chd.js"
@@ -102,8 +102,11 @@
   "resources/js/Pages/Creation/Partials/DeleteCreation.tsx": [
     "/build/assets/DeleteCreation-Ctj_a1v9.js"
   ],
+  "resources/js/Pages/Creation/Partials/UpdateCreationTitle.tsx": [
+    "/build/assets/UpdateCreationTitle-QE-bBAGk.js"
+  ],
   "resources/js/Pages/Creation/Partials/UploadCreationForm.tsx": [
-    "/build/assets/UploadCreationForm-m9FcEEMK.js"
+    "/build/assets/UploadCreationForm-BCaMKgp8.js"
   ],
   "resources/js/Pages/Dashboard.tsx": [
     "/build/assets/Dashboard-CYPmwz_0.js"
@@ -157,7 +160,7 @@
     "/build/assets/Form-DvzIHEax.js"
   ],
   "resources/js/Pages/Participant/Detail.tsx": [
-    "/build/assets/Detail-B7yR8T5W.js"
+    "/build/assets/Detail-C0wY-W2N.js"
   ],
   "resources/js/Pages/Participant/List.tsx": [
     "/build/assets/List-DURCCtJw.js"

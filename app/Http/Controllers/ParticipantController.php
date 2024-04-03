@@ -79,7 +79,7 @@ class ParticipantController extends Controller
                 'payment_receipt' => $path,
                 'reject_reason' => $request->reject_reasons
             ]);
-            
+
             if ($participant) {
                 return to_route('participant.index');
             }
@@ -106,6 +106,7 @@ class ParticipantController extends Controller
             'language',
             'level_of_participant',
             'user.profile',
+            'creation'
         ])->has('user');
 
         return Inertia::render('Participant/Detail', [
