@@ -140,7 +140,7 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }) {
           }
         ),
         /* @__PURE__ */ jsx("div", { className: "max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-5 my-28", children: /* @__PURE__ */ jsx("div", { className: "text-left", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col md:flex-row gap-4 items-center", children: [
-          /* @__PURE__ */ jsx("div", { className: "order-start mt-6 w-full md:w-2/5 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm", children: /* @__PURE__ */ jsx("img", { className: "w-full", src: category.image, alt: "" }) }),
+          /* @__PURE__ */ jsx("div", { className: "order-start mt-6 w-full md:w-2/5 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm", children: /* @__PURE__ */ jsx("img", { className: "w-full", src: "/storage/" + category.image, alt: "" }) }),
           /* @__PURE__ */ jsxs("div", { className: "order-end mt-6 text-md w-full md:w-3/5", children: [
             /* @__PURE__ */ jsx("h1", { className: "text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4", children: category.category_name }),
             /* @__PURE__ */ jsx("p", { className: " leading-8 text-gray-600", children: category.description })
@@ -163,34 +163,56 @@ function LandingPage({ auth, laravelVersion, phpVersion, category }) {
           }
         )
       ] }),
-      /* @__PURE__ */ jsx("div", { className: "max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10 my-16", id: "teknis-lomba", children: /* @__PURE__ */ jsxs("div", { className: "text-left", children: [
+      /* @__PURE__ */ jsx("div", { className: "max-w-7xl mx-auto px-6 lg:px-8 space-y-10 my-16", id: "teknis-lomba", children: /* @__PURE__ */ jsxs("div", { className: "text-left", children: [
         /* @__PURE__ */ jsx("h1", { className: "text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl", children: "Mekanisme Pelaksanaan" }),
-        /* @__PURE__ */ jsx("div", { className: "flex flex-col md:flex-row gap-4", children: /* @__PURE__ */ jsxs("div", { className: "order-start mt-6 w-3/4 text-md leading-8 text-gray-600", children: [
-          /* @__PURE__ */ jsxs("ol", { className: "list-decimal list-inside my-6", children: [
+        /* @__PURE__ */ jsx("div", { className: "flex flex-col md:flex-row gap-4", children: /* @__PURE__ */ jsxs("div", { className: "order-start mt-6 w-full md:w-3/4 text-md leading-8 text-gray-600 text-wrap", children: [
+          /* @__PURE__ */ jsxs("ol", { className: "list-decimal list-inside my-6 text-balance break-words", children: [
             /* @__PURE__ */ jsx("li", { children: "Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)" }),
-            /* @__PURE__ */ jsx("li", { children: "Peserta melakukan pendaftaran kompetisi melalui laman https://kompetisimendongeng.qiteplanguage.org dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf." }),
+            /* @__PURE__ */ jsxs("li", { children: [
+              "Peserta melakukan pendaftaran kompetisi melalui laman",
+              /* @__PURE__ */ jsx("a", { href: "https://kompetisimendongeng.qiteplanguage.org/register-participant", className: "mx-1 text-blue-400 hover:tetx-blue-500 text-wrap", target: "_blank", rel: "noopener noreferrer", children: "https://kompetisimendongeng.qiteplanguage.org" }),
+              "dengan melampirkan bukti transfer pembayaran dalam format file gambar (png, jpg) atau pdf."
+            ] }),
             /* @__PURE__ */ jsx("li", { children: "Setelah proses pendaftaran, panitia akan melakukan verifikasi bukti pembayaran." }),
-            /* @__PURE__ */ jsx("li", { children: "Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran." }),
+            /* @__PURE__ */ jsx("li", { children: "Peserta wajib bergabung ke dalam grup telegram atau whatsapp yang dikirim ke email saat proses pendaftaran atau dapat dilihat di laman dashboard peserta setelah login." }),
+            /* @__PURE__ */ jsx("li", { children: "Karya yang dilombakan dalam kompetisi ini di Babak Penyisihan berupa video mendongeng yang dibuat oleh peserta dengan tema dongeng : “Ragam Budaya Nusantara”." }),
             /* @__PURE__ */ jsxs("li", { children: [
               "Peserta yang lulus proses verifikasi, mengumpulkan karya dengan mekanisme pengumpulan sebagai berikut:",
-              /* @__PURE__ */ jsxs("ol", { className: "list-alpha list-inside ml-4", children: [
-                /* @__PURE__ */ jsx("li", { children: "a.	Login pada laman https://kompetisimendongeng.qiteplanguage.org menggunakan email dan password yang dikirim ke email pendaftar" }),
-                /* @__PURE__ */ jsx("li", { children: "b.	Masuk ke menu “Unggah Karya”  " }),
-                /* @__PURE__ */ jsx("li", { children: "c.	Klik tautan unggah karya, kemudian unggah video ke dalam folder google drive yang telah disediakan" }),
-                /* @__PURE__ */ jsx("li", { children: "d.	Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah video pada folder yang disediakan" }),
-                /* @__PURE__ */ jsx("li", { children: "e.	Klik “Daftarkan”" }),
-                /* @__PURE__ */ jsx("li", { children: "f.	Peserta akan menerima email notifikasi unggah hasil karya" })
+              /* @__PURE__ */ jsxs("ol", { className: "list-alpha list-inside ml-4 text-wrap", children: [
+                /* @__PURE__ */ jsxs("li", { children: [
+                  "a.	Login pada laman ",
+                  /* @__PURE__ */ jsx("a", { href: "https://kompetisimendongeng.qiteplanguage.org/login", className: "mx-1 text-blue-400 hover:text-blue-500 text-wrap", target: "_blank", rel: "noopener noreferrer", children: "https://kompetisimendongeng.qiteplanguage.org" }),
+                  " menggunakan email dan password yang telah didaftarkan;"
+                ] }),
+                /* @__PURE__ */ jsx("li", { children: "b.	Masuk ke menu “Unggah Karya”;" }),
+                /* @__PURE__ */ jsx("li", { children: "c.	Klik tautan unggah karya/video, kemudian unggah hasil karya ke dalam folder google drive yang telah disediakan;" }),
+                /* @__PURE__ */ jsx("li", { children: "d.  Kembali ke laman unggah karya, lalu contreng (V) pernyataan bahwa peserta telah mengunggah hasil karya" }),
+                /* @__PURE__ */ jsx("li", { children: "e.	Klik “Daftarkan Karya” untuk mengirimkan pernyataan dan hasil karya dapat dinilai oleh panitia/juri;" })
               ] })
             ] }),
-            /* @__PURE__ */ jsx("li", { children: "Peserta yang lulus seleksi awal oleh dewan juri, akan mengikuti seleksi akhir secara langsung baik daring maupun luring." })
+            /* @__PURE__ */ jsx("li", { children: "Pada Babak Penyisihan, karya video lomba peserta yang lulus verifikasi sesuai ketentuan video yang dibuat, akan dilakukan penilaian oleh dewan juri dan akan ditentukan peserta yang lolos ke babak selanjutnya (Babak Final)." }),
+            /* @__PURE__ */ jsx("li", { children: "Pada Babak Final, akan dilakukan secara daring melalui zoom, peserta akan diminta menampilkan/perform live online mendongeng di depan dewan juri dengan cerita dongeng yang berbeda dari karya yang dikumpulkan pada saat Babak Penyisihan." }),
+            /* @__PURE__ */ jsx("li", { children: "Ketentuan lomba di Babak Final akan dibahas lebih detail di teknikal meeting." }),
+            /* @__PURE__ */ jsx("li", { children: "Pengumuman dan informasi lainnya akan disampaikan secara berkala melalui grup whatsapp atau telegram peserta lomba." })
           ] }),
-          /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsxs("div", { className: "my-4", children: [
             /* @__PURE__ */ jsx("h4", { className: "text-lg font-semibold", children: "Linimasa Kompetisi Mendongeng" }),
             /* @__PURE__ */ jsxs("ol", { className: "list-decimal list-inside", children: [
               /* @__PURE__ */ jsx("li", { children: "Pendaftaran Peserta: 29 Maret - 31 Mei 2024" }),
               /* @__PURE__ */ jsx("li", { children: "Pengumpulan Karya (Penyisihan): 29 Maret—31 Mei 2024" }),
               /* @__PURE__ */ jsx("li", { children: "Pengumuman Finalis: 13 Juni 2024" }),
               /* @__PURE__ */ jsx("li", { children: "Babak Final: 20 Juni 2024" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "my-4", children: [
+            /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold", children: "Narahubung" }),
+            /* @__PURE__ */ jsxs("p", { className: "text-lg font-semibold", children: [
+              /* @__PURE__ */ jsx("a", { className: "text-blue-400 hover:text-blue-500", href: "tel:+6281223337333", children: "0812-2333-7333" }),
+              " (WINA)"
+            ] }),
+            /* @__PURE__ */ jsxs("p", { className: "text-lg font-semibold", children: [
+              /* @__PURE__ */ jsx("a", { className: "text-blue-400 hover:text-blue-500", href: "tel:+628567788023", children: "0856-7788-023" }),
+              " (ERI)"
             ] })
           ] })
         ] }) })
