@@ -4,11 +4,12 @@ import { P as PrimaryButton } from "./PrimaryButton-C-TDjBGq.js";
 import { Head } from "@inertiajs/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useState, useMemo } from "react";
-import LevelOfParticipantForm from "./LevelOfParticipantForm-Bi6COmrd.js";
-import DeleteLevelOfParticipant from "./DeleteLevelOfParticipant-BcwG7lZ0.js";
+import CategoryForm from "./Form-DvzIHEax.js";
+import DeleteCategory from "./DeleteForm-RLPMoSsG.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
+import "./ComboBoxInput-Cjtp4iA-.js";
 import "./InputError-cRVTeK4i.js";
 import "./InputLabel-uXgJWz9w.js";
 import "./TextInput-CL99szxP.js";
@@ -16,15 +17,29 @@ import "@heroicons/react/24/outline";
 import "@heroicons/react/20/solid";
 import "./ConditionalRender-BsoLXbpe.js";
 import "@tanstack/match-sorter-utils";
-function List({ auth, level_of_participants = [] }) {
+function List({ auth, page_sections = [], languages = [] }) {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState({ item: void 0, show: false });
   const [showUpdateDialog, setShowUpdateDialog] = useState({ item: void 0, show: false });
   const columnHelper = createColumnHelper();
   const columns = useMemo(() => [
-    columnHelper.accessor((row) => row.level_name, {
-      header: "Nama Tingat Partisipan",
-      id: "table-header-level-of-participant",
+    columnHelper.accessor((row) => row.section, {
+      header: "Section",
+      id: "table-header-section",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id,
+      filterFn: "includesString"
+    }),
+    // columnHelper.accessor(row => row.content, {
+    //   header: 'Content',
+    //   id: 'table-header-question',
+    //   cell: info => info.renderValue(),
+    //   footer: props => props.column.id,
+    //   filterFn: 'includesString',
+    // }),
+    columnHelper.accessor((row) => row.language_id, {
+      header: "language_id",
+      id: "table-header-question",
       cell: (info) => info.getValue(),
       footer: (props) => props.column.id,
       filterFn: "includesString"
@@ -60,36 +75,38 @@ function List({ auth, level_of_participants = [] }) {
     {
       roles: auth.roles,
       user: auth.user,
-      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 leading-tight", children: "Tingkatan Partisipan " }),
+      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 leading-tight", children: "Page Section" }),
       children: [
-        /* @__PURE__ */ jsx(Head, { title: "Admin | Tingkatan Partisipan" }),
+        /* @__PURE__ */ jsx(Head, { title: "Admin | Page Section Management" }),
         /* @__PURE__ */ jsx("div", { className: "py-2", children: /* @__PURE__ */ jsx("div", { className: "w-full mx-auto sm:px-6 lg:px-8 space-y-6", children: /* @__PURE__ */ jsx(
           TableContent,
           {
-            data: level_of_participants,
+            data: page_sections,
             columns,
             headerAction: /* @__PURE__ */ jsx("div", { className: "md:mx-2 my-2 order-first", children: /* @__PURE__ */ jsx(PrimaryButton, { onClick: () => setShowCreateDialog(true), children: "Tambah Data" }) })
           }
         ) }) }),
         /* @__PURE__ */ jsx(Modal, { show: showCreateDialog, onClose: () => setShowCreateDialog(false), children: /* @__PURE__ */ jsx(
-          LevelOfParticipantForm,
+          CategoryForm,
           {
             mode: "create",
+            languages,
             className: "p-4 sm:p-8 bg-white shadow sm:rounded-lg",
             onComplete: () => setShowCreateDialog(false)
           }
         ) }),
         /* @__PURE__ */ jsx(Modal, { show: showUpdateDialog.show, onClose: () => setShowUpdateDialog({ item: void 0, show: false }), children: /* @__PURE__ */ jsx(
-          LevelOfParticipantForm,
+          CategoryForm,
           {
             mode: "update",
+            languages,
             item: showUpdateDialog.item,
             className: "p-4 sm:p-8 bg-white shadow sm:rounded-lg",
             onComplete: () => setShowDeleteDialog({ item: void 0, show: false })
           }
         ) }),
         /* @__PURE__ */ jsx(Modal, { show: showDeleteDialog.show, onClose: () => setShowDeleteDialog({ item: void 0, show: false }), children: /* @__PURE__ */ jsx(
-          DeleteLevelOfParticipant,
+          DeleteCategory,
           {
             className: "p-4 sm:p-8 bg-white shadow sm:rounded-lg",
             item: showDeleteDialog.item,

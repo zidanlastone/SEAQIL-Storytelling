@@ -4,33 +4,34 @@ import { P as PrimaryButton } from "./PrimaryButton-C-TDjBGq.js";
 import { Head } from "@inertiajs/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useState, useMemo } from "react";
-import CategoryForm from "./Form-CDfA_t9B.js";
-import DeleteCategory from "./DeleteForm-Dxsv2Yqn.js";
+import CategoryForm from "./Form-CQYnd9rA.js";
+import DeleteCategory from "./DeleteForm-ChVrLjEf.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./InputError-cRVTeK4i.js";
 import "./InputLabel-uXgJWz9w.js";
+import "./TextInput-CL99szxP.js";
 import "@heroicons/react/24/outline";
 import "@heroicons/react/20/solid";
 import "./ConditionalRender-BsoLXbpe.js";
 import "@tanstack/match-sorter-utils";
-function List({ auth, questions = [] }) {
+function List({ auth, languages = [] }) {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState({ item: void 0, show: false });
   const [showUpdateDialog, setShowUpdateDialog] = useState({ item: void 0, show: false });
   const columnHelper = createColumnHelper();
   const columns = useMemo(() => [
-    columnHelper.accessor((row) => row.question, {
-      header: "Pertanyaan",
-      id: "table-header-question",
+    columnHelper.accessor((row) => row.name, {
+      header: "Nama Bahasa",
+      id: "table-header-name",
       cell: (info) => info.getValue(),
       footer: (props) => props.column.id,
       filterFn: "includesString"
     }),
-    columnHelper.accessor((row) => row.answer, {
-      header: "Jawaban",
-      id: "table-header-answer",
+    columnHelper.accessor((row) => row.code, {
+      header: "Kode Bahasa",
+      id: "table-header-code",
       cell: (info) => info.getValue(),
       footer: (props) => props.column.id
     }),
@@ -65,13 +66,13 @@ function List({ auth, questions = [] }) {
     {
       roles: auth.roles,
       user: auth.user,
-      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 leading-tight", children: "Question And Answers" }),
+      header: /* @__PURE__ */ jsx("h2", { className: "font-semibold text-xl text-gray-800 leading-tight", children: "Kategori" }),
       children: [
         /* @__PURE__ */ jsx(Head, { title: "Admin | Category Management" }),
         /* @__PURE__ */ jsx("div", { className: "py-2", children: /* @__PURE__ */ jsx("div", { className: "w-full mx-auto sm:px-6 lg:px-8 space-y-6", children: /* @__PURE__ */ jsx(
           TableContent,
           {
-            data: questions,
+            data: languages,
             columns,
             headerAction: /* @__PURE__ */ jsx("div", { className: "md:mx-2 my-2 order-first", children: /* @__PURE__ */ jsx(PrimaryButton, { onClick: () => setShowCreateDialog(true), children: "Tambah Data" }) })
           }

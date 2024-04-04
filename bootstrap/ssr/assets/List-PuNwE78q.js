@@ -8,7 +8,7 @@ import ParticipantForm from "./ParticipantForm-C5bp77BJ.js";
 import DeleteParticipant from "./DeleteParticipant-DxRUmp79.js";
 import { C as ConditionalRender } from "./ConditionalRender-BsoLXbpe.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./ComboBoxInput-Cjtp4iA-.js";
 import "./InputError-cRVTeK4i.js";

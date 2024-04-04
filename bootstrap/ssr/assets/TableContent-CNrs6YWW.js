@@ -54,7 +54,7 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
   });
   return itemRank.passed;
 };
-function TableContent({ columns, data, headerAction, columnFilters, setColumnFilters }) {
+function TableContent({ columns, data = [], headerAction, columnFilters = [], setColumnFilters }) {
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState([]);
   const [pagination, setPagination] = React.useState({
@@ -71,7 +71,7 @@ function TableContent({ columns, data, headerAction, columnFilters, setColumnFil
       sorting,
       pagination,
       globalFilter,
-      columnFilters: columnFilters ?? void 0
+      columnFilters
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

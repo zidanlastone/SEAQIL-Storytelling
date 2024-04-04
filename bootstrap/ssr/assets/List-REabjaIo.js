@@ -4,10 +4,10 @@ import { P as PrimaryButton } from "./PrimaryButton-C-TDjBGq.js";
 import { Head } from "@inertiajs/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useState, useMemo } from "react";
-import CategoryForm from "./CategoryForm-Mm7gbw_1.js";
-import DeleteCategory from "./DeleteCategory-4pLXERhg.js";
+import CategoryForm from "./Form-CSKANDf0.js";
+import DeleteCategory from "./DeleteForm-Be59WHlF.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./InputError-cRVTeK4i.js";
 import "./InputLabel-uXgJWz9w.js";
@@ -16,22 +16,52 @@ import "@heroicons/react/24/outline";
 import "@heroicons/react/20/solid";
 import "./ConditionalRender-BsoLXbpe.js";
 import "@tanstack/match-sorter-utils";
-function List({ auth, categories = [] }) {
+function List({ auth, configs = [] }) {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState({ item: void 0, show: false });
   const [showUpdateDialog, setShowUpdateDialog] = useState({ item: void 0, show: false });
   const columnHelper = createColumnHelper();
   const columns = useMemo(() => [
-    columnHelper.accessor((row) => row.category_name, {
-      header: "Nama kategori",
-      id: "table-header-category_name",
+    columnHelper.accessor((row) => row.service_name, {
+      header: "Nama Service",
+      id: "table-header-service_name",
       cell: (info) => info.getValue(),
       footer: (props) => props.column.id,
       filterFn: "includesString"
     }),
-    columnHelper.accessor((row) => row.image, {
-      header: "Image",
-      id: "table-header-image",
+    columnHelper.accessor((row) => row.protocol, {
+      header: "Protokol",
+      id: "table-header-protocol",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id
+    }),
+    columnHelper.accessor((row) => row.host, {
+      header: "Host",
+      id: "table-header-host",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id
+    }),
+    columnHelper.accessor((row) => row.port, {
+      header: "Port",
+      id: "table-header-port",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id
+    }),
+    columnHelper.accessor((row) => row.timeout, {
+      header: "Timeout",
+      id: "table-header-timeout",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id
+    }),
+    columnHelper.accessor((row) => row.username, {
+      header: "username",
+      id: "table-header-username",
+      cell: (info) => info.getValue(),
+      footer: (props) => props.column.id
+    }),
+    columnHelper.accessor((row) => row.password, {
+      header: "Password",
+      id: "table-header-password",
       cell: (info) => info.getValue(),
       footer: (props) => props.column.id
     }),
@@ -72,7 +102,7 @@ function List({ auth, categories = [] }) {
         /* @__PURE__ */ jsx("div", { className: "py-2", children: /* @__PURE__ */ jsx("div", { className: "w-full mx-auto sm:px-6 lg:px-8 space-y-6", children: /* @__PURE__ */ jsx(
           TableContent,
           {
-            data: categories,
+            data: configs,
             columns,
             headerAction: /* @__PURE__ */ jsx("div", { className: "md:mx-2 my-2 order-first", children: /* @__PURE__ */ jsx(PrimaryButton, { onClick: () => setShowCreateDialog(true), children: "Tambah Data" }) })
           }

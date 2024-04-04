@@ -7,7 +7,7 @@ import { useState, useMemo } from "react";
 import SliderForm from "./SliderForm-Bf_bHyzT.js";
 import DeleteSlider from "./DeleteSlider-_ZyhWxgk.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./InputError-cRVTeK4i.js";
 import "./InputLabel-uXgJWz9w.js";

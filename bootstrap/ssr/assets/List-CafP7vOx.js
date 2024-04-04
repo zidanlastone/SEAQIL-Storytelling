@@ -7,7 +7,7 @@ import { useState } from "react";
 import CreateUserForm from "./CreateUserForm-uIq4C2VE.js";
 import AdminDeleteUserForm from "./AdminDeleteUserForm-dhuAKa3P.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./InputError-cRVTeK4i.js";
 import "./InputLabel-uXgJWz9w.js";

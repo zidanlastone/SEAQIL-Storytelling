@@ -9,7 +9,7 @@ import CreationForm from "./CreationForm-BSu32chd.js";
 import DeleteCreation from "./DeleteCreation-Ctj_a1v9.js";
 import { A as AdminLayout } from "./AdminLayout-DNKnB601.js";
 import { C as ConditionalRender } from "./ConditionalRender-BsoLXbpe.js";
-import { T as TableContent } from "./TableContent-zRVHdZtT.js";
+import { T as TableContent } from "./TableContent-CNrs6YWW.js";
 import "@headlessui/react";
 import "./Checkbox-B46RnHis.js";
 import "./InputError-cRVTeK4i.js";
@@ -20,7 +20,6 @@ import "@heroicons/react/24/outline";
 import "@heroicons/react/20/solid";
 import "@tanstack/match-sorter-utils";
 function List({ auth, creations = [], creation = void 0 }) {
-  console.log(creations, creation);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState({ item: void 0, show: false });
   const [showUpdateDialog, setShowUpdateDialog] = useState({ item: void 0, show: false });
@@ -29,7 +28,8 @@ function List({ auth, creations = [], creation = void 0 }) {
   const columns = useMemo(() => [
     columnHelper.accessor((row) => row.id, {
       header: "No",
-      cell: (info) => parseInt(info.row.id) + 1
+      cell: (info) => parseInt(info.row.id) + 1,
+      filterFn: "includesString"
     }),
     columnHelper.accessor((row) => {
       var _a, _b;
@@ -140,7 +140,7 @@ function List({ auth, creations = [], creation = void 0 }) {
             ] }),
             /* @__PURE__ */ jsx(ConditionalRender, { condition: creation != void 0, children: /* @__PURE__ */ jsx(UploadCreationForm, { item: creation, mode: "update" }) })
           ] }),
-          /* @__PURE__ */ jsx(ConditionalRender, { condition: auth.roles.includes("administrator") || auth.roles.includes("operator"), children: /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsx(ConditionalRender, { condition: auth.roles.includes("administrator") || auth.roles.includes("operator"), children: creations && /* @__PURE__ */ jsx(
             TableContent,
             {
               data: creations,
