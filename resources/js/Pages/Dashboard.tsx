@@ -160,7 +160,7 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                       <td>
                         <div className="flex flex-row items-center">
                           :
-                          <ConditionalRender condition={participation?.creation?.upload_status != "2"}>
+                          <ConditionalRender condition={participation?.creation?.upload_status == "0"}>
                             <div className="flex flex-row text-yellow-600 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -168,12 +168,20 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
                               <p>Belum Seleksi</p>
                             </div>
                           </ConditionalRender>
+                          <ConditionalRender condition={participation?.creation?.upload_status == "1"}>
+                            <div className="flex flex-row text-yellow-600 items-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                              <p>Proses Seleksi</p>
+                            </div>
+                          </ConditionalRender>
                           <ConditionalRender condition={participation?.creation?.upload_status == "2"}>
                             <div className="flex flex-row text-yellow-500 items-center">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                               </svg>
-                              <p>Proses Seleksi</p>
+                              <p>Lolos Seleksi</p>
                             </div>
                           </ConditionalRender>
                         </div>

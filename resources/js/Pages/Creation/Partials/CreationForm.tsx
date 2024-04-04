@@ -97,7 +97,10 @@ function CreationForm({ onComplete, className, item, mode = 'create' }: { onComp
               <input type="radio" id="upload_status-l" name="upload_status" value={"0"} checked={data.upload_status == '0'} onChange={(e) => setData('upload_status', '0')} /> Belum Upload
             </label>
             <label htmlFor="upload_status-p">
-              <input type="radio" id="upload_status-p" name="upload_status" value={"1"} checked={data.upload_status == '1'} onChange={(e) => setData('upload_status', '1')} /> Sudah Upload
+              <input type="radio" id="upload_status-p" name="upload_status" value={"1"} checked={data.upload_status == '1'} onChange={(e) => setData('upload_status', '1')} /> Sudah Upload / Proses Seleksi
+            </label>
+            <label htmlFor="upload_status-q">
+              <input type="radio" id="upload_status-q" name="upload_status" value={"2"} checked={data.upload_status == '2'} onChange={(e) => setData('upload_status', '2')} /> Lolos Seleksi
             </label>
           </div>
           <InputError className="mt-2" message={errors.upload_status} />

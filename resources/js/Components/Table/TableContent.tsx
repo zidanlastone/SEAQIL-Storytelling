@@ -10,11 +10,17 @@ type TableContentProps<T> = {
   data: T[],
   columns: ColumnDef<T, any>[],
   headerAction?: ReactNode,
-  columnFilters?: ColumnFilter[],
-  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFilter[]>>,
+  // columnFilters?: ColumnFilter[],
+  // setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFilter[]>>,
 }
 
-function TableContent<T>({columns, data = [], headerAction, columnFilters = [], setColumnFilters}: TableContentProps<T>) {
+function TableContent<T>({
+  columns, 
+  data = [], 
+  headerAction, 
+  // columnFilters, 
+  // setColumnFilters
+}: TableContentProps<T>) {
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -33,13 +39,13 @@ function TableContent<T>({columns, data = [], headerAction, columnFilters = [], 
       sorting,
       pagination,
       globalFilter,
-      columnFilters: columnFilters
+      // columnFilters: columnFilters ?? []
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters ?? undefined,
+    // onColumnFiltersChange: setColumnFilters ?? undefined,
     onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
