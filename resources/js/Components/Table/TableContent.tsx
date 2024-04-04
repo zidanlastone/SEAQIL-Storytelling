@@ -14,7 +14,7 @@ type TableContentProps<T> = {
   setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFilter[]>>,
 }
 
-function TableContent<T>({columns, data, headerAction, columnFilters, setColumnFilters}: TableContentProps<T>) {
+function TableContent<T>({columns, data = [], headerAction, columnFilters = [], setColumnFilters}: TableContentProps<T>) {
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -33,7 +33,7 @@ function TableContent<T>({columns, data, headerAction, columnFilters, setColumnF
       sorting,
       pagination,
       globalFilter,
-      columnFilters: columnFilters ?? undefined
+      columnFilters: columnFilters
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

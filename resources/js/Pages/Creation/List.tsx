@@ -23,8 +23,6 @@ type CreationProps = {
 
 export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
 
-  console.log(creations, creation);
-
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
   const [showDeleteDialog, setShowDeleteDialog] = useState<{ item?: Creation, show: boolean }>({ item: undefined, show: false });
@@ -39,6 +37,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
   const columns = useMemo(() => [
     columnHelper.accessor(row => row.id, {
       header: "No", cell: info => parseInt(info.row.id) + 1,
+      filterFn: 'includesString'
     }),
     columnHelper.accessor(row => row?.participant?.user?.name, {
       header: 'Nama Peserta',
@@ -153,14 +152,16 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
           </ConditionalRender>
 
           <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
-            <TableContent <Creation>
-              data={creations}
-              columns={columns}
-              headerAction={
-                <div className="md:mx-2 my-2 order-first">
-                  <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
-                </div>}
-            />
+            {creations && (
+              <TableContent <Creation>
+                data={creations}
+                columns={columns}
+                headerAction={
+                  <div className="md:mx-2 my-2 order-first">
+                    <PrimaryButton onClick={() => setShowCreateDialog(true)}>Tambah Data</PrimaryButton>
+                  </div>}
+              />
+            )} 
           </ConditionalRender>
         </div>
       </div>
