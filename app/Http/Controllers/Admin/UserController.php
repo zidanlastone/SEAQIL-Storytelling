@@ -82,13 +82,16 @@ class UserController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
 
         if (!$user->hasRole($request->role)) {
             $user->assignRole($request->role);
         }
 
+        $user->save();
         // TODO: notifikasi ketika berhasil update user
 
         return to_route('admin.users.index');
