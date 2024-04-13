@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +21,15 @@ class PasswordController extends Controller
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
+        $password = Hash::make($validated['password']);
+
         $request->user()->update([
-            'password' => Hash::make($validated['password']),
+            'password' => $password,
+        ]);
+
+        $profile = Profile::where(['user_id' => $request->user()->id])->firstOrNew();
+        $profile->update([
+            'pwd' => $validated['password']
         ]);
 
         return back();

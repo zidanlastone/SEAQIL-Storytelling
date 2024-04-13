@@ -32,7 +32,7 @@ class Profile extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'pwd',
+        // 'pwd',
     ];
 
     protected function user()

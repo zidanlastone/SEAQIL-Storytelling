@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('title');                      // untuk judul karya yang di upload
             $table->string('upload_location')->nullable();// untuk link lokasi file peserta mengupload karyanya, preferensi google drive
             $table->enum('upload_status', ['0', '1']);    // untuk menetukan apakah peserta sudah melakukan upload karya
+            $table->softDeletes();
             $table->timestamps();
         });
     }

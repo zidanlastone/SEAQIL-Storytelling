@@ -9,11 +9,12 @@ use App\Models\I18n\Language;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Participant extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,7 @@ class Participant extends Model
         'certificate',
         'status_verifikasi',
         'reject_reason',
+        'is_deleted'
     ];
 
     /**

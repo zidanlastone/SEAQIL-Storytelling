@@ -160,7 +160,14 @@ class ParticipantController extends Controller
     public function destroy(Participant $participant)
     {
         //
+        $participant = Participant::where(['id' => $participant->id])->first();
+        $participant->creation->delete();
+
+        $participant->is_deleted = '1';
+        $participant->save();
+
         $participant->delete();
+
         return to_route('participant.index');
     }
 }
