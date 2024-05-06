@@ -43,6 +43,11 @@ const filters = [
         href: route('slider.index')
       },
       {
+        value: 'portrait-slider',
+        label: 'Portrait Slider',
+        href: route('portrait-slider.index')
+      },
+      {
         value: 'kategori',
         label: 'Kategori',
         href: route('category.index')

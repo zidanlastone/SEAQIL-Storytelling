@@ -14,11 +14,14 @@ use App\Http\Controllers\LevelOfParticipantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionAndAnswerController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\PortraitSliderController;
 
 use App\Models\Category;
 use App\Models\PageSection;
 use App\Models\QuestionAndAnswer;
 use App\Models\Slider;
+use App\Models\PortraitSlider;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,12 +30,14 @@ Route::get('/', function () {
 
     $sliders = Slider::all();
     $categories = Category::all();
+    $portrait_sliders = PortraitSlider::all();
 
-    $dekripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->first();
-    $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->first();
+    $dekripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->get();
+    $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->get();
 
     return Inertia::render('LandingPage', [
         'sliders' => $sliders,
+        'portrait_sliders' => $portrait_sliders,
         'categories' => $categories,
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -88,6 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('language', LanguageController::class);
     Route::resource('slider', SliderController::class);
+    Route::resource('portrait-slider', PortraitSliderController::class);
 });
 
 require __DIR__ . '/auth.php';

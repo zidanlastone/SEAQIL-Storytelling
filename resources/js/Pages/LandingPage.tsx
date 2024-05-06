@@ -5,10 +5,11 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import SponsorHeader from '@/Components/SponsorHeader';
 import ConditionalRender from '@/Components/ConditionalRender';
 
@@ -24,12 +25,24 @@ type LandingPageProps = {
   laravelVersion: string,
   phpVersion: string,
   sliders: Slider[],
+  portrait_sliders: Slider[],
   categories: Category[],
-  deskripsi_lomba?: PageSection
-  mekanisme_pelaksanaan?: PageSection
+  deskripsi_lomba?: PageSection[],
+  mekanisme_pelaksanaan?: PageSection[],
+  timeline?: PageSection[],
+  contacts?: PageSection[]
 }
 
-function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mekanisme_pelaksanaan }: PageProps<LandingPageProps>) {
+function LandingPage({
+  auth, 
+  sliders = [], 
+  portrait_sliders = [], 
+  categories = [], 
+  deskripsi_lomba = [], 
+  mekanisme_pelaksanaan = [], 
+  timeline = [],
+  contacts = []
+}: PageProps<LandingPageProps>) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -175,8 +188,10 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                 autoplay={{
                   delay: 3000,
                   disableOnInteraction: true,
+                  pauseOnMouseEnter: true
                 }}
-                modules={[Pagination, Autoplay]}
+                navigation={true}
+                modules={[Navigation, Pagination, Autoplay]}
                 className="mySwiper rounded-md"
               >
                 {sliders.map(item => {
@@ -219,10 +234,55 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
           <div className="text-left">
             <div className="flex flex-col md:flex-row gap-4 items-center">
               <div className="order-start mt-6 w-full md:w-1/4 bg-gradient-to-br from-blue-500 to-red-500 rounded-2xl flex-col gap-6 p-4 shadow=sm">
-                <video className="w-full" controls>
-                  <source src="/video/intro-video-v2.mp4" type="video/mp4" />
-                </video>
+                <Swiper
+                  pagination={{
+                    dynamicBullets: true,
+                  }}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: true
+                  }}
+                  navigation={true}
+                  modules={[Navigation, Pagination, Autoplay]}
+                  className="mySwiper rounded-md"
+                >
+                  <ConditionalRender condition={portrait_sliders?.length == 0}>
+                  {portrait_sliders?.map((item) => {
+                    if (item.type == 'image') {
+                      return (
+                        <SwiperSlide key={item.id}>
+                          <img className="rounded-lg w-full" src={'/storage/' + item.source} alt="" />
+                        </SwiperSlide>
+                      )
+                    }
+                    if (item.type == 'video') {
+                      return (
+                        <SwiperSlide key={item.id}>
+                          <video className="rounded-lg w-full" controls>
+                            <source src={'/storage/' + item.source} />
+                          </video>
+                        </SwiperSlide>
+                      )
+                    }
+                  })}
+                  </ConditionalRender>
+                  
+                  <ConditionalRender condition={portrait_sliders.length > 0}>
+                      <SwiperSlide key={1}>
+                        <video className="rounded-lg w-full" controls>
+                          <source src={'/video/intro-video-v2.mp4'} />
+                        </video>
+                      </SwiperSlide>
+                      <SwiperSlide key={2}>
+                        <video className="rounded-lg w-full" controls>
+                          <source src={'/video/Ajakan_Kompetisi_Mendongeng_Tridaya.mp4'} />
+                        </video>
+                      </SwiperSlide>
+                  </ConditionalRender>
+                </Swiper>
               </div>
+              <ConditionalRender condition={deskripsi_lomba?.length == 0}>
               <div className="order-end mt-6 text-md w-full md:w-3/4">
                 <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
                 KOMPETISI MENDONGENG MULTIBAHASA DI ERA DIGITAL
@@ -234,6 +294,20 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                   Kompetisi ini dapat dijadikan ajang mempromosikan keanekaragaman budaya dan linguistik di tengah konektivitas global. Melalui kompetisi ini, peserta dari berbagai latar belakang budaya dan bahasa dapat berbagi cerita dalam bahasa asli mereka atau bahasa lain yang mereka kuasai, menciptakan sebuah lingkungan yang kaya akan keberagaman. Selain itu, dengan dukungan teknologi digital, kompetisi ini juga mendorong inovasi dalam presentasi cerita, memungkinkan penggunaan berbagai alat bantu digital seperti animasi dan visualisasi interaktif untuk meningkatkan pengalaman mendengarkan. Ini membawa cerita-cerita dari berbagai tradisi ke era digital dengan cara yang menarik dan relevan, menciptakan pengalaman mendongeng yang lebih mendalam dan menyeluruh bagi para pendengar.
                 </p>
               </div>
+              </ConditionalRender>
+
+              <ConditionalRender condition={deskripsi_lomba?.length > 0}>
+              <div className="order-end mt-6 text-md w-full md:w-3/4">
+                <h1 className="text-xl font-bold tracking-tight leading-6 text-gray-600 sm:text-3xl my-4">
+                KOMPETISI MENDONGENG MULTIBAHASA DI ERA DIGITAL
+                </h1>
+                {deskripsi_lomba?.map((item) => {
+                  return (
+                    <p className="leading-8 text-gray-600 my-2" dangerouslySetInnerHTML={{__html: item.content}}></p>
+                  )
+                })}
+              </div>
+              </ConditionalRender>
             </div>
           </div>
         </div>
@@ -263,8 +337,17 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
             <div className="flex flex-col md:flex-row gap-4">
               <div className="order-start mt-6 w-full md:w-3/4 text-md leading-8 text-gray-600 text-wrap">
 
-                {/* <div dangerouslySetInnerHTML={{ __html: mekanisme_pelaksanaan?.content }}></div> */}
+                <ConditionalRender condition={mekanisme_pelaksanaan?.length > 0}>
+                <ol className="list-decimal list-inside my-6 text-balance break-words">
+                  {mekanisme_pelaksanaan?.map((item) => {
+                    return (
+                      <li dangerouslySetInnerHTML={{__html: item.content}}></li>
+                    )
+                  })}
+                </ol>
+                </ConditionalRender>
 
+                <ConditionalRender condition={mekanisme_pelaksanaan?.length == 0}>
                 <ol className="list-decimal list-inside my-6 text-balance break-words">
                   <li>
                   Peserta yang akan mendaftar, terlebih dahulu harus melakukan proses transfer biaya pendaftaran kompetisi sebesar Rp.50.000 per orang ke nomor Virtual Account (VA) Bank BNI 9882 4474 2223 1991 atas nama TRIDAYA OLIMPIADE (Simpan dokumentasi bukti transfer)
@@ -313,7 +396,10 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                   </li>
 
                 </ol>
+                </ConditionalRender>
 
+
+                <ConditionalRender condition={timeline?.length == 0}>
                 <div className='my-4'>
                   <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
                   <ol className="list-decimal list-inside">
@@ -323,18 +409,44 @@ function LandingPage({ auth, sliders = [], categories = [], deskripsi_lomba, mek
                     <li>Babak Final: 20 Juni 2024</li>
                   </ol>
                 </div>
+                </ConditionalRender>
+                
+                <ConditionalRender condition={timeline?.length > 0}>
+                <div className='my-4'>
+                  <h4 className="text-lg font-semibold">Linimasa Kompetisi Mendongeng</h4>
+                  <ol className="list-decimal list-inside">
+                    {timeline?.map((item) => {
+                      return (
+                        <li dangerouslySetInnerHTML={{__html: item.content}}></li>
+                      )
+                    })}
+                  </ol>
+                </div>
+                </ConditionalRender>
 
+                <ConditionalRender condition={contacts.length == 0}>
                 <div className='my-4'>
                   <h2 className='text-lg font-semibold'>Narahubung</h2>
                   <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+6281223337333">0812-2333-7333</a> (WINA)</p>
                   <p className='text-lg font-semibold'><a className='text-blue-400 hover:text-blue-500' href="tel:+628567788023">0856-7788-023</a> (ERI)</p>
                 </div>
+                </ConditionalRender>
+
+                <ConditionalRender condition={contacts.length > 0}>
+                <div className='my-4'>
+                  <h2 className='text-lg font-semibold'>Narahubung</h2>
+                  {contacts?.map((item) => {
+                    return (
+                      <p className='text-lg font-semibold' dangerouslySetInnerHTML={{__html: item.content}}></p>
+                    )
+                  })}
+                </div>
+                </ConditionalRender>
 
               </div>
             </div>
           </div>
         </div>
-
 
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
