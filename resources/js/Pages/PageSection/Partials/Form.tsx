@@ -22,7 +22,7 @@ type PageSectionProps = {
 function CategoryForm({ onComplete, className, item, mode = 'create', languages = [] }: PageSectionProps) {
 
   const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<PageSectionInsert>({
-    language_id: item?.language_id || 0,
+    language_id: item?.language_id || 1,
     section: item?.section || '',
     content: item?.content || '',
   });
@@ -53,8 +53,6 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
     return [];
   }, [languages])
 
-  const [selectedLanguage, setSelectedLanguage] = useState<ComboBoxData | null>(combo_languages.find(x => x.id == item?.language_id) || null);
-
   return (
     <section className={className}>
       <header>
@@ -62,16 +60,24 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
       </header>
       <form onSubmit={submit} className="flex flex-col gap-4">
 
-        <div>
-          <InputLabel htmlFor="language_id" value="Pilih Bahasa" />
-          <ComboBoxInput
-            data={combo_languages}
+        <div className="mt-4">
+          <InputLabel htmlFor="language_id" >
+            Pilih Bahasa <span className="text-red-500">*</span>
+          </InputLabel>
+
+          <SelectInput
+            className="w-full py-3"
             id="language_id"
-            onChange={(value) => {
-              setSelectedLanguage(value)
-              setData('language_id', value.id)
-            }}
-            value={selectedLanguage} />
+            required
+            onChange={(e) => {
+              setData('language_id', parseInt(e.target.value))
+            }}>
+            <option>Pilih Opsi</option>
+            {combo_languages.map(item => (
+              <option value={item.id} key={item.id} className="min-w-full" selected={data.language_id == item.id}>{item.value}</option>
+            ))}
+          </SelectInput>
+
           <InputError message={errors.language_id} className="mt-2" />
         </div>
 
@@ -91,7 +97,7 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
         </div>
 
         <div className="my-2">
-          <InputLabel htmlFor="content" value="Conent" />
+          <InputLabel htmlFor="content" value="Content" />
           <textarea
             className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm "
             name="description" id="description" rows={3}
@@ -103,15 +109,15 @@ function CategoryForm({ onComplete, className, item, mode = 'create', languages 
 
         <div className="flex items-center justify-end mt-4">
           <Transition
-              show={recentlySuccessful}
-              enter="transition ease-in-out"
-              enterFrom="opacity-0"
-              leave="transition ease-in-out"
-              leaveTo="opacity-0"
-            >
-              <p className="text-sm text-gray-600 mr-2">Saved.</p>
-            </Transition>
-          
+            show={recentlySuccessful}
+            enter="transition ease-in-out"
+            enterFrom="opacity-0"
+            leave="transition ease-in-out"
+            leaveTo="opacity-0"
+          >
+            <p className="text-sm text-gray-600 mr-2">Saved.</p>
+          </Transition>
+
           <PrimaryButton className="ms-4" disabled={processing}>
             {mode == 'create' ? 'Tambah Data' : 'Ubah Data'}
           </PrimaryButton>

@@ -130,6 +130,7 @@ export interface PageSection {
     language_id: number,
     section: string,
     content: string
+    language?: Language 
 }
 
 

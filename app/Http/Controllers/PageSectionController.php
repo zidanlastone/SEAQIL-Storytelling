@@ -16,7 +16,7 @@ class PageSectionController extends Controller
     public function index()
     {
         //
-        $pageSection = PageSection::all();
+        $pageSection = PageSection::with(['language'])->get();
         $languages = Language::all();
         return Inertia::render("PageSection/List", [
             "page_sections" => $pageSection,

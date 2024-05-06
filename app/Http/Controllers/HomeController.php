@@ -16,12 +16,16 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+  /**
+   * Display the landing page
+   */
   public function index(){
+
     $sliders = Slider::all();
     $categories = Category::all();
     $portrait_sliders = PortraitSlider::all();
 
-    $dekripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->get();
+    $deskripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->get();
     $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->get();
     $timeline = PageSection::where(['section' => 'timeline'])->get();
     $contacts = PageSection::where(['section' => 'contacts'])->get();
@@ -34,7 +38,7 @@ class HomeController extends Controller
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'dekripsi_lomba' => $dekripsi_lomba,
+        'deskripsi_lomba' => $deskripsi_lomba,
         'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan,
         'timeline' => $timeline,
         'contacts' => $contacts

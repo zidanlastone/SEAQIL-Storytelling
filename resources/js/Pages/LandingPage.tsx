@@ -269,12 +269,12 @@ function LandingPage({
                   </ConditionalRender>
                   
                   <ConditionalRender condition={portrait_sliders.length == 0}>
-                      <SwiperSlide key={1}>
+                      <SwiperSlide>
                         <video className="rounded-lg w-full" controls>
                           <source src={'/video/intro-video-v2.mp4'} />
                         </video>
                       </SwiperSlide>
-                      <SwiperSlide key={2}>
+                      <SwiperSlide>
                         <video className="rounded-lg w-full" controls>
                           <source src={'/video/Ajakan_Kompetisi_Mendongeng_Tridaya.mp4'} />
                         </video>

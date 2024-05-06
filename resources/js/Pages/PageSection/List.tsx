@@ -28,19 +28,19 @@ export default function List({ auth, page_sections = [], languages = [] }: PageP
       footer: props => props.column.id,
       filterFn: 'includesString',
     }),
-    // columnHelper.accessor(row => row.content, {
-    //   header: 'Content',
-    //   id: 'table-header-question',
-    //   cell: info => info.renderValue(),
-    //   footer: props => props.column.id,
-    //   filterFn: 'includesString',
-    // }),
-    columnHelper.accessor(row => row.language_id, {
+    columnHelper.accessor(row => row?.language?.name, {
       header: 'language_id',
       id: 'table-header-question',
       cell: info => info.getValue(),
       footer: props => props.column.id,
       filterFn: 'includesString',
+    }),
+    columnHelper.accessor(row => row.content, {
+      header: 'Content',
+      id: 'table-header-content',
+      cell: info => info.renderValue(),
+      footer: props => props.column.id,
+      // filterFn: 'includesString',
     }),
     columnHelper.accessor(row => row.id, {
       id: 'table-header-action',
@@ -101,7 +101,7 @@ export default function List({ auth, page_sections = [], languages = [] }: PageP
           languages={languages}
           item={showUpdateDialog.item}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
-          onComplete={() => setShowDeleteDialog({ item: undefined, show: false })} />
+          onComplete={() => setShowUpdateDialog({ item: undefined, show: false })} />
       </Modal>
 
       {/* update delete prompt */}

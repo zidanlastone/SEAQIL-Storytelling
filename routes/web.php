@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\I18n\LanguageController;
 use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\ParticipantController;
@@ -26,27 +27,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-
-    $sliders = Slider::all();
-    $categories = Category::all();
-    $portrait_sliders = PortraitSlider::all();
-
-    $dekripsi_lomba = PageSection::where(['section' => 'deskripsi-lomba'])->get();
-    $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->get();
-
-    return Inertia::render('LandingPage', [
-        'sliders' => $sliders,
-        'portrait_sliders' => $portrait_sliders,
-        'categories' => $categories,
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'dekripsi_lomba' => $dekripsi_lomba,
-        'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/qna', function () {
     $sliders = Slider::all();
