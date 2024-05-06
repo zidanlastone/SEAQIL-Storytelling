@@ -247,7 +247,7 @@ function LandingPage({
                   modules={[Navigation, Pagination, Autoplay]}
                   className="mySwiper rounded-md"
                 >
-                  <ConditionalRender condition={portrait_sliders?.length == 0}>
+                  <ConditionalRender condition={portrait_sliders?.length > 0}>
                   {portrait_sliders?.map((item) => {
                     if (item.type == 'image') {
                       return (
@@ -268,7 +268,7 @@ function LandingPage({
                   })}
                   </ConditionalRender>
                   
-                  <ConditionalRender condition={portrait_sliders.length > 0}>
+                  <ConditionalRender condition={portrait_sliders.length == 0}>
                       <SwiperSlide key={1}>
                         <video className="rounded-lg w-full" controls>
                           <source src={'/video/intro-video-v2.mp4'} />
