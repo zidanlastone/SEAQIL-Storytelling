@@ -213,6 +213,10 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                       ))}
                     </ConditionalRender>
 
+                    <Link method="post" as='button' href={route('logout')} className={"block ml-2 px-2 py-3 border-indigo-400 text-gray-900 focus:border-indigo-700"}>
+                      Logout
+                    </Link>
+
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

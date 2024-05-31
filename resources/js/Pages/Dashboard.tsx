@@ -36,20 +36,20 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
 
               <h2 className="text-lg">Selamat Datang {auth.user.name}</h2>
 
-              <div className="flex flex-row gap-2 my-6 justify-between text-center">
-                <div className="w-1/4 p-6 border-2 text-center rounded">
+              <div className="flex flex-col md:flex-row gap-2 my-6 justify-between text-center">
+                <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Jumlah Pendaftar </p>
                   <p>{counts.participant_count}</p>
                 </div>
-                <div className="w-1/4 p-6 border-2 text-center rounded">
+                <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Jumlah Pendaftar Terverifikasi</p>
                   <p>{counts.verified_participant_count}</p>
                 </div>
-                <div className="w-1/4 p-6 border-2 text-center rounded">
+                <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Karya sudah di unggah</p>
                   <p>{counts.uploaded_creation_count}</p>
                 </div>
-                <div className="w-1/4 p-6 border-2 text-center rounded">
+                <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Karya belum di unggah </p>
                   <p>{counts.notuploaded_creation_count}</p>
                 </div>

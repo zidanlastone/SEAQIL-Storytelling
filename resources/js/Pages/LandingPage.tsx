@@ -303,7 +303,7 @@ function LandingPage({
                 </h1>
                 {deskripsi_lomba?.map((item) => {
                   return (
-                    <p className="leading-8 text-gray-600 my-2" dangerouslySetInnerHTML={{__html: item.content}}></p>
+                    <p key={item.id} className="leading-8 text-gray-600 my-2" dangerouslySetInnerHTML={{__html: item.content}}></p>
                   )
                 })}
               </div>
@@ -341,7 +341,7 @@ function LandingPage({
                 <ol className="list-decimal list-inside my-6 text-balance break-words">
                   {mekanisme_pelaksanaan?.map((item) => {
                     return (
-                      <li dangerouslySetInnerHTML={{__html: item.content}}></li>
+                      <li key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></li>
                     )
                   })}
                 </ol>
@@ -417,7 +417,7 @@ function LandingPage({
                   <ol className="list-decimal list-inside">
                     {timeline?.map((item) => {
                       return (
-                        <li dangerouslySetInnerHTML={{__html: item.content}}></li>
+                        <li key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></li>
                       )
                     })}
                   </ol>
@@ -437,7 +437,7 @@ function LandingPage({
                   <h2 className='text-lg font-semibold'>Narahubung</h2>
                   {contacts?.map((item) => {
                     return (
-                      <p className='text-lg font-semibold' dangerouslySetInnerHTML={{__html: item.content}}></p>
+                      <p className='text-lg font-semibold' key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></p>
                     )
                   })}
                 </div>
