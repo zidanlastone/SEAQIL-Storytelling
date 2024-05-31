@@ -52,9 +52,13 @@ class RegisteredParticipantController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        if(!$user){
+            return redirect(route('login'));
+        }
+
         $user->assignRole('participant');
 
-        Profile::create([
+       $profile = Profile::create([
             'user_id' => $user->id,
             'gender' => $request->gender,
             'whatsapp_contact' => $request->whatsapp_contact,
@@ -67,6 +71,11 @@ class RegisteredParticipantController extends Controller
             'pwd' => $request->password,
         ]);
 
+        if(!$profile){
+            $user->delete();
+            return redirect(route('login'));
+        }
+        
         if ($request->hasFile('payment_receipt')) {
             $filename = \Carbon\Carbon::now()->format('Ymdhis') . '-' . $request->payment_receipt->getClientOriginalName();
             $path = $request->file('payment_receipt')->storeAs('payment_receipt', $filename, 'public');
@@ -81,12 +90,25 @@ class RegisteredParticipantController extends Controller
                 'certificate' => '',
             ]);
 
-            Creation::create([
+            if(!$participant){
+                $profile->delete();
+                $user->delete();
+                return redirect(route('login'));
+            }
+
+            $creation = Creation::create([
                 'id_participant' => $participant->id,
                 'title' => $request->title,
                 'upload_location' => null,
                 'upload_status' => '0',
             ]);
+
+            if(!$creation){
+                $participant->delete();
+                $profile->delete();
+                $user->delete();
+                return redirect(route('login'));
+            }
         }
 
 

@@ -435,7 +435,7 @@ export default function RegisterParticipant({
           </div>
         </div>
 
-        <div className="flex items-center justify-end mt-4 gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-end mt-4 gap-4">
 
           <Link
             href={route('login')}
@@ -451,7 +451,7 @@ export default function RegisterParticipant({
             Kembali
           </Link>
 
-          <PrimaryButton className="ms-4" disabled={processing}>
+          <PrimaryButton className="mx-4 order-first md:order-last" disabled={processing}>
             Daftar
           </PrimaryButton>
         </div>
