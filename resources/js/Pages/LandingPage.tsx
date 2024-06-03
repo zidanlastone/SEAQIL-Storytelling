@@ -30,7 +30,10 @@ type LandingPageProps = {
   deskripsi_lomba?: PageSection[],
   mekanisme_pelaksanaan?: PageSection[],
   timeline?: PageSection[],
-  contacts?: PageSection[]
+  contacts?: PageSection[],
+  sponsors?: PageSection[],
+  menu_login?: PageSection,
+  menu_registrasi?: PageSection,
 }
 
 function LandingPage({
@@ -41,7 +44,10 @@ function LandingPage({
   deskripsi_lomba = [], 
   mekanisme_pelaksanaan = [], 
   timeline = [],
-  contacts = []
+  contacts = [],
+  sponsors = [],
+  menu_login = undefined,
+  menu_registrasi = undefined,
 }: PageProps<LandingPageProps>) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -87,18 +93,30 @@ function LandingPage({
               ) : (
 
                 <div className="leading-6 text-md">
+                  <ConditionalRender condition={!menu_login}>
                   <Link
                     href={route('login')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
                     Log in <span aria-hidden="true">&rarr;</span>
                   </Link>
+                  </ConditionalRender>
+                  <ConditionalRender condition={!menu_registrasi}>
                   <Link
                     href={route('register.participant')}
                     className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                   >
                     Registrasi Peserta
                   </Link>
+                  </ConditionalRender>
+                  
+                  <ConditionalRender condition={menu_login != null}>
+                    <div dangerouslySetInnerHTML={{__html: menu_login?.content as string}}></div>
+                  </ConditionalRender>
+
+                  <ConditionalRender condition={menu_registrasi != null}>
+                    <div dangerouslySetInnerHTML={{__html: menu_registrasi?.content as string}}></div>
+                  </ConditionalRender>
                 </div>
               )}
             </div>
@@ -143,20 +161,36 @@ function LandingPage({
                         </Link>
                       </div>
                     ) : (
+
                       <div className="py-6">
+                        <ConditionalRender condition={!menu_login}>
                         <Link
                           href={route('login')}
                           className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                         >
                           Log in
                         </Link>
+                        </ConditionalRender>
+
+                        <ConditionalRender condition={!menu_registrasi}>
                         <Link
                           href={route('register.participant')}
                           className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
                         >
                           Registrasi Peserta
                         </Link>
+                        </ConditionalRender>
+
+                      <ConditionalRender condition={menu_login != null}>
+                        <div dangerouslySetInnerHTML={{__html: menu_login?.content as string}}></div>
+                      </ConditionalRender>
+
+                      <ConditionalRender condition={menu_registrasi != null}>
+                        <div dangerouslySetInnerHTML={{__html: menu_registrasi?.content as string}}></div>
+                      </ConditionalRender>
+
                       </div>
+
                     )}
                   </div>
                 </div>
@@ -451,15 +485,14 @@ function LandingPage({
         <footer className="w-full bg-blue-600 rounded-t-xl">
           <div className="flex flex-row">
             <div className="flex-auto w-5/6 items-center justify-center text-center py-16">
+              <ConditionalRender condition={sponsors.length > 0}>
               <p>Didukung Oleh:</p>
               <div className="flex flex-row justify-center">
-                <div className="h-12 w-36  p-1 m-1">
-                  <img className="object-cover" src="/image/sponsors/cgv-cinema.png" alt="tutwurihandayani" />
-                </div>
-                <div className="h-12 w-28 p-1 m-1">
-                  <img className="object-contain" src="/image/sponsors/sierra.png" alt="upi" />
-                </div>
+                {sponsors.map((item) => (
+                <div className="h-12 w-36  p-1 m-1" key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
+                ))}
               </div>
+              </ConditionalRender>
             </div>
           </div>
         </footer>

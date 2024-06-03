@@ -29,6 +29,11 @@ class HomeController extends Controller
     $mekanisme_pelaksanaan = PageSection::where(['section' => 'mekanisme-pelaksanaan'])->get();
     $timeline = PageSection::where(['section' => 'timeline'])->get();
     $contacts = PageSection::where(['section' => 'contacts'])->get();
+    $sponsors = PageSection::where(['section' => 'sponsors'])->get();
+    $menu_login = PageSection::where(['section' => 'menu-login'])->first();
+    $menu_registrasi = PageSection::where(['section' => 'menu-registrasi'])->first();
+
+    // dd($menu_login, $menu_registrasi);
 
     return Inertia::render('LandingPage', [
         'sliders' => $sliders,
@@ -41,7 +46,10 @@ class HomeController extends Controller
         'deskripsi_lomba' => $deskripsi_lomba,
         'mekanisme_pelaksanaan' => $mekanisme_pelaksanaan,
         'timeline' => $timeline,
-        'contacts' => $contacts
+        'contacts' => $contacts,
+        'menu_login' => $menu_login,
+        'menu_registrasi' => $menu_registrasi,
+        'sponsors' => $sponsors,
     ]);
   }
 }
