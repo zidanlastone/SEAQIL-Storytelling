@@ -5,7 +5,7 @@ import { Dialog, Disclosure, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import ApplicationLogo from '@/Components/ApplicationLogo'
-import { User } from '@/types'
+import { Participant, User } from '@/types'
 import { Link } from '@inertiajs/react'
 import Dropdown from '@/Components/Dropdown'
 import { NavbarCloseButton } from './Partials/NavbarCloseButton'
@@ -104,7 +104,7 @@ function classNames(...classes: any[]) {
 }
 
 
-function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user: User, roles: string[], header?: ReactNode }>) {
+function AdminLayout({ children, user, header, roles, participation }: PropsWithChildren<{ user: User, roles: string[], header?: ReactNode, participation?:Participant}>) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   return (
@@ -166,6 +166,15 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                           </Link>
                         </li>
                       </ConditionalRender>
+                      
+                      <ConditionalRender condition={roles.includes('participant') && participation?.certificate != ""}>
+                        <li>
+                          <Link href={participation?.certificate ?? '#'} target='_blank' className={"block px-2 py-3 border-indigo-400 text-gray-900 focus:border-indigo-700"}>
+                            Sertifikat
+                          </Link>
+                        </li>
+                      </ConditionalRender>
+
                       <ConditionalRender condition={roles.includes('administrator') || roles.includes('operator')}>
                         <li >
                           <Link href={route('admin.users.index')} className={"block px-2 py-3 border-indigo-400 text-gray-900 focus:border-indigo-700"}>
@@ -293,6 +302,15 @@ function AdminLayout({ children, user, header, roles }: PropsWithChildren<{ user
                       </Link>
                     </li>
                   </ConditionalRender>
+                  
+                  <ConditionalRender condition={roles.includes('participant') && participation?.certificate != ""}>
+                    <li>
+                      <a href={participation?.certificate ?? '#'} target='_blank' >
+                        Sertifikat
+                      </a>
+                    </li>
+                  </ConditionalRender>
+                    
                   <ConditionalRender condition={roles.includes('administrator') || roles.includes('operator')}>
                     <li >
                       <Link href={route('admin.users.index')}>

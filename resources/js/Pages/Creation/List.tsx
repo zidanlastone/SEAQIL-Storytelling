@@ -130,6 +130,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
     <AdminLayout
       roles={auth.roles}
       user={auth.user}
+      participation={auth.participation}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{auth.roles.includes('participant') ? 'Unggah Karya Video' : 'Unggah Karya Video Peserta'}</h2>}>
 
       <Head title="Admin | Karya Peserta" />

@@ -56,14 +56,19 @@ class HandleInertiaRequests extends Middleware
                 ->unique('route');
         }
 
-        // dd($menus);
+        $participation = null;
+        if($user?->participation){
+           $participation = $user->participation;
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $user,
                 'menus' => $menus,
                 'roles' => $roles,
-                'can' => []
+                'can' => [],
+                'participation' => $participation,
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

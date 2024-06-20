@@ -19,12 +19,11 @@ type DashboardProps = {
 
 
 export default function Dashboard({ auth, participation, counts }: PageProps<DashboardProps>) {
-
-  console.log(!participation?.reject_reason, participation?.reject_reason != null, (participation?.reject_reason !== "" || participation?.reject_reason != null))
   return (
     <AdminLayout
       roles={auth.roles}
       user={auth.user}
+      participation={auth.participation}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
     >
       <Head title="Dashboard" />
@@ -37,14 +36,18 @@ export default function Dashboard({ auth, participation, counts }: PageProps<Das
               <h2 className="text-lg">Selamat Datang {auth.user.name}</h2>
 
               <div className="flex flex-col md:flex-row gap-2 my-6 justify-between text-center">
+                <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
                 <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Jumlah Pendaftar </p>
                   <p>{counts.participant_count}</p>
                 </div>
+                </ConditionalRender>
+                <ConditionalRender condition={auth.roles.includes('administrator') || auth.roles.includes('operator')}>
                 <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Jumlah Pendaftar Terverifikasi</p>
                   <p>{counts.verified_participant_count}</p>
                 </div>
+                </ConditionalRender>
                 <div className="w-full md:w-1/4 p-6 border-2 text-center rounded">
                   <p>Karya sudah di unggah</p>
                   <p>{counts.uploaded_creation_count}</p>

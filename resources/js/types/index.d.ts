@@ -138,7 +138,8 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     auth: {
         user: User,
         roles: string[],
-        menus: Menu[]
+        menus: Menu[],
+        participation?: Participant
     };
     ziggy: Config & { location: string };
 };
