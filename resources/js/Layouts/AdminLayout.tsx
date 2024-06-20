@@ -167,7 +167,7 @@ function AdminLayout({ children, user, header, roles, participation }: PropsWith
                         </li>
                       </ConditionalRender>
                       
-                      <ConditionalRender condition={roles.includes('participant') && participation?.certificate != ""}>
+                      <ConditionalRender condition={(roles.includes('participant') && participation?.certificate) as boolean}>
                         <li>
                           <Link href={participation?.certificate ?? '#'} target='_blank' className={"block px-2 py-3 border-indigo-400 text-gray-900 focus:border-indigo-700"}>
                             Sertifikat
@@ -302,8 +302,8 @@ function AdminLayout({ children, user, header, roles, participation }: PropsWith
                       </Link>
                     </li>
                   </ConditionalRender>
-                  
-                  <ConditionalRender condition={roles.includes('participant') && participation?.certificate != ""}>
+
+                  <ConditionalRender condition={(roles.includes('participant') && participation?.certificate) as boolean}>
                     <li>
                       <a href={participation?.certificate ?? '#'} target='_blank' >
                         Sertifikat
