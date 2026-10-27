@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import RowContent from "@/Components/Table/RowContent";
 import RowHeader from "@/Components/Table/RowHeader";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Category, Creation, PageProps, Slider } from "@/types";
+import { Category, Creation, PageProps, Slider, User } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnFiltersState, createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table"
 import { useMemo, useState } from "react";
@@ -18,10 +18,11 @@ import TableContent from "@/Components/Table/TableContent";
 
 type CreationProps = {
   creations: Creation[],
-  creation?: Creation
+  creation?: Creation,
+  participants?: User[]
 };
 
-export default function List({ auth, creations = [], creation = undefined }: PageProps<CreationProps>) {
+export default function List({ auth, creations = [], creation = undefined, participants = [] }: PageProps<CreationProps>) {
 
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
 
@@ -170,6 +171,7 @@ export default function List({ auth, creations = [], creation = undefined }: Pag
       {/* Create mode */}
       <Modal show={showCreateDialog} onClose={() => setShowCreateDialog(false)}>
         <CreationForm mode="create"
+          participants={participants}
           className="p-4 sm:p-8 bg-white shadow sm:rounded-lg"
           onComplete={() => setShowCreateDialog(false)} />
       </Modal>

@@ -64,7 +64,7 @@ function UpdateCreationTitle({ item, updateMode, setUpdateMode }: UpdateCreation
   }
 
   return (
-    <form onSubmit={onSubmit} className='flex flex-row'>
+    <form onSubmit={onSubmit} className='flex flex-col'>
       <div>
         <InputLabel>Judul Karya</InputLabel>
         <TextInput
@@ -77,6 +77,20 @@ function UpdateCreationTitle({ item, updateMode, setUpdateMode }: UpdateCreation
           onChange={(e) => setData('title', e.target.value)} />
         <InputError className="mt-2" message={errors.title} />
       </div>
+
+      <div>
+        <InputLabel>Link Karya</InputLabel>
+        <TextInput
+          id="upload_location"
+          name="upload_location"
+          value={data.upload_location}
+          className="my-2 block w-full"
+          autoComplete="title"
+          isFocused={true}
+          onChange={(e) => setData('upload_location', e.target.value)} />
+        <InputError className="mt-2" message={errors.upload_location} />
+      </div>
+
       <div className="flex items-center justify-end mt-4">
         <PrimaryButton className="ms-4" disabled={processing}>
           Ubah Data

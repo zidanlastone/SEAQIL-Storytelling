@@ -2,7 +2,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Creation } from '@/types';
+import { Creation, User } from '@/types';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import React, { FormEventHandler, useEffect } from 'react'
@@ -13,7 +13,7 @@ type CreationInsert = {
   upload_status: string
 }
 
-function CreationForm({ onComplete, className, item, mode = 'create' }: { onComplete?: () => void, className?: string, item?: Creation, mode?: 'create' | 'update' }) {
+function CreationForm({ onComplete, className, item, mode = 'create', participants = [] }: { onComplete?: () => void, className?: string, item?: Creation, mode?: 'create' | 'update', participants?: User[] }) {
 
   const { data, setData, post, patch, processing, errors, wasSuccessful, recentlySuccessful } = useForm<CreationInsert>({
     title: item?.title as string || 'Karya 1',

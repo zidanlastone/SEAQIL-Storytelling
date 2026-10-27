@@ -6,6 +6,7 @@ use App\Http\Requests\Participant\StoreCreationRequest;
 use App\Http\Requests\Participant\UpdateCreationRequest;
 use App\Models\Participant\Creation;
 use App\Models\Participant\Participant;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -37,15 +38,22 @@ class CreationController extends Controller
 
         // dd($creations->first()->participant->user->id);
 
+        $participants = User::whereHas('roles', function ($query) {
+            $query->where('name', 'participant');
+        })->get();
+
         $creation = null;
         if ($user->hasRole('participant')) {
             $participations = Participant::where(['user_id' => $user->id])->first();
             $creation = Creation::where(['id_participant' => $participations->id])->first();
         }
 
+        // dd($participants);
+
         return Inertia::render("Creation/List", [
             "creations" => $creations->get(),
-            "creation" => $creation
+            "creation" => $creation,
+            "participants" => $participants,
         ]);
     }
 
